@@ -1,0 +1,12 @@
+.homePage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homePage__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

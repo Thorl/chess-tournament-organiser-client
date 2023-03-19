@@ -13,11 +13,11 @@ import { ClassDetailsPage } from "./Pages/ClassDetails/ClassDetailsPage";
 import { NewClassPage } from "./Pages/NewClass/NewClassPage";
 import { NavLayout } from "./Components/NavLayout/NavLayout";
 
-import "./App.css";
+import styles from "./App.module.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.app}>
       <Routes>
         <Route element={<NavLayout />}>
           <Route path="/" element={<HomePage />} />
