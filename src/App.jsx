@@ -12,6 +12,8 @@ import { NewTournamentPage } from "./Pages/NewTournament/NewTournamentPage";
 import { ClassDetailsPage } from "./Pages/ClassDetails/ClassDetailsPage";
 import { NewClassPage } from "./Pages/NewClass/NewClassPage";
 import { NavLayout } from "./Components/NavLayout/NavLayout";
+import { PrivateRoutes } from "./Components/PrivateRoutes/PrivateRoutes";
+import { AnonRoutes } from "./Components/AnonRoutes/AnonRoutes";
 
 import styles from "./App.module.css";
 
@@ -21,28 +23,35 @@ function App() {
       <Routes>
         <Route element={<NavLayout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route
-            path="/profile/account-details"
-            element={<AccountDetailsPage />}
-          />
-          <Route path="/profile/tournaments" element={<TournamentsPage />} />
-          <Route
-            path="/profile/tournaments/:tournamentId"
-            element={<TournamentDetailsPage />}
-          />
-          <Route
-            path="/profile/tournaments/new-tournament"
-            element={<NewTournamentPage />}
-          />
-          <Route path="/profile/classes" element={<ClassesPage />} />
-          <Route
-            path="/profile/classes/:classId"
-            element={<ClassDetailsPage />}
-          />
-          <Route path="/profile/classes/new-class" element={<NewClassPage />} />
+          <Route element={<AnonRoutes />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+          </Route>
+          <Route element={<PrivateRoutes />}>
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route
+              path="/profile/account-details"
+              element={<AccountDetailsPage />}
+            />
+            <Route path="/profile/tournaments" element={<TournamentsPage />} />
+            <Route
+              path="/profile/tournaments/:tournamentId"
+              element={<TournamentDetailsPage />}
+            />
+            <Route
+              path="/profile/tournaments/new-tournament"
+              element={<NewTournamentPage />}
+            />
+            <Route path="/profile/classes" element={<ClassesPage />} />
+            <Route
+              path="/profile/classes/:classId"
+              element={<ClassDetailsPage />}
+            />
+            <Route
+              path="/profile/classes/new-class"
+              element={<NewClassPage />}
+            />
+          </Route>
         </Route>
       </Routes>
     </div>

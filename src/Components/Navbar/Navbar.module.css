@@ -3,3 +3,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.navbar h1 {
+  padding-right: 15px;
+
+  font-size: 20px;
+}

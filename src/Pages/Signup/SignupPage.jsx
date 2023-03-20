@@ -19,7 +19,7 @@ export const SignupPage = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
     const requestBody = { email, password };
@@ -39,7 +39,7 @@ export const SignupPage = () => {
 
   return (
     <section className={styles.signup}>
-      <form className={styles.signup__form} onSubmit={handleSubmit}>
+      <form className={styles.signup__form} onSubmit={handleSignupSubmit}>
         <label htmlFor="email">Email</label>
         <input
           type="text"
