@@ -29,28 +29,19 @@ function App() {
           </Route>
           <Route element={<PrivateRoutes />}>
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/account-details" element={<AccountDetailsPage />} />
+            <Route path="/tournaments" element={<TournamentsPage />} />
             <Route
-              path="/profile/account-details"
-              element={<AccountDetailsPage />}
-            />
-            <Route path="/profile/tournaments" element={<TournamentsPage />} />
-            <Route
-              path="/profile/tournaments/:tournamentId"
+              path="/tournaments/:tournamentId"
               element={<TournamentDetailsPage />}
             />
             <Route
-              path="/profile/tournaments/new-tournament"
+              path="/tournaments/new-tournament"
               element={<NewTournamentPage />}
             />
-            <Route path="/profile/classes" element={<ClassesPage />} />
-            <Route
-              path="/profile/classes/:classId"
-              element={<ClassDetailsPage />}
-            />
-            <Route
-              path="/profile/classes/new-class"
-              element={<NewClassPage />}
-            />
+            <Route path="/classes" element={<ClassesPage />} />
+            <Route path="/classes/:classId" element={<ClassDetailsPage />} />
+            <Route path="/classes/new-class" element={<NewClassPage />} />
           </Route>
         </Route>
       </Routes>

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "./SignupPage.module.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +27,7 @@ export const SignupPage = () => {
     const requestBody = { email, password };
 
     try {
-      await axios.post("http://localhost:5005/auth/signup", requestBody);
+      await axios.post(`${API_URL}/auth/signup`, requestBody);
 
       navigate("/login");
     } catch (error) {

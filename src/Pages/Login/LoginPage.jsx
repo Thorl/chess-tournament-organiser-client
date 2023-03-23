@@ -7,6 +7,8 @@ import { AuthContext } from "../../context/auth.context";
 
 import styles from "./LoginPage.module.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,10 +31,7 @@ export const LoginPage = () => {
     const requestBody = { email, password };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5005/auth/login",
-        requestBody
-      );
+      const response = await axios.post(`${API_URL}/auth/login`, requestBody);
 
       const authToken = response.data.authToken;
 
