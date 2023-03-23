@@ -1,0 +1,28 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.profile__navLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  width: 100%;
+}
+
+.profile__navLinks__item {
+  padding: 20px 20px;
+  width: 80%;
+  text-align: center;
+
+  border: 1px solid #000;
+  border-radius: 15px;
+  text-decoration: none;
+}
