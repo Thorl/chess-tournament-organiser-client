@@ -1,0 +1,48 @@
+.newClass {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.newClass__errorMessage {
+  padding: 10px;
+
+  color: #fff;
+  background-color: red;
+}
+
+.newClass__successMessage {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+
+  color: #fff;
+  background-color: green;
+}
+
+.newClass__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newClass__form__studentNameInput {
+  display: flex;
+  gap: 5px;
+}
+
+.newClass__form__addBtn {
+  margin-top: 5px;
+  width: 100px;
+}
+
+.newClass__classList__student {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 5px;
+}
+
+.newClass__classList__student button {
+  height: 30px;
+}
