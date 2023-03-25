@@ -7,6 +7,24 @@
   width: 100%;
 }
 
+.accountDetails h2 {
+  margin: 0 0 10px 0;
+}
+
+.accountDetails__errorMessage {
+  padding: 10px;
+
+  color: #fff;
+  background-color: red;
+}
+
+.accountDetails__successMessage {
+  padding: 10px;
+
+  color: #fff;
+  background-color: green;
+}
+
 .accountDetails__form {
   display: flex;
   flex-direction: column;
@@ -32,5 +50,5 @@
 }
 
 .accountDetails__form__btn {
-  margin-top: 30px;
+  margin-top: 15px;
 }

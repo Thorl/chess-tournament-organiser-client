@@ -1,12 +1,54 @@
-import { useState } from "react";
+import axios from "axios";
+
+import { useEffect, useState } from "react";
+
+import { API_URL } from "../../constants/API_URL";
 import styles from "./AccountDetailsPage.module.css";
 
 export const AccountDetailsPage = () => {
+  const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const storedAuthToken = localStorage.getItem("authToken");
+
+  useEffect(() => {
+    const loadExistingTeacherData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/account-details`, {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        });
+
+        const { email, firstName, lastName } = response.data;
+
+        setEmail(email);
+
+        if (firstName) {
+          setFirstName(firstName);
+        }
+
+        if (lastName) {
+          setLastName(lastName);
+        }
+      } catch (error) {
+        console.error(
+          "An error occurred while getting account details data: ",
+          error
+        );
+      }
+    };
+
+    loadExistingTeacherData();
+  }, [storedAuthToken]);
+
+  const handleEmailInput = (e) => {
+    setEmail(e.target.value);
+  };
 
   const handleFirstNameInput = (e) => {
     setFirstName(e.target.value);
@@ -28,19 +70,81 @@ export const AccountDetailsPage = () => {
     setRepeatPassword(e.target.value);
   };
 
-  const handleSubmitAccountDetails = (e) => {
+  const handleSubmitAccountDetails = async (e) => {
     e.preventDefault();
 
-    //@TODO: Make a post request to the backend to save user data.
+    const requestBody = {
+      email,
+      firstName,
+      lastName,
+      currentPassword,
+      newPassword,
+      repeatedNewPassword: repeatPassword,
+    };
+
+    try {
+      const response = await axios.post(
+        `${API_URL}/account-details`,
+        requestBody,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
+
+      const { email, firstName, lastName, errorMessage } = response.data;
+
+      if (errorMessage) {
+        setErrorMessage(errorMessage);
+        return;
+      }
+
+      setEmail(email);
+
+      setFirstName(firstName);
+
+      setLastName(lastName);
+
+      setSuccessMessage("Account Details Successfully Updated!");
+
+      setCurrentPassword("");
+
+      setNewPassword("");
+
+      setRepeatPassword("");
+
+      setErrorMessage("");
+    } catch (error) {
+      console.error(
+        "An error occurred while updating account details: ",
+        error
+      );
+    }
   };
 
   return (
     <div className={styles.accountDetails}>
       <h2>My Details</h2>
+      {errorMessage && (
+        <p className={styles.accountDetails__errorMessage}>{errorMessage}</p>
+      )}
+
+      {successMessage && (
+        <p className={styles.accountDetails__successMessage}>
+          {successMessage}
+        </p>
+      )}
       <form
         className={styles.accountDetails__form}
         onSubmit={handleSubmitAccountDetails}
       >
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          placeholder="Enter your email"
+          onChange={handleEmailInput}
+        />
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
