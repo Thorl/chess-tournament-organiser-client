@@ -1,12 +1,8 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
 
 import styles from "./ProfilePage.module.css";
 
 export const ProfilePage = () => {
-  const { logOutUser } = useContext(AuthContext);
-
   return (
     <div className={styles.profile}>
       <div className={styles.profile__navLinks}>
