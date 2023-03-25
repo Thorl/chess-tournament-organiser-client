@@ -1,23 +1,28 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
-const API_URL = process.env.REACT_APP_API_URL
+import { API_URL } from "../../constant/constant";
 
 export const TournamentDetailsPage = () => {
   const [tournamentData, setTournamentData] = useState("");
 
   const { tournamentId } = useParams();
+  const storedAuthToken = localStorage.getItem("authToken");
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/tournaments/${tournamentId}`)
-      .then((res) => {
-        console.log(res.data);
-        setTournamentData(res.data);
-      })
-      .catch((error) => console.log(error.response.data));
+    async function fetchData() {
+      const { data } = await axios.get(`${API_URL}/tournaments/${tournamentId}`, {
+        headers: { Authorization: `Bearer ${storedAuthToken}` },
+      });
+      console.log(data);
+      setTournamentData(data);
+    }
+    fetchData();
   }, []);
 
-  return <div>{tournamentData}</div>;
+  return (
+    <div>
+      <div>{tournamentData.name}</div>
+    </div>
+  );
 };
