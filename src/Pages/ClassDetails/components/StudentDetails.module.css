@@ -1,0 +1,28 @@
+.classDetails__classList__studentDetails__btn {
+  margin: 0 auto;
+  border: none;
+}
+
+.classDetails__classList__studentDetails__edit {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  grid-column: span 3;
+  width: 100%;
+}
+
+.classDetails__classList__studentDetails__edit input {
+  margin: 10% auto;
+  width: 60%;
+}
+
+.classDetails__classList__studentDetails__edit button {
+  margin: 0 auto;
+  border: none;
+}
+
+.classDetails__classList__studentDetails__edit__deleteBtn {
+  grid-column: span 3;
+  padding: 2%;
+
+  background-color: red;
+}
