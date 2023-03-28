@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -9,6 +10,7 @@ import { StudentDetails } from "./components/StudentDetails";
 
 export const ClassDetailsPage = () => {
   const [classData, setClassData] = useState({});
+  const [newStudentName, setNewStudentName] = useState("");
 
   const { classId } = useParams();
 
@@ -20,8 +22,6 @@ export const ClassDetailsPage = () => {
         headers: { Authorization: `Bearer ${storedAuthToken}` },
       });
 
-      console.log("Class data: ", response.data);
-
       setClassData(response.data);
     } catch (error) {
       console.error(
@@ -30,6 +30,39 @@ export const ClassDetailsPage = () => {
       );
     }
   }, [classId]);
+
+  const handleUpdateClassData = (classDataObj) => {
+    setClassData(classDataObj);
+  };
+
+  const handleNewStudentNameInput = (e) => {
+    setNewStudentName(e.target.value);
+  };
+
+  const handleAddNewStudent = async (e) => {
+    e.preventDefault();
+    try {
+      const storedAuthToken = localStorage.getItem("authToken");
+
+      const requestBody = { name: newStudentName, classId };
+
+      await axios.post(
+        `${API_URL}/classes/${classId}/add-student`,
+        requestBody,
+        { headers: { Authorization: `Bearer ${storedAuthToken}` } }
+      );
+
+      const getRequest = await axios.get(`${API_URL}/classes/${classId}`, {
+        headers: { Authorization: `Bearer ${storedAuthToken}` },
+      });
+
+      handleUpdateClassData(getRequest.data);
+
+      setNewStudentName("");
+    } catch (error) {
+      console.error("An error occurred while adding a new student: ", error);
+    }
+  };
 
   useEffect(() => {
     getClassData();
@@ -45,38 +78,31 @@ export const ClassDetailsPage = () => {
         <h3>Total Points</h3>
         <div></div>
         {classData.students?.map((student) => {
-          // let isEditing = false;
-
-          /*  const handleActivateEditing = (isEditing) => {
-            isEditing = isEditing ? false : true;
-            console.log("Chaning edit status: ", isEditing);
-          }; */
-
-          /*  const handleSaveStudentData = (e) => {
-            e.preventDefault();
-
-            console.log("Saving student data");
-          }; */
-
           return (
-            <div
-              key={student._id}
-              className={styles.classDetails__classList__studentDetails}
-            >
-              <StudentDetails student={student} />
-
-              {/* <form
-                  onSubmit={handleSaveStudentData}
-                  key={student._id}
-                  className={`${isEditing} ? ${styles.showEditField} : ""`}
-                >
-                  <input type="text" value={student.name} />
-                  <button>Save</button>
-                </form> */}
-            </div>
+            <React.Fragment key={student._id}>
+              <StudentDetails
+                student={student}
+                onUpdateClassData={handleUpdateClassData}
+                classId={classId}
+              />
+            </React.Fragment>
           );
         })}
       </div>
+      <form
+        onSubmit={handleAddNewStudent}
+        className={styles.classDetails__addStudentForm}
+      >
+        <label htmlFor="addStudent">Add a New Student</label>
+        <input
+          value={newStudentName}
+          onChange={handleNewStudentNameInput}
+          type="text"
+          id="addStudent"
+          placeholder="Enter student name"
+        />
+        <button>Add</button>
+      </form>
     </div>
   );
 };

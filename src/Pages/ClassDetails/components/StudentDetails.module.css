@@ -1,28 +1,42 @@
-.classDetails__classList__studentDetails__btn {
+.classDetails__classList__studentDetails {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  grid-column: span 3;
+  width: 100%;
+  /* padding-bottom: 10px; */
+  padding: 20px 0;
+
+  border-bottom: 1px solid grey;
+  text-align: center;
+}
+
+.classDetails__classList__studentDetails__editBtn {
   margin: 0 auto;
   border: none;
 }
 
-.classDetails__classList__studentDetails__edit {
+.classDetails__classList__studentDetails__editMode {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   grid-column: span 3;
   width: 100%;
 }
 
-.classDetails__classList__studentDetails__edit input {
+.classDetails__classList__studentDetails__editMode input {
   margin: 10% auto;
   width: 60%;
 }
 
-.classDetails__classList__studentDetails__edit button {
+.classDetails__classList__studentDetails__editMode__doneBtn {
   margin: 0 auto;
   border: none;
 }
 
-.classDetails__classList__studentDetails__edit__deleteBtn {
+.classDetails__classList__studentDetails__editMode__deleteBtn {
   grid-column: span 3;
   padding: 2%;
+  margin: 20px auto 0 auto;
 
+  border: none;
   background-color: red;
 }
