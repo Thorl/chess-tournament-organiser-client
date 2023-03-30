@@ -182,8 +182,8 @@ export const TournamentDetailsPage = () => {
                 value={editingStudent.roundsData.round}
                 onChange={(e) => {
                   setEditingStudent((pre) => {
-                    pre.round = e.target.value;
-                    return { ...pre, name: e.target.value };
+                    pre[round] = e.target.value;
+                    return { ...pre };
                   });
                 }}
               />
