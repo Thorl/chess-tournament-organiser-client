@@ -1,0 +1,19 @@
+.newTournament {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
+}
+
+.newTournament__form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* .ant-modal-body .newTournament__form__modal__class {
+  display: grid;
+  grid-template-columns: 4fr 2fr 1fr;
+  justify-content: flex-start;
+  align-items: center;
+} */
