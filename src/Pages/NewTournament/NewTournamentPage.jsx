@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { API_URL } from "../../constants/API_URL";
 import styles from "./NewTournamentPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 export const NewTournamentPage = () => {
   const [tournamentName, setTournamentName] = useState("");
@@ -14,6 +15,10 @@ export const NewTournamentPage = () => {
   const [isModalOpen, setModalIsOpen] = useState(false);
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState([]);
+  const [selectedStudents, setSelectedStudents] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const getClasses = async () => {
     const storedAuthToken = localStorage.getItem("authToken");
@@ -23,8 +28,6 @@ export const NewTournamentPage = () => {
       });
 
       const classes = response.data.classes;
-
-      console.log("Classes: ", classes);
 
       setClasses(classes);
     } catch (error) {
@@ -46,12 +49,10 @@ export const NewTournamentPage = () => {
 
   const handleSetSchoolName = (schoolName) => {
     setSchoolName(schoolName);
-    //@TODO: When selecting a class, set the school's name and output it under the "Add Class" button
   };
 
   const handleSetClassName = (className) => {
     setClassName(className);
-    //@TODO: When selecting a class, set the class' name and output it under the "Add Class" button
   };
 
   const handleToggleModal = () => {
@@ -60,78 +61,148 @@ export const NewTournamentPage = () => {
 
   const handleSelectClass = (selectedClass) => {
     setSelectedClass(selectedClass);
+    handleSetClassName(selectedClass.name);
+    handleSetSchoolName(selectedClass.school);
     setModalIsOpen(false);
   };
 
   const handleSelectStudent = (e) => {
+    console.log("Clicked student: ", e.target.value);
     if (e.target.checked) {
-      console.log("Checkbox value: ", e.target.value);
+      setSelectedStudents((currentStudents) => [
+        ...currentStudents,
+        e.target.value,
+      ]);
+    } else {
+      const studentToRemove = e.target.value;
+      const filteredStudents = selectedStudents.filter((student) => {
+        return student !== studentToRemove;
+      });
+      setSelectedStudents(filteredStudents);
     }
+  };
 
-    //@TODO: If the box is checked, add student to array of selectedStudents.
-    // If the box is unchecked, filter out the student from the selectedStudents array.
+  const handleCreateTournament = async (e) => {
+    e.preventDefault();
+
+    try {
+      const requestBody = {
+        name: tournamentName,
+        _class: selectedClass._id,
+        school: schoolName,
+        students: selectedStudents,
+        numberOfRounds,
+      };
+
+      const storedAuthToken = localStorage.getItem("authToken");
+
+      const response = await axios.post(
+        `${API_URL}/tournaments/new-tournament`,
+        requestBody,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
+
+      console.log("Response: ", response);
+
+      if (response.data.errorMessage) {
+        setErrorMessage(response.data.errorMessage);
+        return;
+      }
+
+      setErrorMessage("");
+
+      const tournamentId = response.data.tournamentId;
+
+      navigate(`/tournaments/${tournamentId}`);
+    } catch (error) {
+      console.error("An error occured while creating a tournament: ", error);
+    }
   };
 
   return (
     <div className={styles.newTournament}>
-      <form className={styles.newTournament__form}>
+      <form
+        onSubmit={handleCreateTournament}
+        className={styles.newTournament__form}
+      >
+        {errorMessage && (
+          <p className={styles.newTournament__form_errorMessage}>
+            {errorMessage}
+          </p>
+        )}
         <input
           type="text"
-          placeholder="Enter a new for your tournament"
+          placeholder="Enter a name for your tournament"
           value={tournamentName}
           onChange={handleTournamentNameInput}
+          required
         />
         <input
           type="number"
-          placeholder="Enter the number of rounds"
+          placeholder="Enter the number of rounds in your tournament"
           value={numberOfRounds}
           onChange={handleNumberOfRoundsInput}
+          required
         />
         <Button type="primary" onClick={handleToggleModal}>
           Add Class
         </Button>
-        <Modal
-          title="Select a class"
-          open={isModalOpen}
-          onCancel={handleToggleModal}
-          okButtonProps={{ style: { display: "none" } }}
-        >
-          <p>Pick one of your classes to make a tournament for:</p>
-          <div>
-            <h2>School</h2>
-            <h2>Class</h2>
-          </div>
 
-          {classes.map((_class) => {
-            return (
-              <div
-                key={_class._id}
-                className={styles.newTournament__form__modal__class}
-              >
-                <p>{_class.school}</p>
-                <p>{_class.name}</p>
-                <button onClick={() => handleSelectClass(_class)}>
-                  Select
-                </button>
-              </div>
-            );
-          })}
-        </Modal>
-        {schoolName && <output>{schoolName}</output>}
-        {className && <output>{className}</output>}
+        {schoolName && (
+          <>
+            <label className={styles.newTournament__form__header}>School</label>
+            <output>{schoolName}</output>
+          </>
+        )}
+
+        {className && (
+          <>
+            <label className={styles.newTournament__form__header}>Class</label>
+            <output>{className}</output>
+          </>
+        )}
+        <h2>Students</h2>
         {selectedClass?.students?.map((student) => {
           return (
             <div key={student._id}>
               <input
                 type="checkbox"
-                value={student.name}
+                value={student._id}
                 onClick={handleSelectStudent}
               />
               <label>{student.name}</label>
             </div>
           );
         })}
+        <button>Create Tournament</button>
       </form>
+      <Modal
+        title="Select a class"
+        open={isModalOpen}
+        onCancel={handleToggleModal}
+        okButtonProps={{ style: { display: "none" } }}
+      >
+        <p>Pick one of your classes to make a tournament for:</p>
+        <div>
+          <h2>School</h2>
+          <h2>Class</h2>
+        </div>
+
+        {classes.map((_class) => {
+          return (
+            <div
+              key={_class._id}
+              className={styles.newTournament__form__modal__class}
+            >
+              <p>{_class.school}</p>
+              <p>{_class.name}</p>
+              <button onClick={() => handleSelectClass(_class)}>Select</button>
+            </div>
+          );
+        })}
+      </Modal>
     </div>
   );
 };

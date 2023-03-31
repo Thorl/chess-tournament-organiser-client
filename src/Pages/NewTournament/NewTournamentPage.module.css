@@ -11,9 +11,17 @@
   gap: 15px;
 }
 
-/* .ant-modal-body .newTournament__form__modal__class {
-  display: grid;
-  grid-template-columns: 4fr 2fr 1fr;
-  justify-content: flex-start;
-  align-items: center;
-} */
+.newTournament__form_errorMessage {
+  padding: 5px;
+
+  background-color: red;
+  color: #fff;
+}
+
+.newTournament__form__header {
+  font-weight: bold;
+}
+
+.newTournament__form h2 {
+  margin: 0;
+}
