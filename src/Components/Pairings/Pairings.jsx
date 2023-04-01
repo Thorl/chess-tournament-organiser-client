@@ -4,12 +4,16 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../constants/API_URL";
 import { Table, Button, Modal, Input } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  ArrowUpOutlined,
+  ArrowDownOutlined,
+  ArrowRightOutlined,
+} from "@ant-design/icons";
 
-export const ViewPairingsPage = () => {
-    return (
-        <div>
-            <div>hello</div>
-        </div>
-    )
-}
+export const Pairings = () => {
+  return (
+    <div>
+      <h1>PAIRINGS</h1>
+    </div>
+  );
+};

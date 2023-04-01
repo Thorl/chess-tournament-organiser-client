@@ -8,7 +8,6 @@ import { TournamentsPage } from "./Pages/Tournaments/TournamentsPage";
 import { ClassesPage } from "./Pages/Classes/ClassesPage";
 import { AccountDetailsPage } from "./Pages/AccountDetails/AccountDetailsPage";
 import { TournamentDetailsPage } from "./Pages/TournamentDetails/TournamentDetailsPage";
-import { ViewPairingsPage } from "./Pages/ViewPairings/ViewPairingsPage";
 import { NewTournamentPage } from "./Pages/NewTournament/NewTournamentPage";
 import { ClassDetailsPage } from "./Pages/ClassDetails/ClassDetailsPage";
 import { NewClassPage } from "./Pages/NewClass/NewClassPage";
@@ -33,12 +32,8 @@ function App() {
             <Route path="/account-details" element={<AccountDetailsPage />} />
             <Route path="/tournaments" element={<TournamentsPage />} />
             <Route
-              path="/tournaments/:tournamentId/points"
+              path="/tournaments/:tournamentId"
               element={<TournamentDetailsPage />}
-            />
-            <Route
-              path="/tournaments/:tournamentId/pairings"
-              element={<ViewPairingsPage />}
             />
             <Route
               path="/tournaments/new-tournament"
