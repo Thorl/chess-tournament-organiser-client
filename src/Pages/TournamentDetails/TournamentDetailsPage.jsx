@@ -25,20 +25,24 @@ export const TournamentDetailsPage = () => {
           headers: { Authorization: `Bearer ${storedAuthToken}` },
         }
       );
+      console.log("axios data:", data);
       setTournamentData(data);
 
       const { participantsData } = data;
+      const roundNumber = 1
 
-      const { pairedStudents } = await axios.post(
+      console.log("participant data:", participantsData);
+
+      const  roundPairings  = await axios.post(
         `${API_URL}/tournaments/${tournamentId}/pairings`,
-        participantsData,
+        { participantsData, roundNumber },
         {
           headers: { Authorization: `Bearer ${storedAuthToken}` },
         }
       );
 
-      setPairings(pairedStudents);
-      console.log(pairedStudents);
+      setPairings(roundPairings.data);
+      console.log("Paired Students:", roundPairings.data);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
