@@ -33,7 +33,7 @@ export const SignupPage = () => {
     } catch (error) {
       const errorDescription = error.response.data.message;
 
-      console.log("Error: ", errorDescription);
+      console.error("An error occurred while signing up: ", error);
 
       setErrorMessage(errorDescription);
     }

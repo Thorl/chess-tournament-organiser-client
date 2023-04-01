@@ -144,6 +144,7 @@ export const AccountDetailsPage = () => {
           value={email}
           placeholder="Enter your email"
           onChange={handleEmailInput}
+          required
         />
         <label htmlFor="firstName">First Name</label>
         <input
