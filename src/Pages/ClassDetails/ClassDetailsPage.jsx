@@ -100,6 +100,7 @@ export const ClassDetailsPage = () => {
           type="text"
           id="addStudent"
           placeholder="Enter student name"
+          required
         />
         <button>Add</button>
       </form>

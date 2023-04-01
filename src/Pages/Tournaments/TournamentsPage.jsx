@@ -19,8 +19,6 @@ export const TournamentsPage = () => {
 
       const tournamentsFromDb = response.data.tournaments;
 
-      console.log("Tournaments: ", tournamentsFromDb);
-
       setTournaments(tournamentsFromDb);
     } catch (error) {
       console.error(

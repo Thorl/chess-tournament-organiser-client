@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { generateKey } from "../../utils/generate-key";
 import { API_URL } from "../../constants/API_URL";
 import styles from "./ClassesPage.module.css";
 
@@ -20,7 +19,7 @@ export const ClassesPage = () => {
 
       const classesFromDb = response.data.classes;
 
-      return classesFromDb;
+      setClasses(classesFromDb);
     } catch (error) {
       console.error(
         "An error occurred while trying to load classes from the database: ",
@@ -30,9 +29,7 @@ export const ClassesPage = () => {
   };
 
   useEffect(() => {
-    getClasses().then((classesFromDb) => {
-      setClasses(classesFromDb);
-    });
+    getClasses();
   }, []);
 
   return (
@@ -42,7 +39,7 @@ export const ClassesPage = () => {
         return (
           <Link
             to={`/classes/${classEl._id}`}
-            key={generateKey()}
+            key={classEl._id}
             className={` ${styles.classes__dbClasses} ${styles.classes__card}`}
           >
             <h3>{classEl.name}</h3>

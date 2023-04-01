@@ -21,7 +21,7 @@ export const StudentDetails = (props) => {
   };
 
   const toggleEditMode = () => {
-    setIsEditing(isEditing ? false : true);
+    setIsEditing(!isEditing);
   };
 
   const handleDoneEditing = async (e) => {
@@ -101,6 +101,7 @@ export const StudentDetails = (props) => {
             type="text"
             value={studentNameInput}
             onChange={handleStudentNameInput}
+            required
           />
           <input
             type="text"

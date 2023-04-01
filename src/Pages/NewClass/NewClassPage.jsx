@@ -112,6 +112,7 @@ export const NewClassPage = () => {
           id="className"
           value={className}
           onChange={handleClassNameInput}
+          required
         />
         <label htmlFor="schoolName">School Name</label>
         <input
@@ -119,6 +120,7 @@ export const NewClassPage = () => {
           id="schoolName"
           value={schoolName}
           onChange={handleSchoolNameInput}
+          required
         />
         <label htmlFor="studentName">Student Name</label>
         <div className={styles.newClass__form__studentNameInput}>

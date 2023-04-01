@@ -56,7 +56,7 @@ export const NewTournamentPage = () => {
   };
 
   const handleToggleModal = () => {
-    setModalIsOpen(isModalOpen ? false : true);
+    setModalIsOpen(!isModalOpen);
   };
 
   const handleSelectClass = (selectedClass) => {
@@ -67,7 +67,6 @@ export const NewTournamentPage = () => {
   };
 
   const handleSelectStudent = (e) => {
-    console.log("Clicked student: ", e.target.value);
     if (e.target.checked) {
       setSelectedStudents((currentStudents) => [
         ...currentStudents,
@@ -103,8 +102,6 @@ export const NewTournamentPage = () => {
           headers: { Authorization: `Bearer ${storedAuthToken}` },
         }
       );
-
-      console.log("Response: ", response);
 
       if (response.data.errorMessage) {
         setErrorMessage(response.data.errorMessage);
