@@ -16,6 +16,7 @@ import { PrivateRoutes } from "./Components/PrivateRoutes/PrivateRoutes";
 import { AnonRoutes } from "./Components/AnonRoutes/AnonRoutes";
 
 import styles from "./App.module.css";
+import { ErrorPage } from "./Pages/ErrorPage/ErrorPage";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/classes/:classId" element={<ClassDetailsPage />} />
             <Route path="/classes/new-class" element={<NewClassPage />} />
           </Route>
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </div>
