@@ -12,6 +12,7 @@ export const TournamentDetailsPage = () => {
   const [tournamentData, setTournamentData] = useState([]);
   const [isToggled, setIsToggled] = useState(false);
   const [pairings, setPairings] = useState("");
+  const [students, setStudents] = useState([]);
 
   const { tournamentId } = useParams();
   const storedAuthToken = localStorage.getItem("authToken");
@@ -26,9 +27,18 @@ export const TournamentDetailsPage = () => {
       );
       setTournamentData(data);
 
-      const { roundPairings } = data;
-      setPairings(roundPairings);
-      console.log(roundPairings);
+      const { participantsData } = data;
+
+      const { pairedStudents } = await axios.post(
+        `${API_URL}/tournaments/${tournamentId}/pairings`,
+        participantsData,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
+
+      setPairings(pairedStudents);
+      console.log(pairedStudents);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
