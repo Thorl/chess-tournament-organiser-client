@@ -1,0 +1,54 @@
+.accountDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.accountDetails h2 {
+  margin: 0 0 10px 0;
+}
+
+.accountDetails__errorMessage {
+  padding: 10px;
+
+  color: #fff;
+  background-color: red;
+}
+
+.accountDetails__successMessage {
+  padding: 10px;
+
+  color: #fff;
+  background-color: green;
+}
+
+.accountDetails__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accountDetails__form label {
+  font-size: 15px;
+}
+
+.accountDetails__form input {
+  padding: 5px;
+}
+
+.accountDetails__form__changePassword {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accountDetails__form__changePassword h3 {
+  margin: 10px 0 5px 0;
+}
+
+.accountDetails__form__btn {
+  margin-top: 15px;
+}

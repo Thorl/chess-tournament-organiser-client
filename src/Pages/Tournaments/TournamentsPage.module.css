@@ -1,0 +1,46 @@
+.tournaments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  height: 100%;
+  width: 100%;
+}
+
+.tournaments__pageHeader {
+  margin: 0 0 10px 0;
+}
+
+.tournaments h3 {
+  margin: 0;
+}
+
+.tournaments__card {
+  height: 30%;
+  width: 70%;
+
+  border: 1px solid #000;
+  text-decoration: none;
+}
+
+.tournaments__dbTournaments {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+
+  color: #000;
+}
+
+.tournaments__dbTournaments__infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tournaments__createNewClass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
