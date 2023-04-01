@@ -10,10 +10,59 @@ import {
   ArrowRightOutlined,
 } from "@ant-design/icons";
 
-export const Pairings = ({ pairings }) => {
+import styles from "./Pairings.module.css";
+
+export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
+  console.log("Pairings: ", pairings);
+
+  const handleResult = (outcome, winningPlayerId, losingPlayerId) => {
+    switch (outcome) {
+      case "win":
+        for (const pair of pairings[`round${roundNumber}`]) {
+          const playerOneId = pair.player1.student._id;
+          const playerTwoId = pair.player2.student._id;
+          if (
+            playerOneId === winningPlayerId &&
+            playerTwoId === losingPlayerId
+          ) {
+            //@TODO: Make an axios post request to update the result for the winning and losing player.
+            // If needed, add a new route and controller to the backend to handle the update
+          }
+        }
+        break;
+      default:
+    }
+  };
   return (
-    <div>
-      <h1>PAIRINGS</h1>
+    <div className={styles.pairings}>
+      <h2>PAIRINGS</h2>
+      <h3>Round {roundNumber}</h3>
+      <div className={styles.pairings__grid}>
+        {pairings.round1.map((pair, index) => {
+          const player1 = pair.player1.student;
+          const player2 = pair.player2.student;
+          return (
+            <div key={index} className={styles.pairings__grid__pair}>
+              <p>{player1.name}</p>
+              <p>vs</p>
+              <p>{player2.name}</p>
+              <div>
+                <button onClick={handleResult("win", player1._id, player2._id)}>
+                  Win
+                </button>
+                <button>Lose</button>
+                <button>Draw</button>
+              </div>
+              <div></div>
+              <div>
+                <button>Win</button>
+                <button>Lose</button>
+                <button>Draw</button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -13,6 +13,7 @@ export const TournamentDetailsPage = () => {
   const [isToggled, setIsToggled] = useState(false);
   const [pairings, setPairings] = useState("");
   const [students, setStudents] = useState([]);
+  const [roundNumber, setRoundNumber] = useState(1);
 
   const { tournamentId } = useParams();
   const storedAuthToken = localStorage.getItem("authToken");
@@ -29,11 +30,10 @@ export const TournamentDetailsPage = () => {
       setTournamentData(data);
 
       const { participantsData } = data;
-      const roundNumber = 1
 
       console.log("participant data:", participantsData);
 
-      const  roundPairings  = await axios.post(
+      const response = await axios.post(
         `${API_URL}/tournaments/${tournamentId}/pairings`,
         { participantsData, roundNumber },
         {
@@ -41,15 +41,21 @@ export const TournamentDetailsPage = () => {
         }
       );
 
-      setPairings(roundPairings.data);
-      console.log("Paired Students:", roundPairings.data);
+      setPairings(response.data.roundPairings);
+      console.log("Paired Students:", response.data.roundPairings);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /* const handleUpdatePairResults = (playerOneResult, playerTwoResult) => {
+    setPairings(prevState => {
+      return [...prevState, playerOneResult, playerOneResult]
+    })
+  }; */
+
   return (
-    <div>
+    <div className={styles.views}>
       {isToggled ? (
         <button onClick={() => setIsToggled(!isToggled)}>Points</button>
       ) : (
@@ -59,7 +65,12 @@ export const TournamentDetailsPage = () => {
         <Points tournamentData={tournamentData} pairings={pairings} />
       )}
       {isToggled && (
-        <Pairings tournamentData={tournamentData} pairings={pairings} />
+        <Pairings
+          tournamentData={tournamentData}
+          pairings={pairings}
+          roundNumber={roundNumber}
+          // onUpdatePairResults={handleUpdatePairResults}
+        />
       )}
     </div>
   );
