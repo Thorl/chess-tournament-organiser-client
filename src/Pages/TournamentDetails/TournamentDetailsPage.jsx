@@ -14,6 +14,7 @@ export const TournamentDetailsPage = () => {
   const [pairings, setPairings] = useState("");
   const [students, setStudents] = useState([]);
   const [roundNumber, setRoundNumber] = useState(1);
+  const [participantsData, setParticipantsData] = useState({});
 
   const { tournamentId } = useParams();
   const storedAuthToken = localStorage.getItem("authToken");
@@ -29,20 +30,14 @@ export const TournamentDetailsPage = () => {
       console.log("axios data:", data);
       setTournamentData(data);
 
-      const { participantsData } = data;
+      const { participantsData, roundPairings } = data;
 
       console.log("participant data:", participantsData);
 
-      const response = await axios.post(
-        `${API_URL}/tournaments/${tournamentId}/pairings`,
-        { participantsData, roundNumber },
-        {
-          headers: { Authorization: `Bearer ${storedAuthToken}` },
-        }
-      );
+      setParticipantsData(participantsData);
 
-      setPairings(response.data.roundPairings);
-      console.log("Paired Students:", response.data.roundPairings);
+      setPairings(roundPairings);
+      console.log("Pairings: ", pairings);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,8 +49,28 @@ export const TournamentDetailsPage = () => {
     })
   }; */
 
+  console.log("Participants data: ", participantsData);
+
+  const handleGeneratePairings = async () => {
+    const response = await axios.post(
+      `${API_URL}/tournaments/${tournamentId}/pairings`,
+      { participantsData, roundNumber },
+      {
+        headers: { Authorization: `Bearer ${storedAuthToken}` },
+      }
+    );
+
+    setPairings(response.data.roundPairings);
+    console.log("Paired Students:", response.data.roundPairings);
+  };
+
+  const handleUpdatePairResults = (updatedPairResults) => {
+    setPairings(updatedPairResults);
+  };
+
   return (
     <div className={styles.views}>
+      <button onClick={handleGeneratePairings}>Generate pairings</button>
       {isToggled ? (
         <button onClick={() => setIsToggled(!isToggled)}>Points</button>
       ) : (
@@ -69,7 +84,7 @@ export const TournamentDetailsPage = () => {
           tournamentData={tournamentData}
           pairings={pairings}
           roundNumber={roundNumber}
-          // onUpdatePairResults={handleUpdatePairResults}
+          onUpdatePairResults={handleUpdatePairResults}
         />
       )}
     </div>

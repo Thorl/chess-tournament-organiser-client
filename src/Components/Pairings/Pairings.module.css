@@ -11,8 +11,13 @@
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   grid-column: span 3;
+  justify-items: center;
 }
 
-.pairings__grid__pair p {
-  text-align: center;
+.pairings__grid__pair__winner {
+  background-color: green;
+}
+
+.pairings__grid__pair__loser {
+  background-color: red;
 }
