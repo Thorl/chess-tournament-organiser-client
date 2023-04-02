@@ -6,6 +6,11 @@
   height: 100%;
 }
 
+.pairings h2,
+.pairings h3 {
+  margin: 10px 0;
+}
+
 .pairings__grid,
 .pairings__grid__pair {
   display: grid;
@@ -37,4 +42,8 @@
   padding: 5px;
 
   background-color: grey;
+}
+
+.pairings__nextRoundBtn {
+  margin-top: 35px;
 }

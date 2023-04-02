@@ -17,7 +17,12 @@ import {
 
 import styles from "./Pairings.module.css";
 
-export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
+export const Pairings = ({
+  participantsData,
+  pairings,
+  roundNumber,
+  onUpdatePairingsData,
+}) => {
   const { tournamentId } = useParams();
   const round = "round" + roundNumber;
   console.log("Pairings: ", pairings[round]);
@@ -43,7 +48,7 @@ export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
 
         const updatedResults = response.data;
 
-        onUpdatePairResults(updatedResults);
+        onUpdatePairingsData(updatedResults);
         return;
       }
     }
@@ -76,11 +81,36 @@ export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
 
         const updatedResults = response.data;
 
-        onUpdatePairResults(updatedResults);
+        onUpdatePairingsData(updatedResults);
         return;
       }
     }
   };
+
+  const handleStartNextRound = async () => {
+    try {
+    } catch (error) {
+      console.log("An error occurred while starting the next round: ");
+    }
+    const response = await axios.post(
+      `${API_URL}/tournaments/${tournamentId}/pairings`,
+      { participantsData, roundNumber: roundNumber + 1 },
+      {
+        headers: { Authorization: `Bearer ${storedAuthToken}` },
+      }
+    );
+
+    const updatedPairingsData = response.data;
+
+    onUpdatePairingsData(updatedPairingsData);
+  };
+
+  //@TODO: Fully implement the functionality of starting the next round, as well as
+  // switching between previously completed rounds. One way to keep track of whether
+  // a round has finished or not could be to have a state that keeps track of the
+  // number of active rounds.
+  // Another way could be to have a property on each round in the roundPairings that
+  // keeps track of whether the round has finished or not. Create a new component called <Round/> to make it easier to keep track of all the states?
 
   return (
     <div className={styles.pairings}>
@@ -155,6 +185,13 @@ export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
           );
         })}
       </div>
+
+      <button
+        onClick={handleStartNextRound}
+        className={styles.pairings__nextRoundBtn}
+      >
+        Start Next round
+      </button>
     </div>
   );
 };
