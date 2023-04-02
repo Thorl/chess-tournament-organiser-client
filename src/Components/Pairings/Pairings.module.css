@@ -14,10 +14,27 @@
   justify-items: center;
 }
 
+.pairings__grid__pair {
+  margin-bottom: 5px;
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #000;
+}
+
 .pairings__grid__pair__winner {
   background-color: green;
+
+  padding: 5px;
 }
 
 .pairings__grid__pair__loser {
+  padding: 5px;
+
   background-color: red;
+}
+
+.pairings__grid__pair__draw {
+  padding: 5px;
+
+  background-color: grey;
 }

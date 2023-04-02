@@ -21,14 +21,13 @@ export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
   const { tournamentId } = useParams();
   const round = "round" + roundNumber;
   console.log("Pairings: ", pairings[round]);
+  const storedAuthToken = localStorage.getItem("authToken");
 
   const handleWin = async (winningPlayer, winningPlayerId) => {
-    const storedAuthToken = localStorage.getItem("authToken");
-
     for (const pair of pairings[`round${roundNumber}`]) {
-      const player = pair[winningPlayer].student;
+      const player = pair[winningPlayer];
 
-      if (player._id === winningPlayerId) {
+      if (player.id === winningPlayerId) {
         const requestBody = {
           winningPlayerId,
           roundNumber,
@@ -45,15 +44,43 @@ export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
         const updatedResults = response.data;
 
         onUpdatePairResults(updatedResults);
-
-        //@TODO: Make an axios post request to update the result for the winning and losing player.
-        // If needed, add a new route and controller to the backend to handle the update
         return;
       }
     }
   };
 
-  const handleDraw = async (playerOneId, playerTwoId) => {};
+  const handleDraw = async (playerOneId, playerTwoId) => {
+    for (const pair of pairings[`round${roundNumber}`]) {
+      const currentPlayerOneId = pair.player1.id;
+      const currentPlayerTwoId = pair.player2.id;
+
+      if (
+        currentPlayerOneId === playerOneId &&
+        currentPlayerTwoId === playerTwoId
+      ) {
+        const requestBody = {
+          playerOneId,
+          playerTwoId,
+          roundNumber,
+        };
+
+        const response = await axios.post(
+          `${API_URL}/tournaments/${tournamentId}/score`,
+          requestBody,
+          {
+            headers: { Authorization: `Bearer ${storedAuthToken}` },
+          }
+        );
+
+        console.log("Draw response: ", response.data);
+
+        const updatedResults = response.data;
+
+        onUpdatePairResults(updatedResults);
+        return;
+      }
+    }
+  };
 
   return (
     <div className={styles.pairings}>
@@ -77,9 +104,13 @@ export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
                   player1.result === "lose"
                     ? styles.pairings__grid__pair__loser
                     : ""
+                } ${
+                  player1.result === "draw"
+                    ? styles.pairings__grid__pair__draw
+                    : ""
                 }`}
               >
-                {player1.student.name}
+                {player1.name}
               </p>
               <p>vs</p>
               <p
@@ -91,29 +122,31 @@ export const Pairings = ({ pairings, roundNumber, onUpdatePairResults }) => {
                   player2.result === "lose"
                     ? styles.pairings__grid__pair__loser
                     : ""
+                } ${
+                  player1.result === "draw"
+                    ? styles.pairings__grid__pair__draw
+                    : ""
                 }`}
               >
-                {player2.student.name}
+                {player2.name}
               </p>
               <button
                 disabled={wasMatchDecided}
                 id="player1Win"
-                onClick={() => handleWin("player1", player1.student._id)}
+                onClick={() => handleWin("player1", player1.id)}
               >
                 Win
               </button>
               <button
                 disabled={wasMatchDecided}
-                onClick={() =>
-                  handleDraw(player1.student._id, player2.student._id)
-                }
+                onClick={() => handleDraw(player1.id, player2.id)}
               >
                 Draw
               </button>
               <button
                 disabled={wasMatchDecided}
                 id="player2Win"
-                onClick={() => handleWin("player2", player2.student._id)}
+                onClick={() => handleWin("player2", player2.id)}
               >
                 Win
               </button>
