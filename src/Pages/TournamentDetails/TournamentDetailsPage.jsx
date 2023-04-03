@@ -12,9 +12,10 @@ export const TournamentDetailsPage = () => {
   const [isToggled, setIsToggled] = useState(true);
   const [pairings, setPairings] = useState("");
   const [students, setStudents] = useState([]);
-  const [roundNumber, setRoundNumber] = useState(1);
+  const [currentRoundNumber, setCurrentRoundNumber] = useState(1);
   const [participantsData, setParticipantsData] = useState({});
   const [tournamentStatus, setTournamentStatus] = useState("inactive");
+  const [numberOfTournamentRounds, setNumberOfTournamentRounds] = useState(1);
 
   const { tournamentId } = useParams();
   const storedAuthToken = localStorage.getItem("authToken");
@@ -29,15 +30,17 @@ export const TournamentDetailsPage = () => {
       );
       console.log("axios data:", data);
 
-      const { participantsData, roundPairings, status } = data;
+      const { participantsData, roundPairings, status, numberOfRounds } = data;
 
       console.log("participant data:", participantsData);
 
       setParticipantsData(participantsData);
 
-      setRoundNumber(Object.keys(roundPairings).length);
+      setCurrentRoundNumber(roundPairings.size || 1);
 
       setTournamentStatus(status);
+
+      setNumberOfTournamentRounds(numberOfRounds);
 
       console.log("Tournament status: ", tournamentStatus);
 
@@ -54,7 +57,7 @@ export const TournamentDetailsPage = () => {
     const startTournament = true;
     const response = await axios.post(
       `${API_URL}/tournaments/${tournamentId}/pairings`,
-      { participantsData, roundNumber, startTournament },
+      { participantsData, roundNumber: currentRoundNumber, startTournament },
       {
         headers: { Authorization: `Bearer ${storedAuthToken}` },
       }
@@ -67,6 +70,14 @@ export const TournamentDetailsPage = () => {
 
   const handleUpdatePairingsData = (updatedPairResults) => {
     setPairings(updatedPairResults);
+  };
+
+  const handleUpdateParticipantsData = (participantsData) => {
+    setParticipantsData(participantsData);
+  };
+
+  const handleUpdateRoundNumber = (roundNumber) => {
+    setCurrentRoundNumber(roundNumber);
   };
 
   return (
@@ -87,8 +98,11 @@ export const TournamentDetailsPage = () => {
             <Pairings
               participantsData={participantsData}
               pairings={pairings}
-              roundNumber={roundNumber}
+              currentRoundNumber={currentRoundNumber}
+              numberOfTournamentRounds={numberOfTournamentRounds}
               onUpdatePairingsData={handleUpdatePairingsData}
+              onUpdateParticipantsData={handleUpdateParticipantsData}
+              onUpdateRoundNumber={handleUpdateRoundNumber}
             />
           )}
         </div>

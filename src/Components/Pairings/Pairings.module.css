@@ -11,6 +11,14 @@
   margin: 10px 0;
 }
 
+.pairings__roundSelector {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 20px;
+  width: 100%;
+}
+
 .pairings__grid,
 .pairings__grid__pair {
   display: grid;
