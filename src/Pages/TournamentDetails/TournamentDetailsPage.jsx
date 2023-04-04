@@ -1,23 +1,117 @@
+import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
-
-const API_URL = process.env.REACT_APP_API_URL
+import axios from "axios";
+import { API_URL } from "../../constants/API_URL";
+import styles from "./TournamentDetails.module.css";
+import { Link } from "react-router-dom";
+import { Points } from "../../Components/Points/Points";
+import { Pairings } from "../../Components/Pairings/Pairings";
 
 export const TournamentDetailsPage = () => {
-  const [tournamentData, setTournamentData] = useState("");
+  const [isToggled, setIsToggled] = useState(true);
+  const [pairings, setPairings] = useState("");
+  const [currentRoundNumber, setCurrentRoundNumber] = useState(1);
+  const [participantsData, setParticipantsData] = useState({});
+  const [tournamentStatus, setTournamentStatus] = useState("inactive");
+  const [numberOfTournamentRounds, setNumberOfTournamentRounds] = useState(1);
 
   const { tournamentId } = useParams();
+  const storedAuthToken = localStorage.getItem("authToken");
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/tournaments/${tournamentId}`)
-      .then((res) => {
-        console.log(res.data);
-        setTournamentData(res.data);
-      })
-      .catch((error) => console.log(error.response.data));
+    async function fetchData() {
+      const { data } = await axios.get(
+        `${API_URL}/tournaments/${tournamentId}`,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
+      console.log("axios data:", data);
+
+      const { participantsData, roundPairings, status, numberOfRounds } = data;
+
+      console.log("participant data:", participantsData);
+
+      setParticipantsData(participantsData);
+
+      setCurrentRoundNumber(roundPairings.size || 1);
+
+      setTournamentStatus(status);
+
+      setNumberOfTournamentRounds(numberOfRounds);
+
+      console.log("Tournament status: ", tournamentStatus);
+
+      setPairings(roundPairings);
+      console.log("Pairings: ", pairings);
+    }
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div>{tournamentData}</div>;
+  console.log("Participants data: ", participantsData);
+
+  const handleStartTournament = async () => {
+    const startTournament = true;
+    const response = await axios.post(
+      `${API_URL}/tournaments/${tournamentId}/pairings`,
+      { participantsData, roundNumber: currentRoundNumber, startTournament },
+      {
+        headers: { Authorization: `Bearer ${storedAuthToken}` },
+      }
+    );
+
+    setTournamentStatus("active");
+    setPairings(response.data.roundPairings);
+    console.log("Paired Students:", response.data.roundPairings);
+  };
+
+  const handleUpdatePairingsData = (updatedPairResults) => {
+    setPairings(updatedPairResults);
+  };
+
+  const handleUpdateParticipantsData = (participantsData) => {
+    setParticipantsData(participantsData);
+  };
+
+  const handleUpdateRoundNumber = (roundNumber) => {
+    setCurrentRoundNumber(roundNumber);
+  };
+
+  const handleUpdateTournamentStatus = (status) => {
+    setTournamentStatus(status);
+  };
+
+  return (
+    <div className={styles.views}>
+      {tournamentStatus === "inactive" && (
+        <button onClick={handleStartTournament}>Start Tournament</button>
+      )}
+
+      {(tournamentStatus === "active" || tournamentStatus === "finished") && (
+        <div>
+          {isToggled ? (
+            <button onClick={() => setIsToggled(!isToggled)}>Points</button>
+          ) : (
+            <button onClick={() => setIsToggled(!isToggled)}>Pairings</button>
+          )}
+          {!isToggled && <Points pairings={pairings} />}
+          {isToggled && (
+            <Pairings
+              participantsData={participantsData}
+              pairings={pairings}
+              currentRoundNumber={currentRoundNumber}
+              numberOfTournamentRounds={numberOfTournamentRounds}
+              tournamentStatus={tournamentStatus}
+              onUpdateTournamentStatus={handleUpdateTournamentStatus}
+              onUpdatePairingsData={handleUpdatePairingsData}
+              onUpdateParticipantsData={handleUpdateParticipantsData}
+              onUpdateRoundNumber={handleUpdateRoundNumber}
+            />
+          )}
+        </div>
+      )}
+    </div>
+  );
 };
