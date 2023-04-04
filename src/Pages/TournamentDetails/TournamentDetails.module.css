@@ -8,9 +8,21 @@
   grid-template-columns: 100px 600px;
 }
 
-.views {
+.tournamentDetails,
+.tournamentDetails__views {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   height: 100%;
 }
+
+/* .tournamentDetails__views {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+} */
 
 .logo {
   background-color: aliceblue;

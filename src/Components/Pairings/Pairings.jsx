@@ -287,9 +287,9 @@ export const Pairings = ({
           </button>
         )}
       {tournamentStatus === "finished" && (
-        <div className={styles.pairings__finishedMessage}>
-          <p>Tournament over! Go to the "Points" view to see who won!</p>
-        </div>
+        <p className={styles.pairings__finishedMessage}>
+          Tournament over! Go to the "Points" view to see who won!
+        </p>
       )}
     </div>
   );

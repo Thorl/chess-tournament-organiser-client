@@ -1,12 +1,10 @@
-import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { API_URL } from "../../constants/API_URL";
-import styles from "./TournamentDetails.module.css";
-import { Link } from "react-router-dom";
 import { Points } from "../../Components/Points/Points";
 import { Pairings } from "../../Components/Pairings/Pairings";
+import styles from "./TournamentDetails.module.css";
 
 export const TournamentDetailsPage = () => {
   const [isToggled, setIsToggled] = useState(true);
@@ -84,19 +82,21 @@ export const TournamentDetailsPage = () => {
   };
 
   return (
-    <div className={styles.views}>
+    <div className={styles.tournamentDetails}>
       {tournamentStatus === "inactive" && (
         <button onClick={handleStartTournament}>Start Tournament</button>
       )}
 
       {(tournamentStatus === "active" || tournamentStatus === "finished") && (
-        <div>
+        <div className={styles.tournamentDetails__views}>
           {isToggled ? (
             <button onClick={() => setIsToggled(!isToggled)}>Points</button>
           ) : (
             <button onClick={() => setIsToggled(!isToggled)}>Pairings</button>
           )}
-          {!isToggled && <Points pairings={pairings} />}
+          {!isToggled && (
+            <Points pairings={pairings} participantsData={participantsData} />
+          )}
           {isToggled && (
             <Pairings
               participantsData={participantsData}

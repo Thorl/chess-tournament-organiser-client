@@ -1,0 +1,34 @@
+.points {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.points__leftMarginAdjust {
+  margin-left: 40px;
+}
+
+.points__grid {
+  display: grid;
+  grid-template-columns: auto;
+  margin-left: 20px;
+}
+
+.points__grid__rounds {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.points__grid__roundPoints {
+  /* margin-left: 30px; */
+}
+
+.points__grid__rounds__roundNumber {
+  /* padding-left: 30px; */
+}
+
+.points__grid__rounds h3 {
+  margin: 0;
+}

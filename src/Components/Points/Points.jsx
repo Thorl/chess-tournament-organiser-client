@@ -1,215 +1,50 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
+import { useState, useEffect, useCallback } from "react";
 import { API_URL } from "../../constants/API_URL";
 
-import { Table, Button, Modal, Input } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import styles from "./Points.module.css";
 
+export const Points = ({ pairings, participantsData }) => {
+  const { tournamentId } = useParams();
+  const storedAuthToken = localStorage.getItem("authToken");
+  const numberOfRounds = Object.keys(pairings);
+  console.log("Pairings: ", pairings);
+  console.log("Participants data: ", participantsData);
 
-export const Points = ({tournamentData}) => {
- const [isEditing, setIsEditing] = useState(false);
- const [editingStudent, setEditingStudent] = useState(null);
- const [columnData, setColumnData] = useState([]);
+  //@TODO: Pair the student name with the result in each round. The result in each
+  // round will be used to calculate the number of points: 3p for a win, 1p for a draw,
+  // and 0p for a loss.
+  // A solution could be to create a function that creates a new object with all
+  // the student paired with their round scores.
+  // I need to output the rounds dynamically. How to make the number of columns dynamic?
 
-
- const { tournamentId } = useParams();
- const storedAuthToken = localStorage.getItem("authToken");
- const columns = [];
- const rows = [];
-
-
-//  useEffect(() => {
-//    async function fetchData() {
-//      const { data } = await axios.get(
-//        `${API_URL}/tournaments/${tournamentId}`,
-//        {
-//          headers: { Authorization: `Bearer ${storedAuthToken}` },
-//        }
-//      );
-
-
-//      columns.push(
-//        {
-//          key: "1",
-//          title: "ID",
-//          dataIndex: "id",
-//        },
-//        {
-//          key: "2",
-//          title: "Name",
-//          dataIndex: "name",
-//        }
-//      );
-
-
-//      for (let i = 1; i <= data.numberOfRounds; i++) {
-//        columns.push({
-//          key: (i + 2).toString(),
-//          title: `R${i}`,
-//          dataIndex: `R${i}`,
-//        });
-//      }
-
-
-//      columns.push(
-//        {
-//          key: (columns.length + 1).toString(),
-//          title: "Total",
-//          dataIndex: "total",
-//        },
-//        {
-//          key: (columns.length + 2).toString(),
-//          title: "Actions",
-//          render: (record) => {
-//            return (
-//              <>
-//                <EditOutlined onClick={() => editStudent(record)} />
-//                <DeleteOutlined
-//                  onClick={() => deleteStudent(record)}
-//                  style={{ color: "red", marginLeft: 12 }}
-//                />
-//              </>
-//            );
-//          },
-//        }
-//      );
-
-
-//      setColumnData(columns);
-
-
-//      data.participantsData.forEach((participant, index) => {
-//        rows.push({
-//          id: index + 1,
-//          name: participant.participantID.name,
-//          roundsData: {},
-//        });
-//      });
-
-
-//      for (const participant of rows) {
-//        for (let i = 1; i <= data.numberOfRounds; i++) {
-//          participant.roundsData[`R${i}`] = "";
-//        }
-//        participant["total"] = "";
-//      }
-
-
-//      console.log(rows);
-//      setTournamentData(rows);
-//    }
-//    fetchData();
-//    // eslint-disable-next-line react-hooks/exhaustive-deps
-//  }, []);
-
-
-//  const addNewStudent = () => {
-//    const newStudentID = tournamentData[tournamentData.length - 1].id + 1;
-
-
-//    const newStudent = {
-//      id: newStudentID,
-//      name: "",
-//      roundsData: {
-//        R1: "",
-//        R2: "",
-//        R3: "",
-//        R4: "",
-//      },
-//      total: "",
-//    };
-//    setTournamentData((previousState) => {
-//      return [...previousState, newStudent];
-//    });
-//  };
-
-
-//  const deleteStudent = (record) => {
-//    Modal.confirm({
-//      title: `Are you sure you want to remove ${record.name} from the tournament?`,
-//      okText: "Yes",
-//      okType: "danger",
-//      onOk: () => {
-//        setTournamentData((previousState) => {
-//          return previousState.filter(
-//            (participant) => participant.id !== record.id
-//          );
-//        });
-//      },
-//    });
-//  };
-
-
-//  const editStudent = (record) => {
-//    setIsEditing(true);
-//    setEditingStudent({ ...record });
-//    console.log(record);
-//  };
-
-
-//  const resetEdit = () => {
-//    setIsEditing(false);
-//    setEditingStudent(null);
-//  };
-
-
-//  return (
-//    <div>
-//      <Button onClick={addNewStudent}>Add a New Student</Button>
-//      <Table columns={columnData} dataSource={tournamentData} pagination={false}></Table>
-//      <Modal
-//        title="Edit Student"
-//        open={isEditing}
-//        okText="Save"
-//        onCancel={() => {
-//          resetEdit();
-//        }}
-//        onOk={() => {
-//          setTournamentData((pre) => {
-//            return pre.map((participant) => {
-//              if (participant.id === editingStudent.id) {
-//                return editingStudent;
-//              } else {
-//                return participant;
-//              }
-//            });
-//          });
-
-
-//          resetEdit();
-//        }}
-//      >
-//        <Input
-//          addonBefore="Name"
-//          value={editingStudent?.name}
-//          onChange={(e) => {
-//            setEditingStudent((pre) => {
-//              return { ...pre, name: e.target.value };
-//            });
-//          }}
-//        />
-//        {editingStudent &&
-//          Object.keys(editingStudent.roundsData).map((round) => {
-//            return (
-//              <Input
-//                addonBefore={`Round ${round.slice(1)}`}
-//                value={editingStudent.roundsData.round}
-//                onChange={(e) => {
-//                  setEditingStudent((pre) => {
-//                    pre[round] = e.target.value;
-//                    return { ...pre };
-//                  });
-//                }}
-//              />
-//            );
-//          })}
-//      </Modal>
-//      <Button>
-//        <Link to={`/tournaments/${tournamentId}/pairings`}>View Pairings</Link>
-//      </Button>
-//    </div>
-//  );
+  return (
+    <div className={styles.points}>
+      <h2>Points</h2>
+      <div className={styles.points__grid}>
+        <div className={styles.points__grid__rounds}>
+          <h3>Students</h3>
+          {numberOfRounds.map((_, i) => {
+            return (
+              <h3
+                className={styles.points__grid__rounds__roundNumber}
+              >{`Round ${i + 1}`}</h3>
+            );
+          })}
+        </div>
+        <div className={styles.points__grid__roundPoints}>
+          {participantsData.map(({ student }) => {
+            console.log("Student name: ", student.name);
+            return (
+              <div key={student._id}>
+                <p>{student.name}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 };
