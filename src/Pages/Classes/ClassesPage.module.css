@@ -1,0 +1,44 @@
+.classes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  height: 100%;
+  width: 100%;
+}
+
+.classes__pageHeader {
+  margin: 0 0 10px 0;
+}
+
+.classes h3 {
+  margin: 0;
+}
+
+.classes__card {
+  height: 30%;
+  width: 70%;
+
+  border: 1px solid #000;
+  text-decoration: none;
+}
+
+.classes__dbClasses {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  color: #000;
+}
+
+.classes__createNewClass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.classes__createNewClass__link {
+  text-decoration: none;
+}

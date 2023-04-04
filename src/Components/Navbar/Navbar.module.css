@@ -1,0 +1,15 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+
+  border-bottom: 1px solid #000;
+}
+
+.navbar h1 {
+  padding-right: 15px;
+
+  font-size: 20px;
+}
