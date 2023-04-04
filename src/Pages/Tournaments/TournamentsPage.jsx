@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../constants/API_URL";
 import styles from "./TournamentsPage.module.css";
 
+
 export const TournamentsPage = () => {
   const [tournaments, setTournaments] = useState([]);
 
