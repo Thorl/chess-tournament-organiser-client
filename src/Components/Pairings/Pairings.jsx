@@ -1,19 +1,8 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import React, { useState } from "react";
-
+import { useState } from "react";
 import { API_URL } from "../../constants/API_URL";
-
-/* import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { Table, Button, Modal, Input } from "antd";
-import {
-  ArrowUpOutlined,
-  ArrowDownOutlined,
-  ArrowRightOutlined,
-} from "@ant-design/icons"; */
 
 import styles from "./Pairings.module.css";
 
@@ -25,16 +14,34 @@ export const Pairings = ({
   onUpdateParticipantsData,
   onUpdateRoundNumber,
   numberOfTournamentRounds,
+  onUpdateTournamentStatus,
+  tournamentStatus,
 }) => {
   const [matchesCompleted, setMatchesCompleted] = useState(0);
   const { tournamentId } = useParams();
   const round = "round" + currentRoundNumber;
-  console.log("Pairings: ", pairings);
   const storedAuthToken = localStorage.getItem("authToken");
   const numberOfMatches = pairings[round].length;
+  const numberOfActiveRounds = Object.keys(pairings).length;
+  const isTournamentFinished =
+    matchesCompleted === numberOfMatches &&
+    currentRoundNumber === numberOfTournamentRounds;
+
+  console.log("***");
+  console.log("Pairings: ", pairings);
+
+  console.log("Tournament status: ", tournamentStatus);
+
+  console.log("Is tournament finished: ", isTournamentFinished);
+
+  console.log("number of active rounds: ", numberOfActiveRounds);
 
   console.log("Matches completed: ", matchesCompleted);
   console.log("number of matches: ", numberOfMatches);
+  console.log("Current round number: ", currentRoundNumber);
+  console.log("Number of tournament rounds: ", numberOfTournamentRounds);
+
+  //@TODO:
 
   const handleWin = async (winningPlayer, winningPlayerId) => {
     for (const pair of pairings[`round${currentRoundNumber}`]) {
@@ -59,6 +66,13 @@ export const Pairings = ({
         onUpdatePairingsData(updatedResults);
 
         setMatchesCompleted(matchesCompleted + 1);
+
+        console.log(
+          "Is tourney finished: ",
+          matchesCompleted === numberOfMatches &&
+            currentRoundNumber === numberOfTournamentRounds
+        );
+
         return;
       }
     }
@@ -92,6 +106,7 @@ export const Pairings = ({
         const updatedResults = response.data;
 
         onUpdatePairingsData(updatedResults);
+
         setMatchesCompleted(matchesCompleted + 1);
         return;
       }
@@ -131,22 +146,54 @@ export const Pairings = ({
     }
   };
 
-  //@TODO: Implement functionality to switch between rounds.
-  // Make a call to the backend
-  const handleViewNextRound = () => {};
+  const handleSwitchRound = async (direction) => {
+    if (direction === "next") {
+      onUpdateRoundNumber(currentRoundNumber + 1);
+    } else if (direction === "previous") {
+      onUpdateRoundNumber(currentRoundNumber - 1);
+    }
+  };
+
+  const handleFinishTournament = async () => {
+    try {
+      const requestBody = { newStatus: "finished" };
+
+      const response = await axios.post(
+        `${API_URL}/tournaments/${tournamentId}/status`,
+        requestBody,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
+
+      const finishedTournamentStatus = response.data.status;
+
+      console.log("Tournament status update: ", response);
+      onUpdateTournamentStatus(finishedTournamentStatus);
+    } catch (error) {
+      console.log(
+        "An error occurred while trying to set the tournament status to 'finished': ",
+        error
+      );
+    }
+  };
 
   return (
     <div className={styles.pairings}>
       <h2>PAIRINGS</h2>
       <div className={styles.pairings__roundSelector}>
-        {matchesCompleted !== numberOfMatches && currentRoundNumber > 1 && (
-          <button>Previous</button>
+        {currentRoundNumber > 1 && (
+          <button onClick={() => handleSwitchRound("previous")}>
+            Previous
+          </button>
         )}
+        {currentRoundNumber === 1 && <div></div>}
         <h3>Round {currentRoundNumber}</h3>
-        {matchesCompleted !== numberOfMatches &&
-          currentRoundNumber < numberOfTournamentRounds && (
-            <button onClick={handleViewNextRound}>Next</button>
+        {currentRoundNumber < numberOfTournamentRounds &&
+          currentRoundNumber < numberOfActiveRounds && (
+            <button onClick={() => handleSwitchRound("next")}>Next</button>
           )}
+        {currentRoundNumber === numberOfTournamentRounds && <div></div>}
       </div>
       <div className={styles.pairings__grid}>
         {pairings[round].map((pair, index) => {
@@ -219,7 +266,8 @@ export const Pairings = ({
       </div>
 
       {numberOfMatches === matchesCompleted &&
-        currentRoundNumber < numberOfTournamentRounds && (
+        currentRoundNumber < numberOfTournamentRounds &&
+        currentRoundNumber >= numberOfActiveRounds && (
           <button
             onClick={handleStartNextRound}
             className={styles.pairings__nextRoundBtn}
@@ -227,6 +275,22 @@ export const Pairings = ({
             Start Next round
           </button>
         )}
+      {numberOfMatches === matchesCompleted &&
+        currentRoundNumber === numberOfTournamentRounds &&
+        currentRoundNumber >= numberOfActiveRounds &&
+        tournamentStatus === "active" && (
+          <button
+            onClick={handleFinishTournament}
+            className={styles.pairings__nextRoundBtn}
+          >
+            Finish Tournament
+          </button>
+        )}
+      {tournamentStatus === "finished" && (
+        <div className={styles.pairings__finishedMessage}>
+          <p>Tournament over! Go to the "Points" view to see who won!</p>
+        </div>
+      )}
     </div>
   );
 };

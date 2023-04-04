@@ -11,7 +11,6 @@ import { Pairings } from "../../Components/Pairings/Pairings";
 export const TournamentDetailsPage = () => {
   const [isToggled, setIsToggled] = useState(true);
   const [pairings, setPairings] = useState("");
-  const [students, setStudents] = useState([]);
   const [currentRoundNumber, setCurrentRoundNumber] = useState(1);
   const [participantsData, setParticipantsData] = useState({});
   const [tournamentStatus, setTournamentStatus] = useState("inactive");
@@ -80,13 +79,17 @@ export const TournamentDetailsPage = () => {
     setCurrentRoundNumber(roundNumber);
   };
 
+  const handleUpdateTournamentStatus = (status) => {
+    setTournamentStatus(status);
+  };
+
   return (
     <div className={styles.views}>
       {tournamentStatus === "inactive" && (
         <button onClick={handleStartTournament}>Start Tournament</button>
       )}
 
-      {tournamentStatus === "active" && (
+      {(tournamentStatus === "active" || tournamentStatus === "finished") && (
         <div>
           {isToggled ? (
             <button onClick={() => setIsToggled(!isToggled)}>Points</button>
@@ -100,6 +103,8 @@ export const TournamentDetailsPage = () => {
               pairings={pairings}
               currentRoundNumber={currentRoundNumber}
               numberOfTournamentRounds={numberOfTournamentRounds}
+              tournamentStatus={tournamentStatus}
+              onUpdateTournamentStatus={handleUpdateTournamentStatus}
               onUpdatePairingsData={handleUpdatePairingsData}
               onUpdateParticipantsData={handleUpdateParticipantsData}
               onUpdateRoundNumber={handleUpdateRoundNumber}

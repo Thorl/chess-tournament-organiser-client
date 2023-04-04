@@ -12,10 +12,11 @@
 }
 
 .pairings__roundSelector {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
   align-items: baseline;
-  gap: 20px;
+  grid-gap: 15px;
   width: 100%;
 }
 
@@ -54,4 +55,8 @@
 
 .pairings__nextRoundBtn {
   margin-top: 35px;
+}
+
+.pairings__finishedMessage {
+  width: 60%;
 }
