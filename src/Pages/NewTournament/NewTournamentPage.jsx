@@ -112,6 +112,8 @@ export const NewTournamentPage = () => {
 
       const tournamentId = response.data.tournamentId;
 
+      console.log("Response: ", response.data);
+
       navigate(`/tournaments/${tournamentId}`);
     } catch (error) {
       console.error("An error occured while creating a tournament: ", error);
