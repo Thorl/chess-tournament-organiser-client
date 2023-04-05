@@ -1,32 +1,53 @@
 .points {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   height: 100%;
+  overflow-x: scroll;
 }
 
-.points__leftMarginAdjust {
-  margin-left: 40px;
+.points__winningMessage {
+  margin: 0 0 20px 0;
+
+  text-align: center;
 }
 
 .points__grid {
   display: grid;
   grid-template-columns: auto;
-  margin-left: 20px;
+  padding-left: 50%;
+  width: 150%;
+  overflow-x: scroll;
 }
 
 .points__grid__rounds {
   display: grid;
   grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  justify-self: center;
+  height: 100%;
+  width: 100%;
 }
 
-.points__grid__roundPoints {
-  /* margin-left: 30px; */
+.points__grid__rounds h3 {
+  text-align: center;
+}
+
+.points__grid__points {
+  /* padding-left: 10px; */
+}
+
+.points__grid__points__row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  justify-items: center;
+
+  border-bottom: 1px solid #000;
 }
 
 .points__grid__rounds__roundNumber {
-  /* padding-left: 30px; */
+  /* padding: 0 10px; */
 }
 
 .points__grid__rounds h3 {
