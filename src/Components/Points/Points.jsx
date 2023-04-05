@@ -1,215 +1,139 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
+import { useState, useEffect, useCallback } from "react";
 import { API_URL } from "../../constants/API_URL";
 
-import { Table, Button, Modal, Input } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import styles from "./Points.module.css";
+import React from "react";
 
+export const Points = ({ pairings, participantsData, tournamentStatus }) => {
+  const [studentPointsPerRound, setStudentPointsPerRound] = useState(null);
+  const [winnerMessage, setWinnerMessage] = useState("");
+  const rounds = Object.keys(pairings);
 
-export const Points = ({tournamentData}) => {
- const [isEditing, setIsEditing] = useState(false);
- const [editingStudent, setEditingStudent] = useState(null);
- const [columnData, setColumnData] = useState([]);
+  const calculateWinner = useCallback(() => {
+    if (tournamentStatus === "finished") {
+      const studentSortedByPoints = [...participantsData].sort(
+        (studentOne, studentTwo) => {
+          if (studentOne.points > studentTwo.points) {
+            return -1;
+          } else if (studentOne.points < studentTwo.points) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      );
 
+      let winnersList = [];
 
- const { tournamentId } = useParams();
- const storedAuthToken = localStorage.getItem("authToken");
- const columns = [];
- const rows = [];
+      for (let i = 0; i < studentSortedByPoints.length; i++) {
+        const highestScore = studentSortedByPoints[0].points;
 
+        const currentStudent = studentSortedByPoints[i];
+        if (currentStudent.points >= highestScore) {
+          winnersList.push(currentStudent.student.name);
+        }
+      }
 
-//  useEffect(() => {
-//    async function fetchData() {
-//      const { data } = await axios.get(
-//        `${API_URL}/tournaments/${tournamentId}`,
-//        {
-//          headers: { Authorization: `Bearer ${storedAuthToken}` },
-//        }
-//      );
+      let message = "";
 
+      console.log("Winners list: ", winnersList);
 
-//      columns.push(
-//        {
-//          key: "1",
-//          title: "ID",
-//          dataIndex: "id",
-//        },
-//        {
-//          key: "2",
-//          title: "Name",
-//          dataIndex: "name",
-//        }
-//      );
+      if (winnersList.length === 1) {
+        const message = `${winnersList[0]} has won the tournament!`;
 
+        setWinnerMessage(message);
+      } else if (winnersList.length > 1) {
+        for (let i = 0; i < winnersList.length; i++) {
+          if (winnersList[i + 1]) {
+            message += `${winnersList[i]} & `;
+          } else {
+            message += winnersList[i];
+          }
+        }
 
-//      for (let i = 1; i <= data.numberOfRounds; i++) {
-//        columns.push({
-//          key: (i + 2).toString(),
-//          title: `R${i}`,
-//          dataIndex: `R${i}`,
-//        });
-//      }
+        message += " have won the tournament!";
 
+        setWinnerMessage(message);
+      }
+    }
+  }, [participantsData, tournamentStatus]);
 
-//      columns.push(
-//        {
-//          key: (columns.length + 1).toString(),
-//          title: "Total",
-//          dataIndex: "total",
-//        },
-//        {
-//          key: (columns.length + 2).toString(),
-//          title: "Actions",
-//          render: (record) => {
-//            return (
-//              <>
-//                <EditOutlined onClick={() => editStudent(record)} />
-//                <DeleteOutlined
-//                  onClick={() => deleteStudent(record)}
-//                  style={{ color: "red", marginLeft: 12 }}
-//                />
-//              </>
-//            );
-//          },
-//        }
-//      );
+  const calculateStudentPointsPerRound = useCallback(() => {
+    const rounds = Object.keys(pairings);
+    const studentPointsPerRound = {};
 
+    for (const participant of participantsData) {
+      const studentId = participant.student._id;
 
-//      setColumnData(columns);
+      studentPointsPerRound[studentId] = [];
+    }
 
+    rounds.forEach((round) => {
+      for (const match of pairings[round]) {
+        const playerOneId = match.player1.id;
+        const playerOnePoints = match.player1.points;
 
-//      data.participantsData.forEach((participant, index) => {
-//        rows.push({
-//          id: index + 1,
-//          name: participant.participantID.name,
-//          roundsData: {},
-//        });
-//      });
+        const playerTwoId = match.player2.id;
+        const playerTwoPoints = match.player2.points;
 
+        studentPointsPerRound[playerOneId].push(playerOnePoints);
+        studentPointsPerRound[playerTwoId].push(playerTwoPoints);
+      }
+    });
 
-//      for (const participant of rows) {
-//        for (let i = 1; i <= data.numberOfRounds; i++) {
-//          participant.roundsData[`R${i}`] = "";
-//        }
-//        participant["total"] = "";
-//      }
+    setStudentPointsPerRound(studentPointsPerRound);
+  }, [pairings, participantsData]);
 
+  useEffect(() => {
+    calculateStudentPointsPerRound();
+    calculateWinner();
+  }, []);
 
-//      console.log(rows);
-//      setTournamentData(rows);
-//    }
-//    fetchData();
-//    // eslint-disable-next-line react-hooks/exhaustive-deps
-//  }, []);
+  return (
+    <div className={styles.points}>
+      <h2>Points</h2>
+      <h3 className={styles.points__winningMessage}>
+        {winnerMessage && winnerMessage}
+      </h3>
+      <div className={styles.points__grid}>
+        <div className={styles.points__grid__rounds}>
+          <h3>Students</h3>
+          {rounds.map((_, i) => {
+            return (
+              <h3
+                key={i}
+                className={styles.points__grid__rounds__roundNumber}
+              >{`R${i + 1}`}</h3>
+            );
+          })}
+          <h3>Total</h3>
+        </div>
+        <div className={styles.points__grid__points}>
+          {participantsData.map(({ student }) => {
+            const studentId = student._id;
+            let totalPoints;
+            if (studentPointsPerRound) {
+              totalPoints = studentPointsPerRound[studentId].reduce(
+                (total, curr) => total + curr
+              );
+            }
+            return (
+              <div key={studentId} className={styles.points__grid__points__row}>
+                <p>{student.name}</p>
+                {studentPointsPerRound &&
+                  studentPointsPerRound[studentId].map((points, i) => {
+                    return <p key={i}>{points}</p>;
+                  })}
 
-
-//  const addNewStudent = () => {
-//    const newStudentID = tournamentData[tournamentData.length - 1].id + 1;
-
-
-//    const newStudent = {
-//      id: newStudentID,
-//      name: "",
-//      roundsData: {
-//        R1: "",
-//        R2: "",
-//        R3: "",
-//        R4: "",
-//      },
-//      total: "",
-//    };
-//    setTournamentData((previousState) => {
-//      return [...previousState, newStudent];
-//    });
-//  };
-
-
-//  const deleteStudent = (record) => {
-//    Modal.confirm({
-//      title: `Are you sure you want to remove ${record.name} from the tournament?`,
-//      okText: "Yes",
-//      okType: "danger",
-//      onOk: () => {
-//        setTournamentData((previousState) => {
-//          return previousState.filter(
-//            (participant) => participant.id !== record.id
-//          );
-//        });
-//      },
-//    });
-//  };
-
-
-//  const editStudent = (record) => {
-//    setIsEditing(true);
-//    setEditingStudent({ ...record });
-//    console.log(record);
-//  };
-
-
-//  const resetEdit = () => {
-//    setIsEditing(false);
-//    setEditingStudent(null);
-//  };
-
-
-//  return (
-//    <div>
-//      <Button onClick={addNewStudent}>Add a New Student</Button>
-//      <Table columns={columnData} dataSource={tournamentData} pagination={false}></Table>
-//      <Modal
-//        title="Edit Student"
-//        open={isEditing}
-//        okText="Save"
-//        onCancel={() => {
-//          resetEdit();
-//        }}
-//        onOk={() => {
-//          setTournamentData((pre) => {
-//            return pre.map((participant) => {
-//              if (participant.id === editingStudent.id) {
-//                return editingStudent;
-//              } else {
-//                return participant;
-//              }
-//            });
-//          });
-
-
-//          resetEdit();
-//        }}
-//      >
-//        <Input
-//          addonBefore="Name"
-//          value={editingStudent?.name}
-//          onChange={(e) => {
-//            setEditingStudent((pre) => {
-//              return { ...pre, name: e.target.value };
-//            });
-//          }}
-//        />
-//        {editingStudent &&
-//          Object.keys(editingStudent.roundsData).map((round) => {
-//            return (
-//              <Input
-//                addonBefore={`Round ${round.slice(1)}`}
-//                value={editingStudent.roundsData.round}
-//                onChange={(e) => {
-//                  setEditingStudent((pre) => {
-//                    pre[round] = e.target.value;
-//                    return { ...pre };
-//                  });
-//                }}
-//              />
-//            );
-//          })}
-//      </Modal>
-//      <Button>
-//        <Link to={`/tournaments/${tournamentId}/pairings`}>View Pairings</Link>
-//      </Button>
-//    </div>
-//  );
+                <p>{totalPoints}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
 };
