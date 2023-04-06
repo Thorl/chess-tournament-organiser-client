@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { API_URL } from "../../constants/API_URL";
 
 import styles from "./Pairings.module.css";
@@ -23,6 +23,40 @@ export const Pairings = ({
   const storedAuthToken = localStorage.getItem("authToken");
   const numberOfMatches = pairings[round].length;
   const numberOfActiveRounds = Object.keys(pairings).length;
+
+  const updateMatchesCompleted = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/tournaments/${tournamentId}`,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
+
+      const roundData = response.data.roundPairings[round];
+
+      let matchesCompleted = 0;
+
+      for (const match of roundData) {
+        if (match.player1.points > 0 || match.player2.points > 0) {
+          matchesCompleted++;
+        }
+      }
+
+      console.log("Student points: ", response.data.participantsData);
+
+      setMatchesCompleted(matchesCompleted);
+    } catch (error) {
+      console.error(
+        "An error occurred while trying to get the number of completed matches: ",
+        error
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    updateMatchesCompleted();
+  }, [updateMatchesCompleted]);
 
   const handleWin = async (winningPlayer, winningPlayerId) => {
     for (const pair of pairings[`round${currentRoundNumber}`]) {
@@ -113,7 +147,7 @@ export const Pairings = ({
       onUpdateRoundNumber(currentRoundNumber + 1);
       setMatchesCompleted(0);
     } catch (error) {
-      console.log("An error occurred while starting the next round: ", error);
+      console.error("An error occurred while starting the next round: ", error);
     }
   };
 
@@ -140,8 +174,20 @@ export const Pairings = ({
       const finishedTournamentStatus = response.data.status;
 
       onUpdateTournamentStatus(finishedTournamentStatus);
+
+      const tournamentDetailsResponse = await axios.get(
+        `${API_URL}/tournaments/${tournamentId}`,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
+
+      const updatedParticipantsData =
+        tournamentDetailsResponse.data.participantsData;
+
+      onUpdateParticipantsData(updatedParticipantsData);
     } catch (error) {
-      console.log(
+      console.error(
         "An error occurred while trying to set the tournament status to 'finished': ",
         error
       );
