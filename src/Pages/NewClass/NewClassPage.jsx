@@ -3,9 +3,9 @@ import axios from "axios";
 import { useState } from "react";
 
 import { generateKey } from "../../utils/generate-key";
-import styles from "./NewClassPage.module.css";
-
 import { API_URL } from "../../constants/API_URL";
+
+import styles from "./NewClassPage.module.css";
 
 export const NewClassPage = () => {
   const [className, setClassName] = useState("");

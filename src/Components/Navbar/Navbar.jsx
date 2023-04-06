@@ -13,7 +13,7 @@ export const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <h1>Chess Tournament Organiser</h1>
+      <h1 className={styles.navbar__header}>Chesstament</h1>
       {isLoggedIn && currentPath !== "/profile" && (
         <HamburgerMenu onLogout={logOutUser} />
       )}
