@@ -41,9 +41,7 @@ export const SignupPage = () => {
 
   return (
     <section className={styles.signup}>
-      <h2 className={styles.signup__header}>
-        Sign <span> up</span>
-      </h2>
+      <h2 className={styles.signup__header}>Sign Up</h2>
       {errorMessage && (
         <p className={styles.signup__form__errorMessage}>{errorMessage}</p>
       )}
