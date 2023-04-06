@@ -4,10 +4,23 @@ import styles from "./HomePage.module.css";
 export const HomePage = () => {
   return (
     <main className={styles.homePage}>
-      <p>Easily manage your classes' chess tournaments!</p>
-      <section className={styles.homePage__btns}>
-        <Link to="/signup">Sign up</Link>
-        <Link to="/login">Log in</Link>
+      <section className={styles.homePage__container}>
+        <p className={styles.homePage__container__copy}>
+          Chesstament is a tool for teachers to easily create and manage chess
+          tournaments in the Swiss style
+        </p>
+        <Link
+          className={`${styles.homePage__container__link} ${styles.homePage__container__link__signup}`}
+          to="/signup"
+        >
+          Sign up
+        </Link>
+        <Link
+          className={`${styles.homePage__container__link} ${styles.homePage__container__link__login}`}
+          to="/login"
+        >
+          Log in
+        </Link>
       </section>
     </main>
   );
