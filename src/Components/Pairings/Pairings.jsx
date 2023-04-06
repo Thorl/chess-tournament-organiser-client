@@ -80,6 +80,18 @@ export const Pairings = ({
 
         onUpdatePairingsData(updatedResults);
 
+        const tournamentDetailsResponse = await axios.get(
+          `${API_URL}/tournaments/${tournamentId}`,
+          {
+            headers: { Authorization: `Bearer ${storedAuthToken}` },
+          }
+        );
+
+        const updatedParticipantsData =
+          tournamentDetailsResponse.data.participantsData;
+
+        onUpdateParticipantsData(updatedParticipantsData);
+
         setMatchesCompleted(matchesCompleted + 1);
 
         return;
@@ -113,6 +125,18 @@ export const Pairings = ({
         const updatedResults = response.data;
 
         onUpdatePairingsData(updatedResults);
+
+        const tournamentDetailsResponse = await axios.get(
+          `${API_URL}/tournaments/${tournamentId}`,
+          {
+            headers: { Authorization: `Bearer ${storedAuthToken}` },
+          }
+        );
+
+        const updatedParticipantsData =
+          tournamentDetailsResponse.data.participantsData;
+
+        onUpdateParticipantsData(updatedParticipantsData);
 
         setMatchesCompleted(matchesCompleted + 1);
         return;
