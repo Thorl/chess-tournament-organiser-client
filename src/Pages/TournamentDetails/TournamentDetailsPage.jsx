@@ -1,12 +1,10 @@
-import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { API_URL } from "../../constants/API_URL";
-import styles from "./TournamentDetails.module.css";
-import { Link } from "react-router-dom";
 import { Points } from "../../Components/Points/Points";
 import { Pairings } from "../../Components/Pairings/Pairings";
+import styles from "./TournamentDetails.module.css";
 
 export const TournamentDetailsPage = () => {
   const [isToggled, setIsToggled] = useState(true);
@@ -27,11 +25,8 @@ export const TournamentDetailsPage = () => {
           headers: { Authorization: `Bearer ${storedAuthToken}` },
         }
       );
-      console.log("axios data:", data);
 
       const { participantsData, roundPairings, status, numberOfRounds } = data;
-
-      console.log("participant data:", participantsData);
 
       setParticipantsData(participantsData);
 
@@ -41,16 +36,10 @@ export const TournamentDetailsPage = () => {
 
       setNumberOfTournamentRounds(numberOfRounds);
 
-      console.log("Tournament status: ", tournamentStatus);
-
       setPairings(roundPairings);
-      console.log("Pairings: ", pairings);
     }
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log("Participants data: ", participantsData);
 
   const handleStartTournament = async () => {
     const startTournament = true;
@@ -64,7 +53,6 @@ export const TournamentDetailsPage = () => {
 
     setTournamentStatus("active");
     setPairings(response.data.roundPairings);
-    console.log("Paired Students:", response.data.roundPairings);
   };
 
   const handleUpdatePairingsData = (updatedPairResults) => {
@@ -84,19 +72,25 @@ export const TournamentDetailsPage = () => {
   };
 
   return (
-    <div className={styles.views}>
+    <div className={styles.tournamentDetails}>
       {tournamentStatus === "inactive" && (
         <button onClick={handleStartTournament}>Start Tournament</button>
       )}
 
       {(tournamentStatus === "active" || tournamentStatus === "finished") && (
-        <div>
+        <div className={styles.tournamentDetails__views}>
           {isToggled ? (
             <button onClick={() => setIsToggled(!isToggled)}>Points</button>
           ) : (
             <button onClick={() => setIsToggled(!isToggled)}>Pairings</button>
           )}
-          {!isToggled && <Points pairings={pairings} />}
+          {!isToggled && (
+            <Points
+              pairings={pairings}
+              participantsData={participantsData}
+              tournamentStatus={tournamentStatus}
+            />
+          )}
           {isToggled && (
             <Pairings
               participantsData={participantsData}

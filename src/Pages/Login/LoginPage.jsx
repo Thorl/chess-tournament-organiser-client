@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth.context";
 
@@ -49,9 +49,16 @@ export const LoginPage = () => {
 
   return (
     <section className={styles.login}>
+      <h2 className={styles.login__header}>Log In</h2>
+      {errorMessage && (
+        <p className={styles.login__form__errorMessage}>{errorMessage}</p>
+      )}
       <form className={styles.login__form} onSubmit={handleLoginSubmit}>
-        <label htmlFor="email">Email</label>
+        <label className={styles.login__form__label} htmlFor="email">
+          Email
+        </label>
         <input
+          className={styles.login__form__input}
           type="text"
           id="email"
           placeholder="Enter email"
@@ -59,8 +66,11 @@ export const LoginPage = () => {
           onChange={handleEmailInput}
           required
         />
-        <label htmlFor="password">Password</label>
+        <label className={styles.login__form__label} htmlFor="password">
+          Password
+        </label>
         <input
+          className={styles.login__form__input}
           type="password"
           id="password"
           placeholder="Enter password"
@@ -68,11 +78,11 @@ export const LoginPage = () => {
           onChange={handlePasswordInput}
           required
         />
-        <button className={styles.login__form__btn}>Sign up</button>
+        <button className={styles.login__form__btn}>Log in</button>
+        <p className={styles.login__form__footer}>
+          Don't have an account yet? <Link to="/signup">Sign up</Link>
+        </p>
       </form>
-      {errorMessage && (
-        <p className={styles.login__form__errorMessage}>{errorMessage}</p>
-      )}
     </section>
   );
 };

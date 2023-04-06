@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { API_URL } from "../../constants/API_URL";
 
 import styles from "./Pairings.module.css";
@@ -23,25 +23,40 @@ export const Pairings = ({
   const storedAuthToken = localStorage.getItem("authToken");
   const numberOfMatches = pairings[round].length;
   const numberOfActiveRounds = Object.keys(pairings).length;
-  const isTournamentFinished =
-    matchesCompleted === numberOfMatches &&
-    currentRoundNumber === numberOfTournamentRounds;
 
-  console.log("***");
-  console.log("Pairings: ", pairings);
+  const updateMatchesCompleted = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/tournaments/${tournamentId}`,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
 
-  console.log("Tournament status: ", tournamentStatus);
+      const roundData = response.data.roundPairings[round];
 
-  console.log("Is tournament finished: ", isTournamentFinished);
+      let matchesCompleted = 0;
 
-  console.log("number of active rounds: ", numberOfActiveRounds);
+      for (const match of roundData) {
+        if (match.player1.points > 0 || match.player2.points > 0) {
+          matchesCompleted++;
+        }
+      }
 
-  console.log("Matches completed: ", matchesCompleted);
-  console.log("number of matches: ", numberOfMatches);
-  console.log("Current round number: ", currentRoundNumber);
-  console.log("Number of tournament rounds: ", numberOfTournamentRounds);
+      console.log("Student points: ", response.data.participantsData);
 
-  //@TODO:
+      setMatchesCompleted(matchesCompleted);
+    } catch (error) {
+      console.error(
+        "An error occurred while trying to get the number of completed matches: ",
+        error
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    updateMatchesCompleted();
+  }, [updateMatchesCompleted]);
 
   const handleWin = async (winningPlayer, winningPlayerId) => {
     for (const pair of pairings[`round${currentRoundNumber}`]) {
@@ -65,13 +80,19 @@ export const Pairings = ({
 
         onUpdatePairingsData(updatedResults);
 
-        setMatchesCompleted(matchesCompleted + 1);
-
-        console.log(
-          "Is tourney finished: ",
-          matchesCompleted === numberOfMatches &&
-            currentRoundNumber === numberOfTournamentRounds
+        const tournamentDetailsResponse = await axios.get(
+          `${API_URL}/tournaments/${tournamentId}`,
+          {
+            headers: { Authorization: `Bearer ${storedAuthToken}` },
+          }
         );
+
+        const updatedParticipantsData =
+          tournamentDetailsResponse.data.participantsData;
+
+        onUpdateParticipantsData(updatedParticipantsData);
+
+        setMatchesCompleted(matchesCompleted + 1);
 
         return;
       }
@@ -101,11 +122,21 @@ export const Pairings = ({
           }
         );
 
-        console.log("Draw response: ", response.data);
-
         const updatedResults = response.data;
 
         onUpdatePairingsData(updatedResults);
+
+        const tournamentDetailsResponse = await axios.get(
+          `${API_URL}/tournaments/${tournamentId}`,
+          {
+            headers: { Authorization: `Bearer ${storedAuthToken}` },
+          }
+        );
+
+        const updatedParticipantsData =
+          tournamentDetailsResponse.data.participantsData;
+
+        onUpdateParticipantsData(updatedParticipantsData);
 
         setMatchesCompleted(matchesCompleted + 1);
         return;
@@ -132,8 +163,6 @@ export const Pairings = ({
 
       const updatedPairingsData = pairingsResponse.data.roundPairings;
 
-      console.log("updated pairings data: ", pairingsResponse.data);
-
       const updatedParticipantsData =
         tournamentDetailsResponse.data.participantsData;
 
@@ -142,7 +171,7 @@ export const Pairings = ({
       onUpdateRoundNumber(currentRoundNumber + 1);
       setMatchesCompleted(0);
     } catch (error) {
-      console.log("An error occurred while starting the next round: ", error);
+      console.error("An error occurred while starting the next round: ", error);
     }
   };
 
@@ -168,10 +197,21 @@ export const Pairings = ({
 
       const finishedTournamentStatus = response.data.status;
 
-      console.log("Tournament status update: ", response);
       onUpdateTournamentStatus(finishedTournamentStatus);
+
+      const tournamentDetailsResponse = await axios.get(
+        `${API_URL}/tournaments/${tournamentId}`,
+        {
+          headers: { Authorization: `Bearer ${storedAuthToken}` },
+        }
+      );
+
+      const updatedParticipantsData =
+        tournamentDetailsResponse.data.participantsData;
+
+      onUpdateParticipantsData(updatedParticipantsData);
     } catch (error) {
-      console.log(
+      console.error(
         "An error occurred while trying to set the tournament status to 'finished': ",
         error
       );
@@ -200,23 +240,19 @@ export const Pairings = ({
           const player1 = pair.player1;
           const player2 = pair.player2;
 
-          const wasMatchDecided = player1.result || player2.result;
+          const wasMatchDecided = player1.points || player2.points;
 
           return (
             <div key={index} className={styles.pairings__grid__pair}>
               <p
                 className={`${
-                  player1.result === "win"
+                  player1.points === 3
                     ? styles.pairings__grid__pair__winner
                     : ""
                 } ${
-                  player1.result === "lose"
-                    ? styles.pairings__grid__pair__loser
-                    : ""
+                  player1.points === 0 ? styles.pairings__grid__pair__loser : ""
                 } ${
-                  player1.result === "draw"
-                    ? styles.pairings__grid__pair__draw
-                    : ""
+                  player1.points === 1 ? styles.pairings__grid__pair__draw : ""
                 }`}
               >
                 {player1.name}
@@ -224,17 +260,13 @@ export const Pairings = ({
               <p>vs</p>
               <p
                 className={`${
-                  player2.result === "win"
+                  player2.points === 3
                     ? styles.pairings__grid__pair__winner
                     : ""
                 } ${
-                  player2.result === "lose"
-                    ? styles.pairings__grid__pair__loser
-                    : ""
+                  player2.points === 0 ? styles.pairings__grid__pair__loser : ""
                 } ${
-                  player1.result === "draw"
-                    ? styles.pairings__grid__pair__draw
-                    : ""
+                  player1.points === 1 ? styles.pairings__grid__pair__draw : ""
                 }`}
               >
                 {player2.name}
@@ -287,9 +319,9 @@ export const Pairings = ({
           </button>
         )}
       {tournamentStatus === "finished" && (
-        <div className={styles.pairings__finishedMessage}>
-          <p>Tournament over! Go to the "Points" view to see who won!</p>
-        </div>
+        <p className={styles.pairings__finishedMessage}>
+          Tournament over! Go to the "Points" view to see who won!
+        </p>
       )}
     </div>
   );

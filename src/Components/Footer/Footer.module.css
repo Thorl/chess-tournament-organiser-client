@@ -2,10 +2,13 @@
   display: flex;
   justify-content: flex-start;
   width: 100vw;
+
+  background-color: #000;
 }
 
 .footer p {
   padding-left: 20px;
 
+  color: #fff;
   font-size: 12px;
 }

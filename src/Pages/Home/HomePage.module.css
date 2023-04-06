@@ -3,10 +3,73 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+
+  background: url(../../assets/chess-home-page.jpg) no-repeat 40% / cover;
 }
 
-.homePage__btns {
+.homePage__container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 30px;
+  padding-top: 5%;
+}
+
+.homePage__container__copy {
+  margin-top: 30px;
+
+  font-family: "Helvetica";
+  color: #fff;
+  text-align: center;
+}
+
+.homePage__container__link {
+  padding: 20px 90px;
+
+  font-size: 18px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 1px 1px 2px black;
+}
+
+.homePage__container__link__signup {
+  background-color: var(--secondary-light-color);
+  color: #fff;
+  transition: all ease-in-out 0.4s;
+}
+
+.homePage__container__link__signup:hover {
+  background-color: var(--accept-color);
+  color: #fff;
+}
+
+.homePage__container__link__login {
+  background-color: var(--secondary-dark-color);
+  color: #fff;
+  transition: all ease-in-out 0.4s;
+}
+
+.homePage__container__link__login:hover {
+  background-color: #8ca464;
+  color: #000;
+}
+
+@media (min-width: 800px) {
+  .homePage__container__link {
+    padding: 20px 150px;
+
+    font-size: 20px;
+  }
+
+  .homePage__container__copy {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .homePage__container__copy {
+    font-size: 25px;
+  }
 }
