@@ -76,6 +76,8 @@
 
 @media (min-width: 800px) {
   .signup__header {
+    margin: 2% 0 0 0;
+
     font-size: 50px;
   }
 
