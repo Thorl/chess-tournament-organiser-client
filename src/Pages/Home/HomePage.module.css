@@ -5,7 +5,8 @@
   align-items: center;
   width: 100%;
 
-  background: url(../../assets/chess-home-page.jpg) no-repeat 40% / cover;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(../../assets/chess-home-page.jpg) no-repeat 40% / cover;
 }
 
 .homePage__container {
@@ -52,7 +53,7 @@
 }
 
 .homePage__container__link__login:hover {
-  background-color: #8ca464;
+  background-color: var(--accept-color);
   color: #000;
 }
 

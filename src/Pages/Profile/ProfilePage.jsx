@@ -8,6 +8,7 @@ export const ProfilePage = () => {
   const { logOutUser } = useContext(AuthContext);
   return (
     <div className={styles.profile}>
+      <div className={styles.profile__overlay}></div>
       <div className={styles.profile__navLinks}>
         <Link className={styles.profile__navLinks__item} to="/tournaments">
           Tournaments
@@ -19,12 +20,12 @@ export const ProfilePage = () => {
           Account Details
         </Link>
 
-        <input
-          type="button"
+        <button
           onClick={logOutUser}
           className={styles.profile__navLinks__logoutBtn}
-          value="Log Out"
-        />
+        >
+          Log Out
+        </button>
       </div>
     </div>
   );
