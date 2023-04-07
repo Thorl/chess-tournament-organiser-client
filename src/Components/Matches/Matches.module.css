@@ -74,6 +74,9 @@
 }
 
 .matches__grid__pair p {
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--main-light-color);
   font-size: 18px;
 }
 

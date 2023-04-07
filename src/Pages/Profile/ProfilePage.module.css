@@ -27,14 +27,22 @@
   width: 80%;
   text-align: center;
 
+  background-color: var(--secondary-dark-color);
+  color: var(--main-light-color);
   font-size: 18px;
   border: 1px solid #000;
   border-radius: 10px;
   text-decoration: none;
+  transition: all ease-in-out 0.4s;
   box-shadow: 1px 1px 2px black;
 }
 
-.profile__navLinks__item:nth-child(odd) {
+.profile__navLinks__item:hover {
+  background-color: var(--secondary-light-color);
+  color: #fff;
+}
+
+/* .profile__navLinks__item:nth-child(odd) {
   background-color: var(--secondary-light-color);
   color: #fff;
   transition: all ease-in-out 0.4s;
@@ -54,15 +62,16 @@
 .profile__navLinks__item:nth-child(even):hover {
   background-color: var(--accept-color);
   color: #000;
-}
+} */
 
 .profile__navLinks__logoutBtn {
   padding: 20px 20px;
-  width: 80%;
+  margin: 20px;
+  width: 50%;
   text-align: center;
 
   font-size: 18px;
-  background-color: var(--secondary-dark-color);
+  background-color: var(--deny-color);
   color: #fff;
   transition: all ease-in-out 0.4s;
   border: 1px solid #000;
@@ -72,6 +81,6 @@
 }
 
 .profile__navLinks__logoutBtn:hover {
-  background-color: var(--accept-color);
+  background-color: var(--secondary-light-color);
   color: #000;
 }
