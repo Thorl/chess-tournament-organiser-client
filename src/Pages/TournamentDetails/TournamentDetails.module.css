@@ -4,11 +4,52 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
-/* .tournamentDetails__views {
+.tournamentDetails {
+  width: 100%;
+
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-board-top-view-compressed.jpg") no-repeat 40% /
+      cover;
+}
+
+.tournamentDetails__views__navButtons {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-} */
+  gap: 50px;
+  padding: 15px 0;
+}
+
+.tournamentDetails__views__navButtons__matches,
+.tournamentDetails__views__navButtons__points {
+  padding: 5px 20px;
+
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.tournamentDetails__views__navButtons__matches {
+}
+
+.tournamentDetails__views__navButtons__activeView {
+  background-color: var(--secondary-light-color);
+}
+
+.tournamentDetails__startBtn {
+  margin: auto 0;
+  padding: 20px 20px;
+  width: 80%;
+  max-width: 450px;
+
+  font-size: 18px;
+  background-color: var(--secondary-light-color);
+  color: #fff;
+  transition: all ease-in-out 0.4s;
+  cursor: pointer;
+}
+
+.tournamentDetails__startBtn:hover {
+  background-color: var(--accept-color);
+  color: #fff;
+}
