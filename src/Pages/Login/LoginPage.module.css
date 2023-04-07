@@ -6,8 +6,9 @@
   height: 100%;
   width: 100%;
 
-  background: url("../../assets/chess-board-close-up-resized-compressed.jpg")
-    no-repeat 40% / cover;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-board-close-up-resized-compressed.jpg") no-repeat
+      40% / cover;
 }
 
 .login__header {
@@ -25,7 +26,7 @@
   margin-top: 25px;
   padding: 30px;
   width: 70%;
-  max-width: 450px;
+  max-width: 400px;
 
   border-radius: 10px;
   background-color: rgba(205, 170, 125, 0.6);
@@ -81,9 +82,5 @@
     margin: 2% 0 0 0;
 
     font-size: 50px;
-  }
-
-  .login__form {
-    padding: 40px 50px;
   }
 }
