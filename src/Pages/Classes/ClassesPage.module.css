@@ -40,7 +40,7 @@
 .icon {
   font-size: 0.5em;
   width: 100%;
-  color: lightslategrey
+  color: lightslategrey;
 }
 
 .icon:hover {
@@ -59,6 +59,8 @@
 }
 
 .classes__dbClasses {
+  display: flex;
+  flex-direction: column;
   background-color: var(--main-dark-color);
   color: var(--main-light-color);
   font-size: 10px;
@@ -66,8 +68,6 @@
   border-radius: 20px;
   width: 100px;
   height: 100px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -76,6 +76,8 @@
 }
 
 .classes__dbClasses:hover {
+  display: flex;
+  flex-direction: column;
   background-color: var(--main-light-color);
   color: var(--main-dark-color);
   font-size: 10px;
@@ -90,6 +92,25 @@
   gap: 10px;
   overflow: hidden;
   overflow-wrap: break-word;
+  border-width: 5px;
+}
+
+.className {
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.schoolName {
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .classes__createNewClass {
@@ -114,12 +135,17 @@
   height: 100px;
   display: flex;
   flex-direction: column;
+  border-width: 5px;
 }
 
 .classesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
+
