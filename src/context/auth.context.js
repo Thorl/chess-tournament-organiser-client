@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
+import { API_URL } from "../constants/API_URL";
 
 export const AuthContext = React.createContext();
 
@@ -20,7 +22,7 @@ export const AuthProviderWrapper = (props) => {
 
     if (storedAuthToken) {
       try {
-        await axios.get("http://localhost:5005/auth/verify", {
+        await axios.get(`${API_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedAuthToken}` },
         });
 
