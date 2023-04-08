@@ -2,25 +2,57 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 375px;
-  padding: 0 12px;
+  width: 100%;
+
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-girl-playing.jpg") no-repeat 35% 60% / cover;
+  overflow-y: hidden;
 }
 
-.classDetails h2,
-.classDetails h3 {
+.classDetails__headersContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.classDetails__mainHeader {
+  margin: 0 0 10px 0;
+  padding-top: 20px;
+  padding-left: 5%;
+
+  color: var(--main-light-color);
+  font-size: 30px;
+}
+
+.classDetails__subHeader {
   margin: 0;
-  padding: 5px;
+  padding: 10px 0 10px 5%;
+
+  color: var(--main-light-color);
 }
 
 .classDetails__classList {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   grid-gap: 5px;
-  margin-top: 10px;
+  margin: 10px 10px 0 10px;
+  width: 80%;
+  max-width: 450px;
+  align-self: center;
+  padding: 0 10px;
+
+  border-radius: 5px;
+  background-color: rgba(205, 170, 125, 0.8);
+  overflow-y: scroll;
+  text-align: center;
 }
 
-.classDetails__classList {
-  text-align: center;
+.classDetails__classList__header {
+  padding-top: 20px;
+  margin: 0;
+
+  color: var(--main-dark-color);
 }
 
 .classDetails__classList__studentDetails {
@@ -37,7 +69,55 @@
 .classDetails__addStudentForm {
   display: flex;
   flex-direction: column;
+  align-self: center;
   width: 50%;
+  max-width: 300px;
   gap: 10px;
-  margin-top: 20px;
+  margin: 20px 0;
+  padding: 10px;
+
+  text-align: center;
+  border-radius: 5px;
+  color: var(--main-light-color);
+  background-color: rgba(205, 170, 125, 0.8);
+}
+
+.classDetails__addStudentForm__label {
+  color: var(--main-dark-color);
+}
+
+.classDetails__addStudentForm__input {
+  align-self: center;
+  width: 80%;
+  max-width: 200px;
+}
+
+.classDetails__addStudentForm__addBtn {
+  width: 50%;
+  max-width: 150px;
+  align-self: center;
+
+  color: var(--main-light-color);
+  background-color: var(--secondary-dark-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  transition: all ease-in-out 0.4s;
+  cursor: pointer;
+}
+
+.classDetails__addStudentForm__addBtn:hover {
+  background-color: var(--accept-color);
+}
+
+@media (min-width: 800px) {
+  .classDetails__mainHeader {
+    font-size: 40px;
+  }
+
+  .classDetails__subHeader {
+    font-size: 25px;
+  }
+
+  .classDetails__classList__header {
+    font-size: 20px;
+  }
 }
