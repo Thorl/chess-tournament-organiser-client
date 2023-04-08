@@ -1,7 +1,8 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import React, { useState, useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
 import { API_URL } from "../constants/API_URL";
 
 export const AuthContext = React.createContext();
