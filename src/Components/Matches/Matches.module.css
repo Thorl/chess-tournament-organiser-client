@@ -56,6 +56,7 @@
   width: 80%;
   max-width: 450px;
   padding: 10px 0;
+  margin-bottom: 15px;
 
   border-radius: 5px;
   background-color: rgba(205, 170, 125, 0.8);
@@ -137,7 +138,7 @@
 
 .matches__nextRoundBtn {
   padding: 10px 20px;
-  margin-top: 35px;
+  margin: 35px 0;
 
   background-color: var(--secondary-dark-color);
   color: var(--main-light-color);
@@ -145,11 +146,18 @@
 
 .matches__finishedMessage {
   width: 60%;
+  max-width: 420px;
+  padding: 15px 15px;
+
+  border-radius: 5px;
+  text-align: center;
+  color: var(--main-light-color);
+  background-color: rgba(92, 52, 52, 0.8);
 }
 
 @media (min-width: 800px) {
   .matches__roundSelector {
-    margin-bottom: 2%;
+    margin-bottom: 1%;
   }
 
   .matches__roundSelector__btn {
