@@ -38,7 +38,7 @@ export const ClassesPage = () => {
   return (
     <div className={styles.classes}>
       <h2 className={styles.classes__pageHeader}>My Classes</h2>
-      <div className={styles.classesContainer}>
+      <div className={styles.classesCardContainer}>
         {classes.map((classEl) => {
           return (
             <Link
