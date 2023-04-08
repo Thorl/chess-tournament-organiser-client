@@ -58,7 +58,7 @@ export const TournamentsPage = () => {
           );
         })}
         <Link
-          className={`${styles.tournaments__createNewClass} ${styles.tournaments__card} ${styles.tournaments__link}`}
+          className={`${styles.tournaments__createNewTournament} ${styles.tournaments__card} ${styles.tournaments__link}`}
           to="/tournaments/new-tournament"
         >
           <div>

@@ -85,7 +85,7 @@
   width: 100%;
 }
 
-.tournaments__createNewClass {
+.tournaments__createNewTournament {
   background-color: var(--main-dark-color);
   color: var(--main-light-color);
   /* font-size: 100px; */
@@ -97,7 +97,7 @@
   flex-direction: column;
 }
 
-.tournaments__createNewClass:hover {
+.tournaments__createNewTournament:hover {
   background-color: var(--main-light-color);
   color: var(--main-dark-color);
   /* font-size: 100px; */
@@ -107,6 +107,8 @@
   height: 200px;
   display: flex;
   flex-direction: column;
+  border-width: 5px;
+  
 }
 
 .tournamentCardContainer {
