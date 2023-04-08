@@ -17,7 +17,6 @@
   grid-template-columns: auto;
   padding-left: 50%;
   width: 150%;
-  overflow-x: scroll;
 }
 
 .points__grid__rounds {
