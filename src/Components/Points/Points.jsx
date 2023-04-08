@@ -1,6 +1,3 @@
-import axios from "axios";
-import { useParams } from "react-router-dom";
-
 import { useState, useEffect, useCallback } from "react";
 
 import styles from "./Points.module.css";
@@ -91,7 +88,6 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
 
   return (
     <div className={styles.points}>
-      <h2>Points</h2>
       <h3 className={styles.points__winningMessage}>
         {winnerMessage && winnerMessage}
       </h3>

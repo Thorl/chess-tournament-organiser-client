@@ -243,9 +243,9 @@ export const Matches = ({
         {currentRoundNumber === numberOfTournamentRounds && <div></div>}
       </div>
       {tournamentStatus === "finished" && (
-        <p className={styles.matches__finishedMessage}>
+        <h3 className={styles.matches__finishedMessage}>
           Tournament over! Go to the "Points" view to see who won!
-        </p>
+        </h3>
       )}
       <div className={styles.matches__grid}>
         {pairings[round].map((pair, index) => {
