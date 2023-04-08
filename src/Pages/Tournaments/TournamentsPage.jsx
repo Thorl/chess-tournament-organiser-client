@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../constants/API_URL";
 import styles from "./TournamentsPage.module.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export const TournamentsPage = () => {
   const [tournaments, setTournaments] = useState([]);
@@ -36,29 +38,34 @@ export const TournamentsPage = () => {
   return (
     <div className={styles.tournaments}>
       <h2 className={styles.tournaments__pageHeader}>My Tournaments</h2>
-      {tournaments.map((tournamentEl) => {
-        return (
-          <Link
-            to={`/tournaments/${tournamentEl._id}`}
-            key={tournamentEl._id}
-            className={`${styles.tournaments__dbTournaments} ${styles.tournaments__card} ${styles.tournaments__link}`}
-          >
-            <h3>{tournamentEl.name}</h3>
 
-            <div className={styles.tournaments__dbTournaments__infoContainer}>
-              <h3>School: {tournamentEl._class.school}</h3>
-              <h3>Class: {tournamentEl._class.name}</h3>
-              <h3>Status: {tournamentEl.status}</h3>
-            </div>
-          </Link>
-        );
-      })}
-      <Link
-        className={`${styles.tournaments__createNewClass} ${styles.tournaments__card} ${styles.tournaments__link}`}
-        to="/tournaments/new-tournament"
-      >
-        <div>Create A New Tournament</div>
-      </Link>
+      <div className={styles.tournamentCardContainer}>
+        {tournaments.map((tournamentEl) => {
+          return (
+            <Link
+              to={`/tournaments/${tournamentEl._id}`}
+              key={tournamentEl._id}
+              className={`${styles.tournaments__dbTournaments} ${styles.tournaments__card} ${styles.tournaments__link}`}
+            >
+              <h3>{tournamentEl.name}</h3>
+
+              <div className={styles.tournaments__dbTournaments__infoContainer}>
+                <h3>School: {tournamentEl._class.school}</h3>
+                <h3>Class: {tournamentEl._class.name}</h3>
+                <h3>Status: {tournamentEl.status}</h3>
+              </div>
+            </Link>
+          );
+        })}
+        <Link
+          className={`${styles.tournaments__createNewClass} ${styles.tournaments__card} ${styles.tournaments__link}`}
+          to="/tournaments/new-tournament"
+        >
+          <div>
+            <FontAwesomeIcon className={styles.icon} icon={faPlus} />
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };

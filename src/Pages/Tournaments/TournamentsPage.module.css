@@ -8,7 +8,8 @@
 }
 
 .tournaments__pageHeader {
-  margin: 0 0 10px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px 0 20px 0;
 }
 
 .tournaments h3 {
@@ -23,14 +24,48 @@
   text-decoration: none;
 }
 
+.tournaments__link {
+  display: flex;
+  text-decoration: none;
+  color: var(--main-light-color);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .tournaments__dbTournaments {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  background-color: var(--main-dark-color);
+  color: var(--main-light-color);
+  font-size: 10px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 20px;
+  width: 200px;
+  height: 200px;
+  justify-content: center;
   align-items: center;
   gap: 10px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
 
-  color: #000;
+.tournaments__dbTournaments:hover {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-light-color);
+  color: var(--main-dark-color);
+  font-size: 10px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 20px;
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-width: 5px;
 }
 
 .tournaments__dbTournaments__infoContainer {
@@ -39,8 +74,57 @@
   gap: 5px;
 }
 
+.icon {
+  font-size: 2em;
+  width: 100%;
+  color: lightslategrey;
+}
+.icon:hover {
+  font-size: 2.25em;
+  color: var(--main-dark-color);
+  width: 100%;
+}
+
 .tournaments__createNewClass {
+  background-color: var(--main-dark-color);
+  color: var(--main-light-color);
+  /* font-size: 100px; */
+  margin: 10px 10px 10px 10px;
+  border-radius: 20px;
+  width: 200px;
+  height: 200px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.tournaments__createNewClass:hover {
+  background-color: var(--main-light-color);
+  color: var(--main-dark-color);
+  /* font-size: 100px; */
+  margin: 10px 10px 10px 10px;
+  border-radius: 20px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tournamentCardContainer {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+@media (min-width: 800px) {
+ 
+}
+
+@media (min-width: 1200px) {
+ 
 }
