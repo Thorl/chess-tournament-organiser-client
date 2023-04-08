@@ -70,12 +70,19 @@ export const ClassDetailsPage = () => {
 
   return (
     <div className={styles.classDetails}>
-      <h2>Viewing Class Details</h2>
-      <h3>Class: {classData.name && classData.name}</h3>
-      <h3>School: {classData.school && classData.school}</h3>
+      <div className={styles.classDetails__headersContainer}>
+        <h2 className={styles.classDetails__mainHeader}>Class Details</h2>
+        <h3 className={styles.classDetails__subHeader}>
+          Class: {classData.name && classData.name}
+        </h3>
+        <h3 className={styles.classDetails__subHeader}>
+          School: {classData.school && classData.school}
+        </h3>
+      </div>
+
       <div className={styles.classDetails__classList}>
-        <h3>Student Name</h3>
-        <h3>Total Points</h3>
+        <h3 className={styles.classDetails__classList__header}>Student Name</h3>
+        <h3 className={styles.classDetails__classList__header}>Total Points</h3>
         <div></div>
         {classData.students?.map((student) => {
           return (
@@ -93,8 +100,14 @@ export const ClassDetailsPage = () => {
         onSubmit={handleAddNewStudent}
         className={styles.classDetails__addStudentForm}
       >
-        <label htmlFor="addStudent">Add a New Student</label>
+        <label
+          className={styles.classDetails__addStudentForm__label}
+          htmlFor="addStudent"
+        >
+          Add a New Student
+        </label>
         <input
+          className={styles.classDetails__addStudentForm__input}
           value={newStudentName}
           onChange={handleNewStudentNameInput}
           type="text"
@@ -102,7 +115,9 @@ export const ClassDetailsPage = () => {
           placeholder="Enter student name"
           required
         />
-        <button>Add</button>
+        <button className={styles.classDetails__addStudentForm__addBtn}>
+          Add
+        </button>
       </form>
     </div>
   );
