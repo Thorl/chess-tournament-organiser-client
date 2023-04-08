@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../constants/API_URL";
 import styles from "./ClassesPage.module.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons"
+
 export const ClassesPage = () => {
   const [classes, setClasses] = useState([]);
 
@@ -35,6 +38,9 @@ export const ClassesPage = () => {
   return (
     <div className={styles.classes}>
       <h2 className={styles.classes__pageHeader}>My Classes</h2>
+      <div className={styles.classesContainer}>
+
+     
       {classes.map((classEl) => {
         return (
           <Link
@@ -47,6 +53,7 @@ export const ClassesPage = () => {
           </Link>
         );
       })}
+      
       <div
         className={`${styles.classes__createNewClass} ${styles.classes__card}`}
       >
@@ -54,8 +61,9 @@ export const ClassesPage = () => {
           to="/classes/new-class"
           className={styles.classes__createNewClass__link}
         >
-          Create A New Class
+          <FontAwesomeIcon className={styles.icon} icon={faPlus} />
         </Link>
+      </div>
       </div>
     </div>
   );
