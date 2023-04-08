@@ -2,7 +2,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import { useState, useEffect, useCallback } from "react";
-import { API_URL } from "../../constants/API_URL";
 
 import styles from "./Points.module.css";
 import React from "react";
@@ -38,8 +37,6 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
       }
 
       let message = "";
-
-      console.log("Winners list: ", winnersList);
 
       if (winnersList.length === 1) {
         const message = `${winnersList[0]} has won the tournament!`;
@@ -90,7 +87,7 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
   useEffect(() => {
     calculateStudentPointsPerRound();
     calculateWinner();
-  }, []);
+  }, [calculateStudentPointsPerRound, calculateWinner]);
 
   return (
     <div className={styles.points}>

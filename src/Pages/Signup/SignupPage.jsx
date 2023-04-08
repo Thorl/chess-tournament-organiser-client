@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./SignupPage.module.css";
 
@@ -41,9 +41,16 @@ export const SignupPage = () => {
 
   return (
     <section className={styles.signup}>
+      <h2 className={styles.signup__header}>Sign Up</h2>
+      {errorMessage && (
+        <p className={styles.signup__form__errorMessage}>{errorMessage}</p>
+      )}
       <form className={styles.signup__form} onSubmit={handleSignupSubmit}>
-        <label htmlFor="email">Email</label>
+        <label className={styles.signup__form__label} htmlFor="email">
+          Email
+        </label>
         <input
+          className={styles.signup__form__input}
           type="text"
           id="email"
           placeholder="Enter email"
@@ -51,8 +58,11 @@ export const SignupPage = () => {
           onChange={handleEmailInput}
           required
         />
-        <label htmlFor="password">Password</label>
+        <label className={styles.signup__form__label} htmlFor="password">
+          Password
+        </label>
         <input
+          className={styles.signup__form__input}
           type="password"
           id="password"
           placeholder="Enter password"
@@ -61,10 +71,11 @@ export const SignupPage = () => {
           required
         />
         <button className={styles.signup__form__btn}>Sign up</button>
+
+        <p className={styles.signup__form__footer}>
+          Already have an account? <Link to="/login">Log in</Link>
+        </p>
       </form>
-      {errorMessage && (
-        <p className={styles.signup__form__errorMessage}>{errorMessage}</p>
-      )}
     </section>
   );
 };

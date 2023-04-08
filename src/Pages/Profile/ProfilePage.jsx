@@ -19,12 +19,12 @@ export const ProfilePage = () => {
           Account Details
         </Link>
 
-        <input
-          type="button"
+        <button
           onClick={logOutUser}
           className={styles.profile__navLinks__logoutBtn}
-          value="Log Out"
-        />
+        >
+          Log Out
+        </button>
       </div>
     </div>
   );

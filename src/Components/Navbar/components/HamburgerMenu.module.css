@@ -16,7 +16,7 @@
   height: 5px;
 
   border-radius: 16px;
-  background-color: #000;
+  background-color: #fff;
   transform-origin: 2px;
   transition: all 0.3s linear;
 }

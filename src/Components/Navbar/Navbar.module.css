@@ -2,14 +2,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
   width: 100%;
 
-  border-bottom: 1px solid #000;
+  background-color: var(--main-dark-color);
 }
 
-.navbar h1 {
-  padding-right: 15px;
+.navbar__header {
+  margin: 0;
+  padding: 10px 0;
 
-  font-size: 20px;
+  color: var(--main-light-color);
+  font-family: "Arial";
+  font-size: 35px;
+}
+
+@media (min-width: 800px) {
+  .navbar__header {
+    font-size: 50px;
+  }
 }

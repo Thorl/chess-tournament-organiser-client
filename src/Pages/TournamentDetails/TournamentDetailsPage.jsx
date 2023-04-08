@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../../constants/API_URL";
 import { Points } from "../../Components/Points/Points";
-import { Pairings } from "../../Components/Pairings/Pairings";
+import { Matches } from "../../Components/Matches/Matches";
 import styles from "./TournamentDetails.module.css";
 
 export const TournamentDetailsPage = () => {
-  const [isToggled, setIsToggled] = useState(true);
+  const [activeView, setActiveView] = useState("matches");
   const [pairings, setPairings] = useState("");
   const [currentRoundNumber, setCurrentRoundNumber] = useState(1);
   const [participantsData, setParticipantsData] = useState({});
@@ -74,25 +74,51 @@ export const TournamentDetailsPage = () => {
   return (
     <div className={styles.tournamentDetails}>
       {tournamentStatus === "inactive" && (
-        <button onClick={handleStartTournament}>Start Tournament</button>
+        <button
+          className={styles.tournamentDetails__startBtn}
+          onClick={handleStartTournament}
+        >
+          Start Tournament
+        </button>
       )}
 
       {(tournamentStatus === "active" || tournamentStatus === "finished") && (
         <div className={styles.tournamentDetails__views}>
-          {isToggled ? (
-            <button onClick={() => setIsToggled(!isToggled)}>Points</button>
-          ) : (
-            <button onClick={() => setIsToggled(!isToggled)}>Pairings</button>
-          )}
-          {!isToggled && (
+          <div className={styles.tournamentDetails__views__navButtons}>
+            <button
+              className={`${
+                styles.tournamentDetails__views__navButtons__matches
+              } ${
+                activeView === "matches"
+                  ? styles.tournamentDetails__views__navButtons__activeView
+                  : ""
+              }`}
+              onClick={() => setActiveView("matches")}
+            >
+              Matches
+            </button>
+            <button
+              className={`${
+                styles.tournamentDetails__views__navButtons__points
+              } ${
+                activeView === "points"
+                  ? styles.tournamentDetails__views__navButtons__activeView
+                  : ""
+              }`}
+              onClick={() => setActiveView("points")}
+            >
+              Points
+            </button>
+          </div>
+          {activeView === "points" && (
             <Points
               pairings={pairings}
               participantsData={participantsData}
               tournamentStatus={tournamentStatus}
             />
           )}
-          {isToggled && (
-            <Pairings
+          {activeView === "matches" && (
+            <Matches
               participantsData={participantsData}
               pairings={pairings}
               currentRoundNumber={currentRoundNumber}
