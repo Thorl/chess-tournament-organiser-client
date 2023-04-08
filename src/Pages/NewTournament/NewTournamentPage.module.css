@@ -1,14 +1,44 @@
 .newTournament {
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
-  width: 90%;
+  width: 100%;
+
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-moving-white-piece.jpg") no-repeat 40% / cover;
+}
+
+.newTournament__header {
+  color: var(--main-light-color);
 }
 
 .newTournament__form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 400px;
   gap: 15px;
+}
+
+.newTournament__form__input {
+  width: 80%;
+  max-width: 300px;
+  height: 20px;
+}
+
+.newTournament__form__addClassBtn {
+  width: 40%;
+  padding: 0px 0 !important;
+
+  background-color: var(--secondary-dark-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  transition: all ease-in-out 0.4s;
+}
+
+.newTournament__form__addClassBtn:hover {
+  background-color: var(--secondary-light-color) !important;
 }
 
 .newTournament__form_errorMessage {
@@ -19,9 +49,30 @@
 }
 
 .newTournament__form__header {
+  color: var(--main-light-color);
   font-weight: bold;
 }
 
 .newTournament__form h2 {
   margin: 0;
+}
+
+.newTournament__modal__header {
+  margin: 0;
+
+  font-size: 25px;
+}
+
+.newTournament__modal__schoolName,
+.newTournament__modal__className {
+  color: var(--main-light-color);
+
+  font-size: 18px;
+}
+
+.newTournament__modal_selectBtn {
+  padding: 10px;
+
+  background-color: var(--secondary-dark-color);
+  color: var(--main-light-color);
 }
