@@ -242,6 +242,11 @@ export const Matches = ({
           )}
         {currentRoundNumber === numberOfTournamentRounds && <div></div>}
       </div>
+      {tournamentStatus === "finished" && (
+        <h3 className={styles.matches__finishedMessage}>
+          Tournament over! Go to the "Points" view to see who won!
+        </h3>
+      )}
       <div className={styles.matches__grid}>
         {pairings[round].map((pair, index) => {
           const player1 = pair.player1;
@@ -322,11 +327,6 @@ export const Matches = ({
             Finish Tournament
           </button>
         )}
-      {tournamentStatus === "finished" && (
-        <p className={styles.matches__finishedMessage}>
-          Tournament over! Go to the "Points" view to see who won!
-        </p>
-      )}
     </div>
   );
 };
