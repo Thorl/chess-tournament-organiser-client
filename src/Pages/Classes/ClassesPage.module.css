@@ -42,3 +42,22 @@
 .classes__createNewClass__link {
   text-decoration: none;
 }
+
+.classes__pageHeader {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 20px;
+}
+
+.classes {
+  background-color: var(--main-light-color);
+}
+
+.classes__dbClasses {
+  background-color: var(--main-dark-color);
+  color: var(--main-light-color);
+  font-size: 10px;
+}
+
+.classes__createNewClass {
+  background-color: blue;
+}
