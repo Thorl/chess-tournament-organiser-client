@@ -122,6 +122,7 @@ export const NewTournamentPage = () => {
 
   return (
     <div className={styles.newTournament}>
+      <h2 className={styles.newTournament__header}>Create a New Tournament</h2>
       <form
         onSubmit={handleCreateTournament}
         className={styles.newTournament__form}
@@ -132,6 +133,7 @@ export const NewTournamentPage = () => {
           </p>
         )}
         <input
+          className={styles.newTournament__form__input}
           type="text"
           placeholder="Enter a name for your tournament"
           value={tournamentName}
@@ -139,65 +141,107 @@ export const NewTournamentPage = () => {
           required
         />
         <input
+          className={styles.newTournament__form__input}
           type="number"
-          placeholder="Enter the number of rounds in your tournament"
+          placeholder="Enter the number of rounds"
           value={numberOfRounds}
           onChange={handleNumberOfRoundsInput}
           required
         />
-        <Button type="primary" onClick={handleToggleModal}>
+        <Button
+          className={styles.newTournament__form__addClassBtn}
+          type="primary"
+          onClick={handleToggleModal}
+          size="large"
+        >
           Add Class
         </Button>
 
         {schoolName && (
           <>
-            <label className={styles.newTournament__form__header}>School</label>
-            <output>{schoolName}</output>
+            <label className={styles.newTournament__form__header}>
+              School: <output>{schoolName}</output>
+            </label>
           </>
         )}
 
         {className && (
           <>
-            <label className={styles.newTournament__form__header}>Class</label>
-            <output>{className}</output>
+            <label className={styles.newTournament__form__header}>
+              Class: <output>{className}</output>
+            </label>
           </>
         )}
-        <h2>Students</h2>
-        {selectedClass?.students?.map((student) => {
-          return (
-            <div key={student._id}>
-              <input
-                type="checkbox"
-                value={student._id}
-                onClick={handleSelectStudent}
-              />
-              <label>{student.name}</label>
-            </div>
-          );
-        })}
-        <button>Create Tournament</button>
+        <div className={styles.newTournament__form__studentList}>
+          <h2 className={styles.newTournament__form__studentList__header}>
+            Students
+          </h2>
+          {selectedClass?.students?.map((student) => {
+            return (
+              <div key={student._id}>
+                <input
+                  id={student._id}
+                  type="checkbox"
+                  value={student._id}
+                  onClick={handleSelectStudent}
+                />
+                <label
+                  className={
+                    styles.newTournament__form__studentList__studentName
+                  }
+                  for={student._id}
+                >
+                  {student.name}
+                </label>
+              </div>
+            );
+          })}
+        </div>
+
+        <button
+          className={
+            styles.newTournament__form__studentList__createTournamentBtn
+          }
+        >
+          Create Tournament
+        </button>
       </form>
       <Modal
         title="Select a class"
         open={isModalOpen}
         onCancel={handleToggleModal}
         okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{
+          style: {
+            backgroundColor: "var(--deny-color)",
+            color: "var(--main-light-color)",
+            padding: " 0 10px",
+          },
+        }}
       >
-        <p>Pick one of your classes to make a tournament for:</p>
+        <p className={styles.newTournament__modal__paragraph}>
+          Pick which one of your classes to make a tournament for:
+        </p>
         <div>
-          <h2>School</h2>
-          <h2>Class</h2>
+          <h2 className={styles.newTournament__modal__header}>School</h2>
+          <h2 className={styles.newTournament__modal__header}>Class</h2>
         </div>
 
         {classes.map((_class) => {
           return (
-            <div
-              key={_class._id}
-              className={styles.newTournament__form__modal__class}
-            >
-              <p>{_class.school}</p>
-              <p>{_class.name}</p>
-              <button onClick={() => handleSelectClass(_class)}>Select</button>
+            <div key={_class._id}>
+              <p className={styles.newTournament__modal__schoolName}>
+                {_class.school}
+              </p>
+              <p className={styles.newTournament__modal__className}>
+                {_class.name}
+              </p>
+              <button
+                className={styles.newTournament__modal_selectBtn}
+                onClick={() => handleSelectClass(_class)}
+              >
+                Select
+              </button>
             </div>
           );
         })}
