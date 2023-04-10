@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Chess Tournament Organiser 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## We present a MERN stack application that allows users to easily run chess tournaments and store participant data.
 
-## Available Scripts
+This project presents an MVP for a Chess Tournament Organiser application which follows the Swiss Tournament format. Users can sign up for an account and use this application to help them run chess tournaments with ease, as well save records of classes and tournaments in the database. 
+The motivation for this project arose out of a need to optimise the process of running chess tournaments in schools. Doing so manually is very time-consuming and does not lend itself well to the chaos of a classroom. This application provides a streamlined approach to running such an activity.
 
-In the project directory, you can run:
+Below is a list of features that the application currently offer:
 
-### `npm start`
+* Sign up for an account and edit account details;
+* Create classes with students in them;
+* Create a tournament by loading an existing class into that tournament. Select the students from the class that you would like to participate in the tournament using a checkbox interface
+* The tournament details page features two views: Matches View and Points View;
+* Matches View displays the pairings for each round, under which are buttons to select the result of each match;
+![Alt text](public/README%20screenshots/Matches_View.png)
+* Points View displays a table which records the results of each round and keeps a running tally of the each participant's total points;
+![Alt text](public/README%20screenshots/Points_View.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### Below is a list of features we hope to implement 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* A Student Details page, where all tournament data for a given student can be accessed and visualised. This would help teachers to keep track fo their students' progress.
+* A re-generate round pairings feature; this would offer the teacher an easy work-around for instances where the algorithm's initial pairings are for some reason problematic in the context of the classroom.
+* A blacklisted students feature. This would allow the teacher to prevent the algorithms from producing specific pairings in the event that, for example, two students in the class do not work well together. 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 
