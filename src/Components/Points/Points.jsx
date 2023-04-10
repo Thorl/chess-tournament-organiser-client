@@ -93,7 +93,7 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
       </h3>
       <div className={styles.points__grid}>
         <div className={styles.points__grid__rounds}>
-          <h3>Students</h3>
+          <h3></h3>
           {rounds.map((_, i) => {
             return (
               <h3
