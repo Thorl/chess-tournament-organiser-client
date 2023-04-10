@@ -216,6 +216,8 @@ export const NewTournamentPage = () => {
             backgroundColor: "var(--deny-color)",
             color: "var(--main-light-color)",
             padding: " 0 10px",
+            boxShadow: "1px 1px 2px var(--main-dark-color)",
+            border: "none",
           },
         }}
       >
