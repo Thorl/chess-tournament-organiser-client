@@ -22,7 +22,7 @@
 .points__grid {
   display: grid;
   grid-template-columns: auto;
-  margin-bottom: 25px;
+  margin: 4% 0 25px 0;
   padding: 20px 20px 0 20px;
 
   overflow-y: scroll;
@@ -56,10 +56,6 @@
 
 .points__grid__points__row:last-child {
   border: none;
-}
-
-.points__grid__points__row p:first-child {
-  color: var(--main-dark-color);
 }
 
 .points__grid__points__row p {

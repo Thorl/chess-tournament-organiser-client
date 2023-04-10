@@ -19,7 +19,7 @@
 .classDetails__mainHeader {
   margin: 0 0 10px 0;
   padding-top: 20px;
-  padding-left: 5%;
+  /* padding-left: 5%; */
 
   color: var(--main-light-color);
   font-size: 30px;
@@ -27,7 +27,7 @@
 
 .classDetails__subHeader {
   margin: 0;
-  padding: 10px 0 10px 5%;
+  padding: 10px 0;
 
   color: var(--main-light-color);
 }
@@ -119,5 +119,21 @@
 
   .classDetails__classList__header {
     font-size: 20px;
+  }
+
+  .classDetails__addStudentForm {
+    padding: 20px 10px;
+  }
+
+  .classDetails__addStudentForm__label {
+    font-size: 20px;
+  }
+
+  .classDetails__addStudentForm__input {
+    height: 20px;
+  }
+
+  .classDetails__addStudentForm__addBtn {
+    font-size: 18px;
   }
 }

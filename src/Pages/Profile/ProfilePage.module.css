@@ -5,7 +5,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  padding-top: 30px;
+  padding-top: 4%;
 
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../assets/chess-white-pieces-with-black-pawn-compressed.jpg")
@@ -41,28 +41,6 @@
   background-color: var(--secondary-light-color);
   color: #fff;
 }
-
-/* .profile__navLinks__item:nth-child(odd) {
-  background-color: var(--secondary-light-color);
-  color: #fff;
-  transition: all ease-in-out 0.4s;
-}
-
-.profile__navLinks__item:nth-child(odd):hover {
-  background-color: var(--accept-color);
-  color: #fff;
-}
-
-.profile__navLinks__item:nth-child(even) {
-  background-color: var(--secondary-dark-color);
-  color: #fff;
-  transition: all ease-in-out 0.4s;
-}
-
-.profile__navLinks__item:nth-child(even):hover {
-  background-color: var(--accept-color);
-  color: #000;
-} */
 
 .profile__navLinks__logoutBtn {
   padding: 20px 20px;

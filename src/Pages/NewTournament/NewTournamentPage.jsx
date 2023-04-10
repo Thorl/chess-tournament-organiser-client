@@ -189,7 +189,7 @@ export const NewTournamentPage = () => {
                   className={
                     styles.newTournament__form__studentList__studentName
                   }
-                  for={student._id}
+                  htmlFor={student._id}
                 >
                   {student.name}
                 </label>
