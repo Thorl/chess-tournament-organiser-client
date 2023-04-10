@@ -33,19 +33,42 @@ export const HamburgerMenu = (props) => {
         className={`${styles.hamburgerMenu__dropdownMenu} 
           ${isMenuOpen ? styles.hamburgerMenu__dropdownMenu_show : ""}`}
       >
-        <Link onClick={handleToggleMenu} to="/profile">
+        <Link
+          className={`${styles.link} ${styles.font}`}
+          onClick={handleToggleMenu}
+          to="/profile"
+        >
           Profile
         </Link>
-        <Link onClick={handleToggleMenu} to="/account-details">
+        <Link
+          className={`${styles.link} ${styles.font}`}
+          onClick={handleToggleMenu}
+          to="/account-details"
+        >
           Account Details
         </Link>
-        <Link onClick={handleToggleMenu} to="/classes">
+        <Link
+          className={`${styles.link} ${styles.font}`}
+          onClick={handleToggleMenu}
+          to="/classes"
+        >
           Classes
         </Link>
-        <Link onClick={handleToggleMenu} to="/tournaments">
+        <Link
+          className={`${styles.link} ${styles.font}`}
+          onClick={handleToggleMenu}
+          to="/tournaments"
+        >
           Tournaments
         </Link>
-        <button onClick={props.onLogout}>Log Out</button>
+        <div className={styles.btn__container}>
+          <button
+            className={`${styles.logOut__btn} ${styles.font}`}
+            onClick={props.onLogout}
+          >
+            Log Out
+          </button>
+        </div>
       </ul>
     </>
   );

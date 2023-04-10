@@ -120,6 +120,7 @@
 
 .newClass__classList__student {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
   padding: 5px;
