@@ -7,8 +7,6 @@ import styles from "./AccountDetailsPage.module.css";
 
 export const AccountDetailsPage = () => {
   const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -24,17 +22,9 @@ export const AccountDetailsPage = () => {
           headers: { Authorization: `Bearer ${storedAuthToken}` },
         });
 
-        const { email, firstName, lastName } = response.data;
+        const { email } = response.data;
 
         setEmail(email);
-
-        if (firstName) {
-          setFirstName(firstName);
-        }
-
-        if (lastName) {
-          setLastName(lastName);
-        }
       } catch (error) {
         console.error(
           "An error occurred while getting account details data: ",
@@ -48,14 +38,6 @@ export const AccountDetailsPage = () => {
 
   const handleEmailInput = (e) => {
     setEmail(e.target.value);
-  };
-
-  const handleFirstNameInput = (e) => {
-    setFirstName(e.target.value);
-  };
-
-  const handleLastNameInput = (e) => {
-    setLastName(e.target.value);
   };
 
   const handleCurrentPasswordInput = (e) => {
@@ -75,8 +57,6 @@ export const AccountDetailsPage = () => {
 
     const requestBody = {
       email,
-      firstName,
-      lastName,
       currentPassword,
       newPassword,
       repeatedNewPassword: repeatPassword,
@@ -91,7 +71,7 @@ export const AccountDetailsPage = () => {
         }
       );
 
-      const { email, firstName, lastName, errorMessage } = response.data;
+      const { email, errorMessage } = response.data;
 
       if (errorMessage) {
         setErrorMessage(errorMessage);
@@ -99,10 +79,6 @@ export const AccountDetailsPage = () => {
       }
 
       setEmail(email);
-
-      setFirstName(firstName);
-
-      setLastName(lastName);
 
       setSuccessMessage("Account Details Successfully Updated!");
 
@@ -123,7 +99,7 @@ export const AccountDetailsPage = () => {
 
   return (
     <div className={styles.accountDetails}>
-      <h2>My Details</h2>
+      <h2 className={styles.accountDetails__mainHeader}>My Details</h2>
       {errorMessage && (
         <p className={styles.accountDetails__errorMessage}>{errorMessage}</p>
       )}
@@ -145,22 +121,6 @@ export const AccountDetailsPage = () => {
           placeholder="Enter your email"
           onChange={handleEmailInput}
           required
-        />
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          id="firstName"
-          value={firstName}
-          placeholder="Enter your first name"
-          onChange={handleFirstNameInput}
-        />
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          id="lastName"
-          value={lastName}
-          onChange={handleLastNameInput}
-          placeholder="Enter your last name"
         />
         <div className={styles.accountDetails__form__changePassword}>
           <h3>Change password</h3>
