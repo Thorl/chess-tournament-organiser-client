@@ -34,36 +34,36 @@ export const HamburgerMenu = (props) => {
           ${isMenuOpen ? styles.hamburgerMenu__dropdownMenu_show : ""}`}
       >
         <Link
-          className={`${styles.link} ${styles.font}`}
+          className={`${styles.hamburgerMenu__dropdownMenu__link} ${styles.hamburgerMenu__dropdownMenu__font}`}
           onClick={handleToggleMenu}
           to="/profile"
         >
           Profile
         </Link>
         <Link
-          className={`${styles.link} ${styles.font}`}
+          className={`${styles.hamburgerMenu__dropdownMenu__link} ${styles.hamburgerMenu__dropdownMenu__font}`}
           onClick={handleToggleMenu}
           to="/account-details"
         >
           Account Details
         </Link>
         <Link
-          className={`${styles.link} ${styles.font}`}
+          className={`${styles.hamburgerMenu__dropdownMenu__link} ${styles.hamburgerMenu__dropdownMenu__font}`}
           onClick={handleToggleMenu}
           to="/classes"
         >
           Classes
         </Link>
         <Link
-          className={`${styles.link} ${styles.font}`}
+          className={`${styles.hamburgerMenu__dropdownMenu__link} ${styles.hamburgerMenu__dropdownMenu__font}`}
           onClick={handleToggleMenu}
           to="/tournaments"
         >
           Tournaments
         </Link>
-        <div className={styles.btn__container}>
+        <div className={styles.hamburgerMenu__dropdownMenu__btnContainer}>
           <button
-            className={`${styles.logOut__btn} ${styles.font}`}
+            className={`${styles.hamburgerMenu__dropdownMenu__btnContainer__logOutBtn} ${styles.hamburgerMenu__dropdownMenu__font}`}
             onClick={props.onLogout}
           >
             Log Out

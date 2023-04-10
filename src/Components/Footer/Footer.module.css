@@ -1,4 +1,6 @@
 .footer {
+  z-index: 100;
+
   display: flex;
   justify-content: flex-start;
   width: 100%;
