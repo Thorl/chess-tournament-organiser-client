@@ -5,6 +5,7 @@
   --secondary-light-color: #cdaa7d;
   --accept-color: #80b362;
   --deny-color: #bf565a;
+  --custom-font: Arial, Helvetica, sans-serif;
 }
 
 body {
