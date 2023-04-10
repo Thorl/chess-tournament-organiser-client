@@ -58,9 +58,37 @@
   border-bottom: 1px solid #000;
   background-color: #ffff;
   list-style: none;
+  border-width: 3px;
+  border-radius: 5px;
 }
 
 .hamburgerMenu__dropdownMenu_show {
   visibility: visible;
   transform: translateX(50%);
+}
+
+.btn__container {
+  background-color:#FAF9F6 ;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.logOut__btn {
+  border-width: 0px;
+  background: var(--main-light-color);
+  border-radius: 5px;
+  background-color:#FAF9F6;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.font {
+  font-family: var(--custom-font);
+  letter-spacing: 1px;
 }
