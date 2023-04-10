@@ -88,9 +88,9 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
 
   return (
     <div className={styles.points}>
-      <h3 className={styles.points__winningMessage}>
-        {winnerMessage && winnerMessage}
-      </h3>
+      {tournamentStatus === "finished" && winnerMessage && (
+        <h3 className={styles.points__winningMessage}>{winnerMessage}</h3>
+      )}
       <div className={styles.points__grid}>
         <div className={styles.points__grid__rounds}>
           <h3>Students</h3>
