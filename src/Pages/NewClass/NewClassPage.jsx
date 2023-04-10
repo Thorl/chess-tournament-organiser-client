@@ -7,6 +7,13 @@ import { API_URL } from "../../constants/API_URL";
 
 import styles from "./NewClassPage.module.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlus,
+  faFloppyDisk,
+  faCircleMinus,
+} from "@fortawesome/free-solid-svg-icons";
+
 export const NewClassPage = () => {
   const [className, setClassName] = useState("");
   const [schoolName, setSchoolName] = useState("");
@@ -14,6 +21,7 @@ export const NewClassPage = () => {
   const [classList, setClassList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [classListClassName, setClassListClassName] = useState("");
 
   const handleClassNameInput = (e) => {
     setClassName(e.target.value);
@@ -38,6 +46,8 @@ export const NewClassPage = () => {
     setClassList((prevList) => {
       return [...prevList, { name: studentName, id: generateKey() }];
     });
+
+    setClassListClassName(className);
 
     setStudentName("");
     setErrorMessage("");
@@ -80,7 +90,7 @@ export const NewClassPage = () => {
         return;
       }
 
-      setSuccessMessage("Class Successfully Created!");
+      setSuccessMessage(`${className} created`);
       setClassName("");
       setSchoolName("");
       setClassList([]);
@@ -98,7 +108,7 @@ export const NewClassPage = () => {
 
   return (
     <div className={styles.newClass}>
-      <h2>Create A New Class</h2>
+      {/* <h2>Create A New Class</h2> */}
       {errorMessage && (
         <p className={styles.newClass__errorMessage}>{errorMessage}</p>
       )}
@@ -106,50 +116,78 @@ export const NewClassPage = () => {
         <p className={styles.newClass__successMessage}>{successMessage}</p>
       )}
       <form className={styles.newClass__form} onSubmit={handleAddStudent}>
-        <label htmlFor="className">Class Name</label>
-        <input
-          type="text"
-          id="className"
-          value={className}
-          onChange={handleClassNameInput}
-          required
-        />
-        <label htmlFor="schoolName">School Name</label>
-        <input
-          type="text"
-          id="schoolName"
-          value={schoolName}
-          onChange={handleSchoolNameInput}
-          required
-        />
-        <label htmlFor="studentName">Student Name</label>
-        <div className={styles.newClass__form__studentNameInput}>
+        <div className={styles.inputBox}>
           <input
+            className={`${styles.input} ${styles.font}`}
+            type="text"
+            id="className"
+            value={className}
+            onChange={handleClassNameInput}
+            required
+          />
+          <span className={styles.inputSpan}>Class Name</span>
+        </div>
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="text"
+            id="schoolName"
+            value={schoolName}
+            onChange={handleSchoolNameInput}
+            required
+          />
+          <span className={styles.inputSpan}>School Name</span>
+        </div>
+
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
             type="text"
             id="studentName"
             value={studentName}
             onChange={handleStudentNameInput}
+            required
           />
-          <button className={styles.newClass__form__addBtn}>Add Student</button>
+          <span className={styles.inputSpan}>Student Name</span>
+          <button className={styles.newClass__form__addBtn}>
+            <FontAwesomeIcon className={styles.icon} icon={faPlus} />
+          </button>
         </div>
       </form>
       <div className={styles.newClass__classList}>
-        <h3>Class List</h3>
-        {classList.map((student) => {
-          return (
-            <div
-              key={generateKey()}
-              className={styles.newClass__classList__student}
+        {classListClassName && (
+          <div className={styles.classListHeader}>
+            <h3 className={styles.font}>{classListClassName}</h3>
+            <button
+              className={styles.save__class__btn}
+              onClick={handleSaveClass}
             >
-              <p>{student.name}</p>
-              <button onClick={() => handleRemoveStudent(student.id)}>
-                Remove Student
-              </button>
-            </div>
-          );
-        })}
+              <FontAwesomeIcon icon={faFloppyDisk} />
+            </button>
+          </div>
+        )}
+        <div className={styles.classList__names}>
+          {classList.map((student, i) => {
+            return (
+              <div
+                key={generateKey()}
+                className={styles.newClass__classList__student}
+              >
+                <p>{i + 1}</p>
+                <p className={`${styles.studentName} ${styles.font}`}>
+                  {student.name}
+                </p>
+                <button
+                  className={styles.remove__student__btn}
+                  onClick={() => handleRemoveStudent(student.id)}
+                >
+                  <FontAwesomeIcon icon={faCircleMinus} />
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <button onClick={handleSaveClass}>Save Class</button>
     </div>
   );
 };
