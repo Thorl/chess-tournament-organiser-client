@@ -38,6 +38,7 @@
   border-radius: 5px;
 
   background-color: rgba(205, 170, 125, 0.8);
+  
 }
 
 .accountDetails__form label {
@@ -74,7 +75,17 @@
   background-color: var(--accept-color);
 }
 
+.inputBoxContainer {
+  margin-top: -15px;
+}
 
+.inputBox {
+   position: relative;
+  width: 250px;
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+}
 
 .inputBoxChangePassword {
   position: relative;
@@ -107,6 +118,11 @@
   transition: 0.5s;
 }
 
+.email {
+  font-size: 20px;
+  margin-bottom: -10px;
+}
+
 .inputBoxChangePassword input:valid ~ span,
 .inputBoxChangePassword input:focus ~ span {
   color: var(--main-light-color);
@@ -132,7 +148,11 @@
   }
 
   .accountDetails__form__changePassword h3 {
-    font-size: 25px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+
+
   }
 
   .accountDetails__form__btn {
