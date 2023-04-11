@@ -38,28 +38,30 @@ export const ClassesPage = () => {
   return (
     <div className={styles.classes}>
       <h2 className={styles.classes__pageHeader}>My Classes</h2>
-      <div className={styles.classesCardContainer}>
+      <div className={styles.classes__cardContainer}>
         {classes.map((classEl) => {
           return (
             <Link
               to={`/classes/${classEl._id}`}
               key={classEl._id}
-              className={` ${styles.classes__dbClasses} ${styles.classes__card}`}
+              className={styles.classes__cardContainer__card}
             >
-              <h3 className={styles.className}>{classEl.name}</h3>
-              <h3 className={styles.schoolName}>{classEl.school}</h3>
+              <h3 className={styles.classes__cardContainer__card__className}>
+                {classEl.name}
+              </h3>
+              <h3 className={styles.classes__cardContainer__card__schoolName}>
+                School: {classEl.school}
+              </h3>
             </Link>
           );
         })}
 
-        <div
-          className={`${styles.classes__createNewClass} ${styles.classes__card}`}
-        >
-          <Link
-            to="/classes/new-class"
-            className={styles.classes__createNewClass__link}
-          >
-            <FontAwesomeIcon className={styles.icon} icon={faPlus} />
+        <div className={`${styles.classes__cardContainer__newClassCard}`}>
+          <Link to="/classes/new-class">
+            <FontAwesomeIcon
+              className={styles.classes__cardContainer__newClassCard__plusIcon}
+              icon={faPlus}
+            />
           </Link>
         </div>
       </div>

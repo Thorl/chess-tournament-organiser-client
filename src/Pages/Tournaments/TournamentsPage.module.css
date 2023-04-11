@@ -106,7 +106,6 @@
 
   font-size: 42px;
   color: var(--main-light-color);
-  transition: all ease-in-out 0.4s;
 }
 
 .tournaments__tournamentCardContainer__newTournamentCard:hover {
@@ -130,6 +129,10 @@
 }
 
 @media (min-width: 1200px) {
+  .tournaments__pageHeader {
+    font-size: 45px;
+  }
+
   .tournaments__tournamentCardContainer {
     gap: 50px;
   }
