@@ -108,7 +108,6 @@ export const NewClassPage = () => {
 
   return (
     <div className={styles.newClass}>
-      {/* <h2>Create A New Class</h2> */}
       {errorMessage && (
         <p className={styles.newClass__errorMessage}>{errorMessage}</p>
       )}

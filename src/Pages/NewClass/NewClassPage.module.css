@@ -66,14 +66,6 @@
   text-transform: uppercase;
   transition: 0.5s;
 }
-.inputSpanPlus {
-  position: absolute;
-  right: 0;
-  padding: 10px;
-  pointer-events: none;
-  font-size: 0.65em;
-  color: lightgray;
-}
 
 .inputBox input:valid ~ span,
 .inputBox input:focus ~ span {
