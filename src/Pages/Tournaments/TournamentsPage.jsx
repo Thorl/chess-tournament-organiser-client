@@ -39,30 +39,57 @@ export const TournamentsPage = () => {
     <div className={styles.tournaments}>
       <h2 className={styles.tournaments__pageHeader}>My Tournaments</h2>
 
-      <div className={styles.tournamentCardContainer}>
+      <div className={styles.tournaments__tournamentCardContainer}>
         {tournaments.map((tournamentEl) => {
           return (
             <Link
               to={`/tournaments/${tournamentEl._id}`}
               key={tournamentEl._id}
-              className={`${styles.tournaments__dbTournaments} ${styles.tournaments__card} ${styles.tournaments__link}`}
+              className={`${styles.tournaments__tournamentCardContainer__card}`}
             >
-              <h3>{tournamentEl.name}</h3>
+              <h3
+                className={
+                  styles.tournaments__tournamentCardContainer__card__header
+                }
+              >
+                {tournamentEl.name}
+              </h3>
 
-              <div className={styles.tournaments__dbTournaments__infoContainer}>
-                <h3>School: {tournamentEl._class.school}</h3>
+              <div
+                className={
+                  styles.tournaments__tournamentCardContainer__card__infoContainer
+                }
+              >
+                <h3> School: {tournamentEl._class.school}</h3>
                 <h3>Class: {tournamentEl._class.name}</h3>
-                <h3>Status: {tournamentEl.status}</h3>
+                <h3>
+                  Status:{" "}
+                  <span
+                    className={`${
+                      tournamentEl.status === "finished"
+                        ? styles.tournaments__tournamentCardContainer__card__infoContainer_finished
+                        : styles.tournaments__tournamentCardContainer__card__infoContainer_active
+                    }`}
+                  >
+                    {" "}
+                    {tournamentEl.status}
+                  </span>
+                </h3>
               </div>
             </Link>
           );
         })}
         <Link
-          className={`${styles.tournaments__createNewTournament} ${styles.tournaments__card} ${styles.tournaments__link}`}
+          className={`${styles.tournaments__tournamentCardContainer__newTournamentCard}`}
           to="/tournaments/new-tournament"
         >
           <div>
-            <FontAwesomeIcon className={styles.icon} icon={faPlus} />
+            <FontAwesomeIcon
+              className={
+                styles.tournaments__tournamentCardContainer__newTournamentCard__icon
+              }
+              icon={faPlus}
+            />
           </div>
         </Link>
       </div>

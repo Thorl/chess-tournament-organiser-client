@@ -2,128 +2,135 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
   height: 100%;
   width: 100%;
+  padding-top: 2%;
+
+  overflow-y: scroll;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-queen-in-focus-compressed.jpg") no-repeat 40% /
+      cover;
 }
 
 .tournaments__pageHeader {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 20px 0 0 0;
-}
-
-.tournaments h3 {
+  padding: 20px 0 10px 0;
   margin: 0;
-}
 
-.tournaments__card {
-
-  border: 1px solid #000;
-  text-decoration: none;
- 
-}
-
-.tournaments__link {
-  display: flex;
-  text-decoration: none;
+  font-size: 28px;
   color: var(--main-light-color);
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 }
 
-.tournaments__dbTournaments {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--main-dark-color);
-  color: var(--main-light-color);
-  font-size: 10px;
-  margin: 10px 10px 10px 10px;
-  border-radius: 20px;
-  width: 200px;
-  height: 150px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  overflow: hidden;
-  overflow-wrap: break-word;
-}
-
-.tournaments__dbTournaments:hover {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--main-light-color);
-  color: var(--main-dark-color);
-  font-size: 10px;
-  margin: 10px 10px 10px 10px;
-  border-radius: 20px;
-  width: 200px;
-  height: 150px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  overflow: hidden;
-  overflow-wrap: break-word;
-  border-width: 5px;
-}
-
-.tournaments__dbTournaments__infoContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.icon {
-  font-size: 2em;
-  width: 100%;
-  color: lightslategrey;
-}
-.icon:hover {
-  font-size: 2.25em;
-  color: var(--main-dark-color);
-  width: 100%;
-}
-
-.tournaments__createNewTournament {
-  background-color: var(--main-dark-color);
-  color: var(--main-light-color);
-  margin: 10px 10px 10px 10px;
-  border-radius: 20px;
-  width: 200px;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-}
-
-.tournaments__createNewTournament:hover {
-  background-color: var(--main-light-color);
-  color: var(--main-dark-color);
-  margin: 10px 10px 10px 10px;
-  border-radius: 20px;
-  width: 200px;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  border-width: 5px;
-  
-}
-
-.tournamentCardContainer {
+.tournaments__tournamentCardContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding-top: 2%;
   height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
+.tournaments__tournamentCardContainer__card {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 5px;
+  width: 200px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 10px;
+  border-radius: 15px;
+  background-color: rgba(205, 170, 125, 0.6);
+  color: var(--main-light-color);
+  box-shadow: 1px 1px 2px black;
+  overflow-wrap: break-word;
+  transition: all ease-in-out 0.4s;
+}
+
+.tournaments__tournamentCardContainer__card:hover {
+  background-color: rgba(92, 52, 52, 0.6);
+}
+
+.tournaments__tournamentCardContainer__card__header {
+  margin: 0;
+
+  text-align: center;
+  font-size: 18px;
+}
+
+.tournaments__tournamentCardContainer__card__infoContainer h3 {
+  margin: 0;
+
+  font-size: 15px;
+}
+
+.tournaments__tournamentCardContainer__card__infoContainer_active {
+  color: var(--accept-color);
+}
+
+.tournaments__tournamentCardContainer__card__infoContainer_finished {
+  color: var(--deny-color);
+}
+
+.tournaments__tournamentCardContainer__card__infoContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  gap: 10px;
+}
+
+.tournaments__tournamentCardContainer__newTournamentCard {
+  background-color: rgba(92, 52, 52, 0.8);
+  color: var(--main-light-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 15px;
+  width: 200px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all ease-in-out 0.4s;
+}
+
+.tournaments__tournamentCardContainer__newTournamentCard__icon {
+  width: 100%;
+
+  font-size: 42px;
+  color: var(--main-light-color);
+  transition: all ease-in-out 0.4s;
+}
+
+.tournaments__tournamentCardContainer__newTournamentCard:hover {
+  background-color: var(--secondary-light-color);
+}
 
 @media (min-width: 800px) {
- 
+  .tournaments__pageHeader {
+    font-size: 35px;
+  }
+
+  .tournaments__tournamentCardContainer__card__header {
+    font-size: 20px;
+  }
+
+  .tournaments__tournamentCardContainer__card__infoContainer h3 {
+    margin: 0;
+
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 1200px) {
- 
+  .tournaments__tournamentCardContainer {
+    gap: 50px;
+  }
 }

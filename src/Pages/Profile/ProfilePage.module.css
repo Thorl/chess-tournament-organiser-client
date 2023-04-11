@@ -7,7 +7,6 @@
   width: 100%;
   padding-top: 4%;
 
-  overflow-y: hidden;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../assets/chess-white-pieces-with-black-pawn-compressed.jpg")
       no-repeat 40% / cover;
@@ -21,8 +20,6 @@
   gap: 70px;
   width: 100%;
   max-width: 450px;
-
-  overflow-y: hidden;
 }
 
 .profile__navLinks__item {
