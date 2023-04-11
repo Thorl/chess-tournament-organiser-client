@@ -99,7 +99,7 @@ export const AccountDetailsPage = () => {
 
   return (
     <div className={styles.accountDetails}>
-      <h2 className={styles.accountDetails__mainHeader}>My Details</h2>
+      {/* <h2 className={styles.accountDetails__mainHeader}>My Details</h2> */}
       {errorMessage && (
         <p className={styles.accountDetails__errorMessage}>{errorMessage}</p>
       )}
@@ -113,6 +113,7 @@ export const AccountDetailsPage = () => {
         className={styles.accountDetails__form}
         onSubmit={handleSubmitAccountDetails}
       >
+        <h3 className={`${styles.font} ${styles.email}`}>Email</h3>
         <div className={styles.inputBox}>
           <input
             className={`${styles.input} ${styles.font}`}
@@ -125,39 +126,41 @@ export const AccountDetailsPage = () => {
           />
         </div>
         <div className={styles.accountDetails__form__changePassword}>
-          <h3>Change password</h3>
-          <div className={styles.inputBoxChangePassword}>
-            <input
-              className={`${styles.input} ${styles.font}`}
-              type="password"
-              id="currentPassword"
-              value={currentPassword}
-              onChange={handleCurrentPasswordInput}
-              required
-            />
-            <span className={styles.inputSpan}>Current Password</span>
-          </div>
-          <div className={styles.inputBoxChangePassword}>
-            <input
-              className={`${styles.input} ${styles.font}`}
-              type="password"
-              id="newPassword"
-              value={newPassword}
-              onChange={handleNewPasswordInput}
-              required
-            />
-            <span className={styles.inputSpan}>New Password</span>
-          </div>
-          <div className={styles.inputBoxChangePassword}>
-            <input
-              className={`${styles.input} ${styles.font}`}
-              type="password"
-              id="repeatPassword"
-              value={repeatPassword}
-              onChange={handleRepeatPasswordInput}
-              required
-            />
-            <span className={styles.inputSpan}>Repeat New Password</span>
+          <h3 className={`${styles.font} ${styles.email}`}>Change Password</h3>
+          <div className={styles.inputBoxContainer}>
+            <div className={styles.inputBoxChangePassword}>
+              <input
+                className={`${styles.input} ${styles.font}`}
+                type="password"
+                id="currentPassword"
+                value={currentPassword}
+                onChange={handleCurrentPasswordInput}
+                required
+              />
+              <span className={styles.inputSpan}>Current Password</span>
+            </div>
+            <div className={styles.inputBoxChangePassword}>
+              <input
+                className={`${styles.input} ${styles.font}`}
+                type="password"
+                id="newPassword"
+                value={newPassword}
+                onChange={handleNewPasswordInput}
+                required
+              />
+              <span className={styles.inputSpan}>New Password</span>
+            </div>
+            <div className={styles.inputBoxChangePassword}>
+              <input
+                className={`${styles.input} ${styles.font}`}
+                type="password"
+                id="repeatPassword"
+                value={repeatPassword}
+                onChange={handleRepeatPasswordInput}
+                required
+              />
+              <span className={styles.inputSpan}>Repeat New Password</span>
+            </div>
           </div>
         </div>
 
