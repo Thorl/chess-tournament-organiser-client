@@ -37,7 +37,7 @@
 .hamburgerMenu__dropdownMenu {
   position: fixed;
   z-index: 50;
-  top: 55px;
+  top: 54px;
 
   display: flex;
   flex-direction: column;
@@ -57,10 +57,9 @@
   line-height: 3rem;
   border-left: 1px solid #000;
   border-bottom: 1px solid #000;
-  background-color: var(--secondary-light-color);
+  background-color: var(--main-dark-color);
   list-style: none;
   border-width: 3px;
-  border-radius: 5px;
 }
 
 .hamburgerMenu__dropdownMenu_show {
@@ -91,7 +90,7 @@
   width: 50%;
   padding: 0 0 10px 10px;
 
-  background-color: var(--secondary-light-color);
+  background-color: var(--main-dark-color);
 }
 
 .hamburgerMenu__dropdownMenu__btnContainer__logOutBtn {
