@@ -13,7 +13,7 @@
 }
 
 .accountDetails__mainHeader {
-  margin: 0 0 10px 0;
+  margin: 0 0 20px 0;
 }
 
 .accountDetails__errorMessage {
@@ -35,6 +35,7 @@
   flex-direction: column;
   gap: 10px;
   padding: 20px 30px;
+  border-radius: 5px;
 
   background-color: rgba(205, 170, 125, 0.8);
 }
@@ -73,6 +74,54 @@
   background-color: var(--accept-color);
 }
 
+
+
+.inputBoxChangePassword {
+  position: relative;
+  width: 250px;
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--main-dark-color);
+  background: var(--main-light-color);
+  border-radius: 5px;
+  outline: none;
+  color: var(--main-dark-color);
+  font-size: 0.75em;
+  border-width: 3px;
+}
+
+.inputSpan {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 0.65em;
+  color: lightgray;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+.inputBoxChangePassword input:valid ~ span,
+.inputBoxChangePassword input:focus ~ span {
+  color: var(--main-light-color);
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.55em;
+  padding: 0 10px;
+  background-color: var(--secondary-dark-color);
+}
+
+.font {
+  font-family: var(--custom-font);
+  letter-spacing: 1px;
+}
+
+
 @media (min-width: 800px) {
   .accountDetails__mainHeader {
     font-size: 35px;
@@ -94,5 +143,8 @@
 @media (min-width: 1200px) {
   .accountDetails {
     padding-top: 2%;
+  }
+  .accountDetails__mainHeader {
+    font-size: 35px;
   }
 }

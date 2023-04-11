@@ -113,44 +113,59 @@ export const AccountDetailsPage = () => {
         className={styles.accountDetails__form}
         onSubmit={handleSubmitAccountDetails}
       >
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          placeholder="Enter your email"
-          onChange={handleEmailInput}
-          required
-        />
-        <div className={styles.accountDetails__form__changePassword}>
-          <h3>Change password</h3>
-          <label htmlFor="currentPassword">Current Password</label>
+        <div className={styles.inputBox}>
           <input
-            type="password"
-            id="currentPassword"
-            value={currentPassword}
-            onChange={handleCurrentPasswordInput}
-            placeholder="Enter your current password"
-          />
-          <label htmlFor="newPassword">New Password</label>
-          <input
-            type="password"
-            id="newPassword"
-            value={newPassword}
-            onChange={handleNewPasswordInput}
-            placeholder="Enter your new password"
-          />
-          <label htmlFor="repeatPassword">Repeat New Password</label>
-          <input
-            type="password"
-            id="repeatPassword"
-            value={repeatPassword}
-            onChange={handleRepeatPasswordInput}
-            placeholder="Repeat your new password"
+            className={`${styles.input} ${styles.font}`}
+            type="email"
+            id="email"
+            value={email}
+            placeholder="Enter your email"
+            onChange={handleEmailInput}
+            required
           />
         </div>
+        <div className={styles.accountDetails__form__changePassword}>
+          <h3>Change password</h3>
+          <div className={styles.inputBoxChangePassword}>
+            <input
+              className={`${styles.input} ${styles.font}`}
+              type="password"
+              id="currentPassword"
+              value={currentPassword}
+              onChange={handleCurrentPasswordInput}
+              required
+            />
+            <span className={styles.inputSpan}>Current Password</span>
+          </div>
+          <div className={styles.inputBoxChangePassword}>
+            <input
+              className={`${styles.input} ${styles.font}`}
+              type="password"
+              id="newPassword"
+              value={newPassword}
+              onChange={handleNewPasswordInput}
+              required
+            />
+            <span className={styles.inputSpan}>New Password</span>
+          </div>
+          <div className={styles.inputBoxChangePassword}>
+            <input
+              className={`${styles.input} ${styles.font}`}
+              type="password"
+              id="repeatPassword"
+              value={repeatPassword}
+              onChange={handleRepeatPasswordInput}
+              required
+            />
+            <span className={styles.inputSpan}>Repeat New Password</span>
+          </div>
+        </div>
 
-        <button className={styles.accountDetails__form__btn}>Submit</button>
+        <button
+          className={`${styles.accountDetails__form__btn} ${styles.font}`}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
