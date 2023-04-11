@@ -4,6 +4,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
+  padding-top: 4%;
   overflow-y: hidden;
 
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -134,6 +135,10 @@
 }
 
 @media (min-width: 800px) {
+  .newTournament {
+    padding-top: 2%;
+  }
+
   .newTournament__header {
     font-size: 30px;
   }

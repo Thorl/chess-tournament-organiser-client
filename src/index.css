@@ -39,6 +39,11 @@ code {
   align-items: center;
 }
 
+.ant-btn.ant-btn-lg {
+  border-radius: 5px !important;
+  box-shadow: 1px 1px 2px var(--main-dark-color) !important;
+}
+
 .ant-modal-footer {
   display: flex;
   justify-content: center;

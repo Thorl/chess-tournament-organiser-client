@@ -3,7 +3,18 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
-  margin-top: 10px;
+  width: 100%;
+  padding-top: 4%;
+
+  overflow-y: scroll;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-behind-black-pieces-resized.jpg") no-repeat 40% 80% /
+      cover;
+}
+
+.newClass__mainHeader {
+  font-size: 25px;
+  color: var(--main-light-color);
 }
 
 .newClass__errorMessage {
@@ -35,10 +46,11 @@
 
 .inputBox {
   position: relative;
-  width: 250px;
+
   display: flex;
-  gap: 5px;
   margin-top: 20px;
+  width: 250px;
+  gap: 5px;
 }
 
 .input {
@@ -93,21 +105,39 @@
 }
 
 .save__class__btn {
-  border-width: 0px;
-  background: var(--main-light-color);
-  margin-left: 90px;
+  width: 40%;
+  padding: 10px 20px;
+  margin: 20px 0;
+  max-width: 200px;
+
+  cursor: pointer;
+  color: var(--main-light-color);
+  background-color: var(--secondary-dark-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  transition: all ease-in-out 0.4s;
+}
+
+.save__class__btn:hover {
+  background-color: var(--accept-color);
 }
 
 .classListHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  margin: 0;
+
+  font-size: 20px;
 }
 
 .newClass__classList {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
+  max-width: 250px;
+  margin-top: 30px;
+  padding: 10px 20px;
+
+  background-color: rgba(205, 170, 125, 0.6);
+  border-radius: 5px;
 }
 
 .newClass__classList__student {
@@ -120,13 +150,30 @@
   height: 40px;
 }
 
+.newClass__classList__student__number,
+.newClass__classList__student__name {
+  color: var(--main-light-color);
+}
+
 .newClass__classList__student button {
   height: 30px;
 }
 
 .remove__student__btn {
-  border-width: 0px;
-  background: var(--main-light-color);
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+}
+
+.remove__student__btn__icon {
+  font-size: 20px;
+  color: var(--deny-color);
+  /* box-shadow: -0.3px 0.3px 0.3px var(--main-dark-color); */
+  transition: all ease-in-out 0.4s;
+}
+
+.remove__student__btn__icon:hover {
+  color: var(--secondary-dark-color);
 }
 
 .classList__names {
@@ -140,4 +187,18 @@
 .font {
   font-family: var(--custom-font);
   letter-spacing: 1px;
+}
+
+@media (min-width: 800px) {
+  .newClass {
+    padding-top: 2%;
+  }
+
+  .newClass__mainHeader {
+    font-size: 30px;
+  }
+
+  .classListHeader {
+    font-size: 25px;
+  }
 }

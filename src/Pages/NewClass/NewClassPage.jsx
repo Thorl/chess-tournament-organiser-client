@@ -108,6 +108,7 @@ export const NewClassPage = () => {
 
   return (
     <div className={styles.newClass}>
+      <h2 className={styles.newClass__mainHeader}>Create a New Class</h2>
       {errorMessage && (
         <p className={styles.newClass__errorMessage}>{errorMessage}</p>
       )}
@@ -153,40 +154,48 @@ export const NewClassPage = () => {
           </button>
         </div>
       </form>
-      <div className={styles.newClass__classList}>
-        {classListClassName && (
-          <div className={styles.classListHeader}>
-            <h3 className={styles.font}>{classListClassName}</h3>
-            <button
-              className={styles.save__class__btn}
-              onClick={handleSaveClass}
-            >
-              <FontAwesomeIcon icon={faFloppyDisk} />
-            </button>
-          </div>
-        )}
-        <div className={styles.classList__names}>
-          {classList.map((student, i) => {
-            return (
-              <div
-                key={generateKey()}
-                className={styles.newClass__classList__student}
-              >
-                <p>{i + 1}</p>
-                <p className={`${styles.studentName} ${styles.font}`}>
-                  {student.name}
-                </p>
-                <button
-                  className={styles.remove__student__btn}
-                  onClick={() => handleRemoveStudent(student.id)}
+      {classListClassName && (
+        <div className={styles.newClass__classList}>
+          <>
+            <h3 className={` ${styles.classListHeader} ${styles.font}`}>
+              {classListClassName}
+            </h3>
+          </>
+
+          <div className={styles.classList__names}>
+            {classList.map((student, i) => {
+              return (
+                <div
+                  key={generateKey()}
+                  className={styles.newClass__classList__student}
                 >
-                  <FontAwesomeIcon icon={faCircleMinus} />
-                </button>
-              </div>
-            );
-          })}
+                  <p className={styles.newClass__classList__student__number}>
+                    {i + 1}
+                  </p>
+                  <p
+                    className={`${styles.newClass__classList__student__name} ${styles.font}`}
+                  >
+                    {student.name}
+                  </p>
+                  <button
+                    className={styles.remove__student__btn}
+                    onClick={() => handleRemoveStudent(student.id)}
+                  >
+                    <FontAwesomeIcon
+                      className={styles.remove__student__btn__icon}
+                      icon={faCircleMinus}
+                    />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
+      <button className={styles.save__class__btn} onClick={handleSaveClass}>
+        Save Class
+        {/* <FontAwesomeIcon icon={faFloppyDisk} /> */}
+      </button>
     </div>
   );
 };
