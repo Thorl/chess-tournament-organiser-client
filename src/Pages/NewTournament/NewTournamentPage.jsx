@@ -14,7 +14,7 @@ export const NewTournamentPage = () => {
   const [className, setClassName] = useState("");
   const [isModalOpen, setModalIsOpen] = useState(false);
   const [classes, setClasses] = useState([]);
-  const [selectedClass, setSelectedClass] = useState([]);
+  const [selectedClass, setSelectedClass] = useState(null);
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -153,6 +153,7 @@ export const NewTournamentPage = () => {
           type="primary"
           onClick={handleToggleModal}
           size="large"
+          style={{ borderRadius: "5px !important" }}
         >
           Add Class
         </Button>
@@ -172,31 +173,33 @@ export const NewTournamentPage = () => {
             </label>
           </>
         )}
-        <div className={styles.newTournament__form__studentList}>
-          <h2 className={styles.newTournament__form__studentList__header}>
-            Students
-          </h2>
-          {selectedClass?.students?.map((student) => {
-            return (
-              <div key={student._id}>
-                <input
-                  id={student._id}
-                  type="checkbox"
-                  value={student._id}
-                  onClick={handleSelectStudent}
-                />
-                <label
-                  className={
-                    styles.newTournament__form__studentList__studentName
-                  }
-                  htmlFor={student._id}
-                >
-                  {student.name}
-                </label>
-              </div>
-            );
-          })}
-        </div>
+        {selectedClass && (
+          <div className={styles.newTournament__form__studentList}>
+            <h2 className={styles.newTournament__form__studentList__header}>
+              Students
+            </h2>
+            {selectedClass?.students?.map((student) => {
+              return (
+                <div key={student._id}>
+                  <input
+                    id={student._id}
+                    type="checkbox"
+                    value={student._id}
+                    onClick={handleSelectStudent}
+                  />
+                  <label
+                    className={
+                      styles.newTournament__form__studentList__studentName
+                    }
+                    htmlFor={student._id}
+                  >
+                    {student.name}
+                  </label>
+                </div>
+              );
+            })}
+          </div>
+        )}
 
         <button
           className={
