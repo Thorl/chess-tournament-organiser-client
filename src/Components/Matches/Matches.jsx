@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { useCallback, useEffect, useState } from "react";
-import { API_URL } from "../../constants/API_URL";
+import { useEffect, useState } from "react";
 
+import { API_URL } from "../../constants/API_URL";
 import styles from "./Matches.module.css";
+import spinner from "../../assets/chess-white-king-favicon.png";
 
 export const Matches = ({
   participantsData,
@@ -18,11 +19,15 @@ export const Matches = ({
   tournamentStatus,
 }) => {
   const [matchesCompleted, setMatchesCompleted] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { tournamentId } = useParams();
   const round = "round" + currentRoundNumber;
   const storedAuthToken = localStorage.getItem("authToken");
   const numberOfMatches = pairings[round].length;
   const numberOfActiveRounds = Object.keys(pairings).length;
+
+  console.log("Is Loading?", isLoading);
 
   useEffect(() => {
     const updateMatchesCompleted = async () => {
@@ -144,6 +149,8 @@ export const Matches = ({
 
   const handleStartNextRound = async () => {
     try {
+      setIsLoading(true);
+
       const pairingsResponse = await axios.post(
         `${API_URL}/tournaments/${tournamentId}/pairings`,
         { participantsData, roundNumber: currentRoundNumber + 1 },
@@ -168,6 +175,7 @@ export const Matches = ({
       onUpdateParticipantsData(updatedParticipantsData);
       onUpdateRoundNumber(currentRoundNumber + 1);
       setMatchesCompleted(0);
+      setIsLoading(false);
     } catch (error) {
       console.error("An error occurred while starting the next round: ", error);
     }
@@ -183,6 +191,7 @@ export const Matches = ({
 
   const handleFinishTournament = async () => {
     try {
+      setIsLoading(true);
       const requestBody = { newStatus: "finished" };
 
       const response = await axios.post(
@@ -208,6 +217,7 @@ export const Matches = ({
         tournamentDetailsResponse.data.participantsData;
 
       onUpdateParticipantsData(updatedParticipantsData);
+      setIsLoading(false);
     } catch (error) {
       console.error(
         "An error occurred while trying to set the tournament status to 'finished': ",
@@ -306,9 +316,18 @@ export const Matches = ({
         })}
       </div>
 
+      {isLoading && (
+        <img
+          className={styles.matches__spinner}
+          src={spinner}
+          alt="Loading spinner in the form of the black king piece"
+        />
+      )}
+
       {numberOfMatches === matchesCompleted &&
         currentRoundNumber < numberOfTournamentRounds &&
-        currentRoundNumber >= numberOfActiveRounds && (
+        currentRoundNumber >= numberOfActiveRounds &&
+        !isLoading && (
           <button
             onClick={handleStartNextRound}
             className={styles.matches__nextRoundBtn}

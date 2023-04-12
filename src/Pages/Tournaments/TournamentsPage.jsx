@@ -1,16 +1,17 @@
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { API_URL } from "../../constants/API_URL";
 import styles from "./TournamentsPage.module.css";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import spinner from "../../assets/chess-king-favicon.png";
 
 export const TournamentsPage = () => {
   const [tournaments, setTournaments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getTournaments = async () => {
     try {
@@ -21,7 +22,7 @@ export const TournamentsPage = () => {
       });
 
       const tournamentsFromDb = response.data.tournaments;
-
+      setIsLoading(false);
       setTournaments(tournamentsFromDb);
     } catch (error) {
       console.error(
@@ -40,6 +41,26 @@ export const TournamentsPage = () => {
       <h2 className={styles.tournaments__pageHeader}>My Tournaments</h2>
 
       <div className={styles.tournaments__tournamentCardContainer}>
+        {isLoading && (
+          <div
+            className={styles.tournaments__tournamentCardContainer__loaderCard}
+          >
+            <img
+              className={
+                styles.tournaments__tournamentCardContainer__loaderCard__spinner
+              }
+              src={spinner}
+              alt="Loading spinner in the form of the black king piece"
+            />
+            <p
+              className={
+                styles.tournaments__tournamentCardContainer__loaderCard__loadingText
+              }
+            >
+              Loading...
+            </p>
+          </div>
+        )}
         {tournaments.map((tournamentEl) => {
           return (
             <Link
