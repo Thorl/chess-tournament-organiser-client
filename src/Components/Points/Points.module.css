@@ -67,3 +67,13 @@
 .points__grid__rounds h3 {
   margin: 0;
 }
+
+@media (min-width: 800px) {
+  .points__grid {
+    padding: 30px 60px 10px 60px;
+  }
+
+  .points__grid__points__row {
+    padding: 15px 0;
+  }
+}
