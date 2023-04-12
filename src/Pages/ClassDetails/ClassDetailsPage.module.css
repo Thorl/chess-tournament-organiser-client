@@ -4,9 +4,9 @@
   height: 100%;
   width: 100%;
 
+  overflow-y: scroll;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../assets/chess-girl-playing.jpg") no-repeat 35% 60% / cover;
-  overflow-y: hidden;
 }
 
 .classDetails__headersContainer {
@@ -19,7 +19,6 @@
 .classDetails__mainHeader {
   margin: 0 0 10px 0;
   padding-top: 20px;
-  /* padding-left: 5%; */
 
   color: var(--main-light-color);
   font-size: 30px;
@@ -44,7 +43,6 @@
 
   border-radius: 5px;
   background-color: rgba(205, 170, 125, 0.8);
-  overflow-y: scroll;
   text-align: center;
 }
 
