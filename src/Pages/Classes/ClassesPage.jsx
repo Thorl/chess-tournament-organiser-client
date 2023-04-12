@@ -1,16 +1,17 @@
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { API_URL } from "../../constants/API_URL";
 import styles from "./ClassesPage.module.css";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import spinner from "../../assets/chess-king-favicon.png";
 
 export const ClassesPage = () => {
   const [classes, setClasses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getClasses = async () => {
     try {
@@ -21,7 +22,7 @@ export const ClassesPage = () => {
       });
 
       const classesFromDb = response.data.classes;
-
+      setIsLoading(false);
       setClasses(classesFromDb);
     } catch (error) {
       console.error(
@@ -39,6 +40,20 @@ export const ClassesPage = () => {
     <div className={styles.classes}>
       <h2 className={styles.classes__pageHeader}>My Classes</h2>
       <div className={styles.classes__cardContainer}>
+        {isLoading && (
+          <div className={styles.classes__cardContainer__loaderCard}>
+            <img
+              className={styles.classes__cardContainer__loaderCard__spinner}
+              src={spinner}
+              alt="Loading spinner in the form of the black king piece"
+            />
+            <p
+              className={styles.classes__cardContainer__loaderCard__loadingText}
+            >
+              Loading...
+            </p>
+          </div>
+        )}
         {classes.map((classEl) => {
           return (
             <Link
