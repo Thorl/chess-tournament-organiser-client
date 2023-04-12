@@ -1,14 +1,55 @@
 .newTournament {
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
-  width: 90%;
+  width: 100%;
+  padding-top: 4%;
+  overflow-y: hidden;
+
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-moving-white-piece.jpg") no-repeat 40% / cover;
+}
+
+.newTournament__header {
+  color: var(--main-light-color);
 }
 
 .newTournament__form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 450px;
   gap: 15px;
+
+  overflow-y: hidden;
+}
+
+.newTournament__form__input {
+  width: 80%;
+  max-width: 300px;
+  height: 20px;
+
+  font-size: 15px;
+}
+
+.newTournament__form__addClassBtn {
+  width: 40%;
+
+  background-color: var(--secondary-dark-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  transition: all ease-in-out 0.4s;
+}
+
+.newTournament__form__addClassBtn:hover {
+  background-color: var(--secondary-light-color) !important;
+}
+
+.newTournament__form__header {
+  font-size: 20px;
+  color: var(--main-light-color);
+  font-weight: bold;
 }
 
 .newTournament__form_errorMessage {
@@ -18,10 +59,95 @@
   color: #fff;
 }
 
-.newTournament__form__header {
+.newTournament__form__studentList {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 10px;
+  gap: 20px;
+  overflow-y: scroll;
+
+  border-radius: 5px;
+  background-color: rgba(205, 170, 125, 0.8);
+}
+
+.newTournament__form__studentList__header {
+  margin: 0;
+  align-self: center;
+
+  color: var(--main-dark-color);
   font-weight: bold;
 }
 
-.newTournament__form h2 {
+.newTournament__form__studentList__studentName {
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--main-light-color);
+}
+
+.newTournament__form__studentList__createTournamentBtn {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: var(--secondary-dark-color);
+  color: var(--main-light-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  transition: all ease-in-out 0.4s;
+}
+
+.newTournament__form__studentList__createTournamentBtn:hover {
+  background-color: var(--secondary-light-color);
+}
+
+.newTournament__modal__paragraph {
+  font-size: 18px;
+}
+
+.newTournament__modal__header {
   margin: 0;
+
+  font-size: 25px;
+}
+
+.newTournament__modal__schoolName,
+.newTournament__modal__className {
+  color: var(--main-light-color);
+
+  font-size: 18px;
+}
+
+.newTournament__modal_selectBtn {
+  padding: 10px;
+
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: var(--secondary-dark-color);
+  color: var(--main-light-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  transition: all ease-in-out 0.4s;
+}
+
+.newTournament__modal_selectBtn:hover {
+  background-color: var(--secondary-light-color);
+}
+
+@media (min-width: 800px) {
+  .newTournament {
+    padding-top: 2%;
+  }
+
+  .newTournament__header {
+    font-size: 30px;
+  }
+
+  .newTournament__form__input {
+    height: 25px;
+  }
+
+  .newTournament__form__header {
+    font-size: 25px;
+  }
 }

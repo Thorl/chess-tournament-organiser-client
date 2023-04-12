@@ -5,6 +5,7 @@
   --secondary-light-color: #cdaa7d;
   --accept-color: #80b362;
   --deny-color: #bf565a;
+  --custom-font: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -22,9 +23,28 @@ code {
     monospace;
 }
 
+.ant-modal-content,
+.ant-modal-title {
+  background-color: var(--secondary-light-color) !important;
+}
+
+.ant-modal-title {
+  font-size: 30px !important;
+}
+
 .ant-modal-body > div {
   display: grid;
-  grid-template-columns: 4fr 2fr 1fr;
+  grid-template-columns: 3fr 3fr 1fr;
   justify-content: flex-start;
   align-items: center;
+}
+
+.ant-btn.ant-btn-lg {
+  border-radius: 5px !important;
+  box-shadow: 1px 1px 2px var(--main-dark-color) !important;
+}
+
+.ant-modal-footer {
+  display: flex;
+  justify-content: center;
 }

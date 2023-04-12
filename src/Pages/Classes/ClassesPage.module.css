@@ -2,43 +2,125 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
   height: 100%;
   width: 100%;
+  padding-top: 2%;
+
+  overflow-y: scroll;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-black-pieces-topdown-resized-compressed.jpg")
+      no-repeat 40% / cover;
 }
 
 .classes__pageHeader {
-  margin: 0 0 10px 0;
-}
-
-.classes h3 {
+  padding: 20px 0 10px 0;
   margin: 0;
+
+  font-size: 28px;
+  color: var(--main-light-color);
 }
 
-.classes__card {
-  height: 30%;
-  width: 70%;
+.classes__cardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 2%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
-  border: 1px solid #000;
+.classes__cardContainer__card {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 5px;
+  width: 200px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  cursor: pointer;
   text-decoration: none;
+  font-size: 10px;
+  border-radius: 15px;
+  background-color: rgba(205, 170, 125, 0.6);
+  color: var(--main-light-color);
+  box-shadow: 1px 1px 2px black;
+  overflow-wrap: break-word;
+  transition: all ease-in-out 0.4s;
 }
 
-.classes__dbClasses {
+.classes__cardContainer__card:hover {
+  background-color: rgba(92, 52, 52, 0.6);
+}
+
+.classes__cardContainer__card__className {
+  margin: 0;
+
+  text-align: center;
+  font-size: 18px;
+}
+
+.classes__cardContainer__card__schoolName {
+  margin: 0;
+
+  font-size: 15px;
+}
+
+.classes__cardContainer__newClassCard {
+  margin: 10px;
+  padding: 5px;
+  width: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
+  border-radius: 15px;
 
-  color: #000;
+  cursor: pointer;
+  background-color: rgba(92, 52, 52, 0.8);
+  color: var(--main-light-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  transition: all ease-in-out 0.4s;
 }
 
-.classes__createNewClass {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.classes__cardContainer__newClassCard:hover {
+  background-color: var(--secondary-light-color);
 }
 
-.classes__createNewClass__link {
-  text-decoration: none;
+.classes__cardContainer__newClassCard__plusIcon {
+  width: 100%;
+
+  font-size: 42px;
+  color: var(--main-light-color);
+}
+
+@media (min-width: 800px) {
+  .classes__pageHeader {
+    font-size: 35px;
+  }
+
+  .classes__cardContainer__card__className {
+    font-size: 20px;
+  }
+
+  .classes__cardContainer__card__schoolName {
+    margin: 0;
+
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .classes__pageHeader {
+    font-size: 45px;
+  }
+
+  .classes__cardContainer {
+    gap: 50px;
+  }
 }

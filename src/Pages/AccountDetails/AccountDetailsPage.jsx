@@ -7,8 +7,6 @@ import styles from "./AccountDetailsPage.module.css";
 
 export const AccountDetailsPage = () => {
   const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -24,17 +22,9 @@ export const AccountDetailsPage = () => {
           headers: { Authorization: `Bearer ${storedAuthToken}` },
         });
 
-        const { email, firstName, lastName } = response.data;
+        const { email } = response.data;
 
         setEmail(email);
-
-        if (firstName) {
-          setFirstName(firstName);
-        }
-
-        if (lastName) {
-          setLastName(lastName);
-        }
       } catch (error) {
         console.error(
           "An error occurred while getting account details data: ",
@@ -48,14 +38,6 @@ export const AccountDetailsPage = () => {
 
   const handleEmailInput = (e) => {
     setEmail(e.target.value);
-  };
-
-  const handleFirstNameInput = (e) => {
-    setFirstName(e.target.value);
-  };
-
-  const handleLastNameInput = (e) => {
-    setLastName(e.target.value);
   };
 
   const handleCurrentPasswordInput = (e) => {
@@ -75,8 +57,6 @@ export const AccountDetailsPage = () => {
 
     const requestBody = {
       email,
-      firstName,
-      lastName,
       currentPassword,
       newPassword,
       repeatedNewPassword: repeatPassword,
@@ -91,7 +71,7 @@ export const AccountDetailsPage = () => {
         }
       );
 
-      const { email, firstName, lastName, errorMessage } = response.data;
+      const { email, errorMessage } = response.data;
 
       if (errorMessage) {
         setErrorMessage(errorMessage);
@@ -99,10 +79,6 @@ export const AccountDetailsPage = () => {
       }
 
       setEmail(email);
-
-      setFirstName(firstName);
-
-      setLastName(lastName);
 
       setSuccessMessage("Account Details Successfully Updated!");
 
@@ -123,7 +99,7 @@ export const AccountDetailsPage = () => {
 
   return (
     <div className={styles.accountDetails}>
-      <h2>My Details</h2>
+      {/* <h2 className={styles.accountDetails__mainHeader}>My Details</h2> */}
       {errorMessage && (
         <p className={styles.accountDetails__errorMessage}>{errorMessage}</p>
       )}
@@ -137,60 +113,62 @@ export const AccountDetailsPage = () => {
         className={styles.accountDetails__form}
         onSubmit={handleSubmitAccountDetails}
       >
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          placeholder="Enter your email"
-          onChange={handleEmailInput}
-          required
-        />
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          id="firstName"
-          value={firstName}
-          placeholder="Enter your first name"
-          onChange={handleFirstNameInput}
-        />
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          id="lastName"
-          value={lastName}
-          onChange={handleLastNameInput}
-          placeholder="Enter your last name"
-        />
-        <div className={styles.accountDetails__form__changePassword}>
-          <h3>Change password</h3>
-          <label htmlFor="currentPassword">Current Password</label>
+        <h3 className={`${styles.font} ${styles.email}`}>Email</h3>
+        <div className={styles.inputBox}>
           <input
-            type="password"
-            id="currentPassword"
-            value={currentPassword}
-            onChange={handleCurrentPasswordInput}
-            placeholder="Enter your current password"
-          />
-          <label htmlFor="newPassword">New Password</label>
-          <input
-            type="password"
-            id="newPassword"
-            value={newPassword}
-            onChange={handleNewPasswordInput}
-            placeholder="Enter your new password"
-          />
-          <label htmlFor="repeatPassword">Repeat New Password</label>
-          <input
-            type="password"
-            id="repeatPassword"
-            value={repeatPassword}
-            onChange={handleRepeatPasswordInput}
-            placeholder="Repeat your new password"
+            className={`${styles.input} ${styles.font}`}
+            type="email"
+            id="email"
+            value={email}
+            placeholder="Enter your email"
+            onChange={handleEmailInput}
+            required
           />
         </div>
+        <div className={styles.accountDetails__form__changePassword}>
+          <h3 className={`${styles.font} ${styles.email}`}>Change Password</h3>
+          <div className={styles.inputBoxContainer}>
+            <div className={styles.inputBoxChangePassword}>
+              <input
+                className={`${styles.input} ${styles.font}`}
+                type="password"
+                id="currentPassword"
+                value={currentPassword}
+                onChange={handleCurrentPasswordInput}
+                required
+              />
+              <span className={styles.inputSpan}>Current Password</span>
+            </div>
+            <div className={styles.inputBoxChangePassword}>
+              <input
+                className={`${styles.input} ${styles.font}`}
+                type="password"
+                id="newPassword"
+                value={newPassword}
+                onChange={handleNewPasswordInput}
+                required
+              />
+              <span className={styles.inputSpan}>New Password</span>
+            </div>
+            <div className={styles.inputBoxChangePassword}>
+              <input
+                className={`${styles.input} ${styles.font}`}
+                type="password"
+                id="repeatPassword"
+                value={repeatPassword}
+                onChange={handleRepeatPasswordInput}
+                required
+              />
+              <span className={styles.inputSpan}>Repeat New Password</span>
+            </div>
+          </div>
+        </div>
 
-        <button className={styles.accountDetails__form__btn}>Submit</button>
+        <button
+          className={`${styles.accountDetails__form__btn} ${styles.font}`}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

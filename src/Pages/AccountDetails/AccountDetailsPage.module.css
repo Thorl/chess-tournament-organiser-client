@@ -5,10 +5,15 @@
   align-items: center;
   height: 100%;
   width: 100%;
+  padding-top: 4%;
+
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/chess-knight-closeup-compressed.jpg") no-repeat 35% 40% /
+      cover;
 }
 
-.accountDetails h2 {
-  margin: 0 0 10px 0;
+.accountDetails__mainHeader {
+  margin: 0 0 20px 0;
 }
 
 .accountDetails__errorMessage {
@@ -29,10 +34,16 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 20px 30px;
+  border-radius: 5px;
+
+  background-color: rgba(205, 170, 125, 0.8);
+  
 }
 
 .accountDetails__form label {
   font-size: 15px;
+  color: var(--main-light-color);
 }
 
 .accountDetails__form input {
@@ -51,4 +62,110 @@
 
 .accountDetails__form__btn {
   margin-top: 15px;
+  padding: 5px 0;
+
+  cursor: pointer;
+  background-color: var(--secondary-dark-color);
+  color: var(--main-light-color);
+  box-shadow: 1px 1px 2px var(--main-dark-color);
+  transition: all ease-in-out 0.4s;
+}
+
+.accountDetails__form__btn:hover {
+  background-color: var(--accept-color);
+}
+
+.inputBoxContainer {
+  margin-top: -15px;
+}
+
+.inputBox {
+   position: relative;
+  width: 250px;
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.inputBoxChangePassword {
+  position: relative;
+  width: 250px;
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--main-dark-color);
+  background: var(--main-light-color);
+  border-radius: 5px;
+  outline: none;
+  color: var(--main-dark-color);
+  font-size: 0.75em;
+  border-width: 3px;
+}
+
+.inputSpan {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 0.65em;
+  color: lightgray;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+.email {
+  font-size: 20px;
+  margin-bottom: -10px;
+  color: var(--main-light-color);
+}
+
+.inputBoxChangePassword input:valid ~ span,
+.inputBoxChangePassword input:focus ~ span {
+  color: var(--main-light-color);
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.55em;
+  padding: 0 10px;
+  background-color: var(--secondary-dark-color);
+}
+
+.font {
+  font-family: var(--custom-font);
+  letter-spacing: 1px;
+}
+
+
+@media (min-width: 800px) {
+  .accountDetails__mainHeader {
+    font-size: 35px;
+  }
+
+  .accountDetails__form label {
+    font-size: 18px;
+  }
+
+  .accountDetails__form__changePassword h3 {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+
+
+  }
+
+  .accountDetails__form__btn {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .accountDetails {
+    padding-top: 2%;
+  }
+  .accountDetails__mainHeader {
+    font-size: 35px;
+  }
 }

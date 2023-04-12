@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
   height: 100%;
+  overflow-y: hidden;
 }
 
 .matches__header,
@@ -26,7 +26,7 @@
   justify-items: center;
   grid-gap: 15px;
   width: 100%;
-  max-width: 450px;
+  max-width: 600px;
   margin-bottom: 4%;
 }
 
@@ -54,9 +54,11 @@
 
 .matches__grid {
   width: 80%;
-  max-width: 450px;
+  max-width: 600px;
   padding: 10px 0;
+  margin-bottom: 15px;
 
+  overflow-y: scroll;
   border-radius: 5px;
   background-color: rgba(205, 170, 125, 0.8);
 }
@@ -137,19 +139,26 @@
 
 .matches__nextRoundBtn {
   padding: 10px 20px;
-  margin-top: 35px;
+  margin: 35px 0;
 
   background-color: var(--secondary-dark-color);
   color: var(--main-light-color);
 }
 
 .matches__finishedMessage {
-  width: 60%;
+  width: 80%;
+  max-width: 550px;
+  padding: 15px 15px;
+
+  border-radius: 5px;
+  text-align: center;
+  color: var(--main-light-color);
+  background-color: rgba(92, 52, 52, 0.8);
 }
 
 @media (min-width: 800px) {
   .matches__roundSelector {
-    margin-bottom: 2%;
+    margin-bottom: 1%;
   }
 
   .matches__roundSelector__btn {

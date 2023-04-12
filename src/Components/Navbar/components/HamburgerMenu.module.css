@@ -37,16 +37,17 @@
 .hamburgerMenu__dropdownMenu {
   position: fixed;
   z-index: 50;
-  top: 55px;
+  top: 54px;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-evenly;
-  padding: 5px;
-  height: 55%;
-  width: 50%;
-  margin: 6px 0 0 0;
+  padding: 50px 5px 20px 5px;
+  height: 250px;
+  width: 80%;
+  margin: 5px 0 0 0;
+  gap: 50px;
 
   visibility: hidden;
   transform: translateX(200%);
@@ -56,11 +57,61 @@
   line-height: 3rem;
   border-left: 1px solid #000;
   border-bottom: 1px solid #000;
-  background-color: #ffff;
+  background-color: var(--main-dark-color);
   list-style: none;
+  border-width: 3px;
 }
 
 .hamburgerMenu__dropdownMenu_show {
   visibility: visible;
-  transform: translateX(50%);
+  transform: translateX(10%);
+}
+
+.hamburgerMenu__dropdownMenu__link {
+  margin-top: -100px;
+  padding-left: 10px;
+
+  color: var(--main-light-color);
+  transition: all ease-in-out 0.4s;
+  text-decoration: none;
+}
+
+.hamburgerMenu__dropdownMenu__link:hover {
+  color: var(--secondary-dark-color);
+}
+
+.hamburgerMenu__dropdownMenu__btnContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: flex-start;
+  width: 50%;
+  padding: 0 0 10px 10px;
+
+  background-color: var(--main-dark-color);
+}
+
+.hamburgerMenu__dropdownMenu__btnContainer__logOutBtn {
+  padding: 3px 5px;
+
+  border-width: 0px;
+  border-radius: 5px;
+  background-color: var(--deny-color);
+  color: var(--main-light-color);
+  transition: all ease-in-out 0.4s;
+  box-shadow: 1px 1px 2px black;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hamburgerMenu__dropdownMenu__btnContainer__logOutBtn:hover {
+  background-color: var(--secondary-dark-color);
+}
+
+.hamburgerMenu__dropdownMenu__font {
+  font-family: var(--custom-font);
+  letter-spacing: 1px;
 }

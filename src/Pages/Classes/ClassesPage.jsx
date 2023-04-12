@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../constants/API_URL";
 import styles from "./ClassesPage.module.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
 export const ClassesPage = () => {
   const [classes, setClasses] = useState([]);
 
@@ -35,27 +38,32 @@ export const ClassesPage = () => {
   return (
     <div className={styles.classes}>
       <h2 className={styles.classes__pageHeader}>My Classes</h2>
-      {classes.map((classEl) => {
-        return (
-          <Link
-            to={`/classes/${classEl._id}`}
-            key={classEl._id}
-            className={` ${styles.classes__dbClasses} ${styles.classes__card}`}
-          >
-            <h3>{classEl.name}</h3>
-            <h3>{classEl.school}</h3>
+      <div className={styles.classes__cardContainer}>
+        {classes.map((classEl) => {
+          return (
+            <Link
+              to={`/classes/${classEl._id}`}
+              key={classEl._id}
+              className={styles.classes__cardContainer__card}
+            >
+              <h3 className={styles.classes__cardContainer__card__className}>
+                {classEl.name}
+              </h3>
+              <h3 className={styles.classes__cardContainer__card__schoolName}>
+                School: {classEl.school}
+              </h3>
+            </Link>
+          );
+        })}
+
+        <div className={`${styles.classes__cardContainer__newClassCard}`}>
+          <Link to="/classes/new-class">
+            <FontAwesomeIcon
+              className={styles.classes__cardContainer__newClassCard__plusIcon}
+              icon={faPlus}
+            />
           </Link>
-        );
-      })}
-      <div
-        className={`${styles.classes__createNewClass} ${styles.classes__card}`}
-      >
-        <Link
-          to="/classes/new-class"
-          className={styles.classes__createNewClass__link}
-        >
-          Create A New Class
-        </Link>
+        </div>
       </div>
     </div>
   );

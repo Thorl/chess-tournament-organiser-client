@@ -1,6 +1,3 @@
-import axios from "axios";
-import { useParams } from "react-router-dom";
-
 import { useState, useEffect, useCallback } from "react";
 
 import styles from "./Points.module.css";
@@ -91,13 +88,12 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
 
   return (
     <div className={styles.points}>
-      <h2>Points</h2>
-      <h3 className={styles.points__winningMessage}>
-        {winnerMessage && winnerMessage}
-      </h3>
+      {tournamentStatus === "finished" && winnerMessage && (
+        <h3 className={styles.points__winningMessage}>{winnerMessage}</h3>
+      )}
       <div className={styles.points__grid}>
         <div className={styles.points__grid__rounds}>
-          <h3>Students</h3>
+          <h3></h3>
           {rounds.map((_, i) => {
             return (
               <h3
