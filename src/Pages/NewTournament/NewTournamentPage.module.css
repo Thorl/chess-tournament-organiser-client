@@ -134,6 +134,53 @@
   background-color: var(--secondary-light-color);
 }
 
+.inputBox {
+  position: relative;
+
+  display: flex;
+  margin-top: 20px;
+  width: 250px;
+  gap: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--main-dark-color);
+  background: var(--main-light-color);
+  border-radius: 5px;
+  outline: none;
+  color: var(--main-dark-color);
+  font-size: 0.75em;
+  border-width: 3px;
+}
+
+.inputSpan {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 0.55em;
+  color: lightgray;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+  color: var(--main-dark-color);
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.45em;
+  padding: 0 10px;
+  background-color: var(--main-light-color);
+}
+
+.font {
+  font-family: var(--custom-font);
+  letter-spacing: 1px;
+}
+
 @media (min-width: 800px) {
   .newTournament {
     padding-top: 2%;
