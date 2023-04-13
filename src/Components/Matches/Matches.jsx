@@ -1,5 +1,10 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronRight,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 import React, { useEffect, useState } from "react";
 
@@ -291,12 +296,11 @@ export const Matches = ({
     <div className={styles.matches}>
       <div className={styles.matches__roundSelector}>
         {currentRoundNumber > 1 && (
-          <button
-            className={styles.matches__roundSelector__btn}
+          <FontAwesomeIcon
             onClick={() => handleSwitchRound("previous")}
-          >
-            Previous
-          </button>
+            icon={faChevronLeft}
+            className={styles.matches__roundSelector__chevron}
+          />
         )}
         {currentRoundNumber === 1 && <div></div>}
         <h3 className={styles.matches__roundSelector__header}>
@@ -305,12 +309,11 @@ export const Matches = ({
         {currentRoundNumber < numberOfTournamentRounds &&
           currentRoundNumber < numberOfActiveRounds &&
           numberOfMatches === matchesCompleted && (
-            <button
-              className={styles.matches__roundSelector__btn}
+            <FontAwesomeIcon
               onClick={() => handleSwitchRound("next")}
-            >
-              Next
-            </button>
+              icon={faChevronRight}
+              className={styles.matches__roundSelector__chevron}
+            />
           )}
         {currentRoundNumber === numberOfTournamentRounds && <div></div>}
       </div>
