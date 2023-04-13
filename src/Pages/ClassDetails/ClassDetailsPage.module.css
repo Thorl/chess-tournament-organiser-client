@@ -80,15 +80,9 @@
   background-color: rgba(205, 170, 125, 0.8);
 }
 
-.classDetails__addStudentForm__label {
-  color: var(--main-dark-color);
-}
 
-.classDetails__addStudentForm__input {
-  align-self: center;
-  width: 80%;
-  max-width: 200px;
-}
+
+
 
 .classDetails__addStudentForm__addBtn {
   width: 50%;
@@ -104,6 +98,73 @@
 
 .classDetails__addStudentForm__addBtn:hover {
   background-color: var(--accept-color);
+}
+
+.classDetails__addStudentForm__label {
+  font-size: 20px;
+}
+
+.inputBox {
+  position: relative;
+  
+
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  gap: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--main-dark-color);
+  background: var(--main-light-color);
+  border-radius: 5px;
+  outline: none;
+  color: var(--main-dark-color);
+  font-size: 0.75em;
+  border-width: 3px;
+}
+
+.icon {
+  font-size: 25px;
+  /* position: absolute; */
+}
+.inputSpan {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 0.65em;
+  color: lightgray;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+  color: var(--main-light-color);
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.65em;
+  padding: 0 10px;
+  background-color: rgba(205, 170, 125, 0.8);
+}
+
+.newClass__form__addBtn {
+  width: 40px;
+  border-width: 0px;
+  background: var(--main-light-color);
+  border-radius: 5px;
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  margin-right: 10px;
+}
+
+
+.font {
+  font-family: var(--custom-font);
+  letter-spacing: 1px;
 }
 
 @media (min-width: 800px) {
@@ -124,7 +185,7 @@
   }
 
   .classDetails__addStudentForm__label {
-    font-size: 20px;
+    font-size: 25px;
   }
 
   .classDetails__addStudentForm__input {
