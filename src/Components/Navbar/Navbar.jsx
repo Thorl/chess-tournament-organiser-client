@@ -28,12 +28,7 @@ export const Navbar = () => {
             >
               Profile
             </Link>
-            <Link
-              to="/account-details"
-              className={styles.navbar__bottomRow__navLinks__link}
-            >
-              Account Details
-            </Link>
+
             <Link
               to="/classes"
               className={styles.navbar__bottomRow__navLinks__link}
@@ -45,6 +40,12 @@ export const Navbar = () => {
               className={styles.navbar__bottomRow__navLinks__link}
             >
               Tournaments
+            </Link>
+            <Link
+              to="/account-details"
+              className={styles.navbar__bottomRow__navLinks__link}
+            >
+              Account Details
             </Link>
           </ul>
         </div>

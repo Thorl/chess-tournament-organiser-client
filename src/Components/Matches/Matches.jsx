@@ -27,8 +27,6 @@ export const Matches = ({
   const numberOfMatches = pairings[round].length;
   const numberOfActiveRounds = Object.keys(pairings).length;
 
-  console.log("Is Loading?", isLoading);
-
   useEffect(() => {
     const updateMatchesCompleted = async () => {
       try {
