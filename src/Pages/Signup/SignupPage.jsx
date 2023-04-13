@@ -46,30 +46,28 @@ export const SignupPage = () => {
         <p className={styles.signup__form__errorMessage}>{errorMessage}</p>
       )}
       <form className={styles.signup__form} onSubmit={handleSignupSubmit}>
-        <label className={styles.signup__form__label} htmlFor="email">
-          Email
-        </label>
-        <input
-          className={styles.signup__form__input}
-          type="text"
-          id="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={handleEmailInput}
-          required
-        />
-        <label className={styles.signup__form__label} htmlFor="password">
-          Password
-        </label>
-        <input
-          className={styles.signup__form__input}
-          type="password"
-          id="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={handlePasswordInput}
-          required
-        />
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="text"
+            id="email"
+            value={email}
+            onChange={handleEmailInput}
+            required
+          />
+          <span className={styles.inputSpan}>Enter email</span>
+        </div>
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordInput}
+            required
+          />
+          <span className={styles.inputSpan}>Enter password</span>
+        </div>
         <button className={styles.signup__form__btn}>Sign up</button>
 
         <p className={styles.signup__form__footer}>

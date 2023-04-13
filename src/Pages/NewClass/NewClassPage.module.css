@@ -65,9 +65,7 @@
   border-width: 3px;
 }
 
-.icon {
-  font-size: 25px;
-}
+
 .inputSpan {
   position: absolute;
   left: 0;
@@ -86,6 +84,15 @@
   font-size: 0.65em;
   padding: 0 10px;
   background-color: var(--main-light-color);
+}
+
+.font {
+  font-family: var(--custom-font);
+  letter-spacing: 1px;
+}
+
+.icon {
+  font-size: 25px;
 }
 
 .newClass__form__studentNameInput {
@@ -185,10 +192,7 @@
   width: 100%;
 }
 
-.font {
-  font-family: var(--custom-font);
-  letter-spacing: 1px;
-}
+
 
 @media (min-width: 800px) {
   .newClass {
