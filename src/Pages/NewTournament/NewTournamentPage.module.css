@@ -12,6 +12,9 @@
 }
 
 .newTournament__header {
+  margin: 0;
+  padding-top: 4%;
+
   color: var(--main-light-color);
 }
 
@@ -22,8 +25,6 @@
   width: 80%;
   max-width: 450px;
   gap: 15px;
-
-  /* overflow-y: hidden; */
 }
 
 .newTournament__form__input {
@@ -186,6 +187,8 @@
   }
 
   .newTournament__header {
+    padding-top: 2%;
+
     font-size: 30px;
   }
 
