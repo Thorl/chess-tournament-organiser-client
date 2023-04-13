@@ -56,30 +56,28 @@ export const LoginPage = () => {
         <p className={styles.login__form__errorMessage}>{errorMessage}</p>
       )}
       <form className={styles.login__form} onSubmit={handleLoginSubmit}>
-        <label className={styles.login__form__label} htmlFor="email">
-          Email
-        </label>
-        <input
-          className={styles.login__form__input}
-          type="text"
-          id="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={handleEmailInput}
-          required
-        />
-        <label className={styles.login__form__label} htmlFor="password">
-          Password
-        </label>
-        <input
-          className={styles.login__form__input}
-          type="password"
-          id="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={handlePasswordInput}
-          required
-        />
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="text"
+            id="email"
+            value={email}
+            onChange={handleEmailInput}
+            required
+          />
+          <span className={styles.inputSpan}>Enter email</span>
+        </div>
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordInput}
+            required
+          />
+          <span className={styles.inputSpan}>Enter password</span>
+        </div>
         <button className={styles.login__form__btn}>Log in</button>
         <p className={styles.login__form__footer}>
           Don't have an account yet? <Link to="/signup">Sign up</Link>
