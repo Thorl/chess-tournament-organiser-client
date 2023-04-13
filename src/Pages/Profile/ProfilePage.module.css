@@ -63,3 +63,9 @@
   background-color: var(--secondary-light-color);
   color: #000;
 }
+
+@media (min-width: 800px) {
+  .profile {
+    padding-top: 5%;
+  }
+}
