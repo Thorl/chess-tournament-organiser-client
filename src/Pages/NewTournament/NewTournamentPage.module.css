@@ -5,7 +5,7 @@
   height: 100%;
   width: 100%;
   padding-top: 4%;
-  overflow-y: hidden;
+  overflow-y: scroll;
 
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../assets/chess-moving-white-piece.jpg") no-repeat 40% / cover;
@@ -23,7 +23,7 @@
   max-width: 450px;
   gap: 15px;
 
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 
 .newTournament__form__input {
@@ -65,7 +65,6 @@
   width: 80%;
   padding: 10px;
   gap: 20px;
-  overflow-y: scroll;
 
   border-radius: 5px;
   background-color: rgba(205, 170, 125, 0.8);
