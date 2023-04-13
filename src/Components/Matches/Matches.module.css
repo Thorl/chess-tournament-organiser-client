@@ -53,42 +53,46 @@
 
 .matches__grid {
   width: 80%;
-  max-width: 600px;
-  padding: 10px 0;
-  margin-bottom: 15px;
+  max-width: 700px;
+  padding: 20px;
+  margin-bottom: 20px;
 
   border-radius: 5px;
   background-color: rgba(205, 170, 125, 0.8);
 }
 
 .matches__grid__pair {
-  width: 80%;
-  padding-bottom: 15px;
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 20px;
 
-  border-bottom: 1px solid #000;
+  border-top: 1px solid var(--main-dark-color);
 }
 
-.matches__grid__pair:last-child {
-  border: none;
+.matches__grid__pair:first-child {
+  margin-top: 0;
+  padding-top: 0;
   padding-bottom: 5px;
+
+  border: none;
 }
 
 .matches__grid__pair p {
+  margin: 0;
   padding: 10px;
   border-radius: 10px;
   color: var(--main-light-color);
   font-size: 18px;
 }
 
-.matches__grid__pair__winBtn:not([disabled]),
-.matches__grid__pair__drawBtn:not([disabled]),
 .matches__grid__pair__winBtn,
-.matches__grid__pair__drawBtn {
+.matches__grid__pair__drawBtn,
+.matches__grid__pair__resetBtn {
   padding: 5px 15px;
   margin-bottom: 10px;
 }
 
-.matches__grid__pair__winBtn:not([disabled]) {
+.matches__grid__pair__winBtn {
   background-color: var(--secondary-dark-color);
   color: var(--main-light-color);
   transition: all ease-in-out 0.4s;
@@ -97,24 +101,39 @@
   cursor: pointer;
 }
 
-.matches__grid__pair__winBtn:not([disabled]):hover {
+.matches__grid__pair__winBtn:hover {
   background-color: var(--accept-color);
   color: #000;
 }
 
-.matches__grid__pair__drawBtn:not([disabled]) {
+.matches__grid__pair__drawBtn {
   transition: all ease-in-out 0.4s;
   box-shadow: 1px 1px 2px black;
   cursor: pointer;
 }
 
-.matches__grid__pair__drawBtn:not([disabled]):hover {
+.matches__grid__pair__drawBtn:hover {
   background-color: lightgrey;
 }
 
 .matches__grid__pair__drawBtn {
   padding: 5px 15px;
   margin-bottom: 10px;
+}
+
+.matches__grid__pair__resetBtn {
+  margin: 0;
+
+  background-color: var(--secondary-dark-color);
+  color: var(--main-light-color);
+  transition: all ease-in-out 0.4s;
+  box-shadow: 1px 1px 2px black;
+  cursor: pointer;
+}
+
+.matches__grid__pair__resetBtn:hover {
+  background-color: var(--main-light-color);
+  color: var(--main-dark-color);
 }
 
 .matches__grid__pair__winner {
@@ -157,6 +176,12 @@
 
   background-color: var(--secondary-dark-color);
   color: var(--main-light-color);
+  cursor: pointer;
+  transition: all ease-in-out 0.4s;
+}
+
+.matches__nextRoundBtn:hover {
+  background-color: var(--secondary-light-color);
 }
 
 .matches__finishedMessage {
@@ -180,13 +205,12 @@
   }
 
   .matches__grid__pair p {
-    font-size: 20px;
+    font-size: 22px;
   }
 
-  .matches__grid__pair__winBtn:not([disabled]),
-  .matches__grid__pair__drawBtn:not([disabled]),
   .matches__grid__pair__winBtn,
-  .matches__grid__pair__drawBtn {
+  .matches__grid__pair__drawBtn,
+  .matches__grid__pair__resetBtn {
     padding: 10px 30px;
 
     font-size: 15px;
