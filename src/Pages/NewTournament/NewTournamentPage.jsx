@@ -130,22 +130,26 @@ export const NewTournamentPage = () => {
             {errorMessage}
           </p>
         )}
-        <input
-          className={styles.newTournament__form__input}
-          type="text"
-          placeholder="Enter a name for your tournament"
-          value={tournamentName}
-          onChange={handleTournamentNameInput}
-          required
-        />
-        <input
-          className={styles.newTournament__form__input}
-          type="number"
-          placeholder="Enter the number of rounds"
-          value={numberOfRounds}
-          onChange={handleNumberOfRoundsInput}
-          required
-        />
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="text"
+            value={tournamentName}
+            onChange={handleTournamentNameInput}
+            required
+          />
+          <span className={styles.inputSpan}>Enter tournament name</span>
+        </div>
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="number"
+            value={numberOfRounds}
+            onChange={handleNumberOfRoundsInput}
+            required
+          />
+          <span className={styles.inputSpan}>Enter number of rounds</span>
+        </div>
         <Button
           className={styles.newTournament__form__addClassBtn}
           type="primary"
