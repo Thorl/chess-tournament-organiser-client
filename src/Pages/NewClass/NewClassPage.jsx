@@ -190,7 +190,6 @@ export const NewClassPage = () => {
       )}
       <button className={styles.save__class__btn} onClick={handleSaveClass}>
         Save Class
-        {/* <FontAwesomeIcon icon={faFloppyDisk} /> */}
       </button>
     </div>
   );
