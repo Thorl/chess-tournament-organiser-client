@@ -14,6 +14,9 @@
 
 .accountDetails__mainHeader {
   margin: 0 0 20px 0;
+
+  font-size: 30px;
+  color: var(--main-light-color);
 }
 
 .accountDetails__errorMessage {
@@ -33,12 +36,11 @@
 .accountDetails__form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px; */
   padding: 20px 30px;
   border-radius: 5px;
 
   background-color: rgba(205, 170, 125, 0.8);
-  
 }
 
 .accountDetails__form label {
@@ -57,12 +59,13 @@
 }
 
 .accountDetails__form__changePassword h3 {
-  margin: 10px 0 5px 0;
+  margin: 20px 0 5px 0;
 }
 
 .accountDetails__form__btn {
   margin-top: 15px;
-  padding: 5px 0;
+  padding: 5px 50px;
+  align-self: center;
 
   cursor: pointer;
   background-color: var(--secondary-dark-color);
@@ -80,7 +83,7 @@
 }
 
 .inputBox {
-   position: relative;
+  position: relative;
   width: 250px;
   display: flex;
   gap: 5px;
@@ -119,16 +122,17 @@
 }
 
 .email {
+  margin: 0 0 -10px 0;
+
   font-size: 20px;
-  margin-bottom: -10px;
   color: var(--main-light-color);
 }
 
 .inputBoxChangePassword input:valid ~ span,
 .inputBoxChangePassword input:focus ~ span {
   color: var(--main-light-color);
-  transform: translateX(10px) translateY(-7px);
-  font-size: 0.55em;
+  transform: translateX(10px) translateY(-10px);
+  font-size: 12px;
   padding: 0 10px;
   background-color: var(--secondary-dark-color);
 }
@@ -138,22 +142,40 @@
   letter-spacing: 1px;
 }
 
-
 @media (min-width: 800px) {
   .accountDetails__mainHeader {
     font-size: 35px;
   }
 
+  .accountDetails__form input {
+    height: 20px;
+
+    font-size: 15px;
+  }
+
   .accountDetails__form label {
-    font-size: 18px;
+    font-size: 2px;
+  }
+
+  .inputBoxChangePassword input:valid ~ span,
+  .inputBoxChangePassword input:focus ~ span {
+    transform: translateX(10px) translateY(-15px);
+  }
+
+  .inputSpan {
+    top: 4px;
+  }
+
+  .email {
+    margin: 0;
+
+    font-size: 25px;
   }
 
   .accountDetails__form__changePassword h3 {
-    font-size: 20px;
+    font-size: 25px;
     display: flex;
     flex-direction: column;
-
-
   }
 
   .accountDetails__form__btn {
@@ -164,8 +186,5 @@
 @media (min-width: 1200px) {
   .accountDetails {
     padding-top: 2%;
-  }
-  .accountDetails__mainHeader {
-    font-size: 35px;
   }
 }

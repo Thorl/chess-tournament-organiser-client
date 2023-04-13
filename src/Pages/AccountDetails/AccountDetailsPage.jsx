@@ -99,7 +99,7 @@ export const AccountDetailsPage = () => {
 
   return (
     <div className={styles.accountDetails}>
-      {/* <h2 className={styles.accountDetails__mainHeader}>My Details</h2> */}
+      <h2 className={styles.accountDetails__mainHeader}>My Details</h2>
       {errorMessage && (
         <p className={styles.accountDetails__errorMessage}>{errorMessage}</p>
       )}
@@ -114,16 +114,16 @@ export const AccountDetailsPage = () => {
         onSubmit={handleSubmitAccountDetails}
       >
         <h3 className={`${styles.font} ${styles.email}`}>Email</h3>
-        <div className={styles.inputBox}>
+        <div className={styles.inputBoxChangePassword}>
           <input
             className={`${styles.input} ${styles.font}`}
             type="email"
             id="email"
             value={email}
-            placeholder="Enter your email"
             onChange={handleEmailInput}
             required
           />
+          <span className={styles.inputSpan}>Enter your email</span>
         </div>
         <div className={styles.accountDetails__form__changePassword}>
           <h3 className={`${styles.font} ${styles.email}`}>Change Password</h3>
