@@ -12,6 +12,10 @@ export const HamburgerMenu = (props) => {
 
   return (
     <>
+      <div
+        onClick={handleToggleMenu}
+        className={`${isMenuOpen ? styles.hamburgerMenu__overlay : ""}`}
+      ></div>
       <nav
         className={styles.hamburgerMenu__hamburger}
         onClick={handleToggleMenu}
