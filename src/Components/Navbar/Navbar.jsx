@@ -6,6 +6,8 @@ import { AuthContext } from "../../context/auth.context";
 import { HamburgerMenu } from "./components/HamburgerMenu";
 import styles from "./Navbar.module.css";
 
+import  logo  from "../../assets/logo.png";
+
 export const Navbar = () => {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
 
@@ -13,7 +15,9 @@ export const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <h1 className={styles.navbar__header}>Chesstament</h1>
+      <h1 className={styles.navbar__header}>
+        <img src={logo} alt="logo" />
+      </h1>
       <div className={styles.navbar__topRow}>
         {isLoggedIn && currentPath !== "/profile" && (
           <HamburgerMenu onLogout={logOutUser} />

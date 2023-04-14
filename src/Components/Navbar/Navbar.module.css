@@ -7,6 +7,12 @@
   background-color: var(--main-dark-color);
 }
 
+img {
+  height: 50px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
 .navbar__header {
   margin: 0;
   padding: 10px 0;
