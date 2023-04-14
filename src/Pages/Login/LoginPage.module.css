@@ -63,6 +63,22 @@
   color: #fff;
 }
 
+.login__form__spinner {
+  height: 50px;
+
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 .login__form__errorMessage {
   padding: 15px 10px;
   margin-top: 30px;
@@ -100,7 +116,6 @@
   border-width: 0px;
 }
 
-
 .inputSpan {
   position: absolute;
   left: 0;
@@ -115,8 +130,8 @@
 .inputBox input:valid ~ span,
 .inputBox input:focus ~ span {
   color: var(--main-light-color);
-  transform: translateX(10px) translateY(-7px);
-  font-size: 0.65em;
+  transform: translateX(10px) translateY(-9px);
+  font-size: 12px;
   padding: 0 10px;
   background-color: rgba(205, 170, 125, 0.8);
 }
@@ -131,5 +146,21 @@
     margin: 2% 0 0 0;
 
     font-size: 50px;
+  }
+
+  .input {
+    height: 18px;
+
+    font-size: 15px;
+  }
+
+  .inputSpan {
+    top: 2px;
+  }
+
+  .inputBox input:valid ~ span,
+  .inputBox input:focus ~ span {
+    font-size: 15px;
+    transform: translateX(10px) translateY(-13px);
   }
 }

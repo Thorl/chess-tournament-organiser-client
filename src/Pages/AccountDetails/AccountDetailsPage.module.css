@@ -83,10 +83,11 @@
 
 .inputBox {
   position: relative;
-  width: 250px;
+
   display: flex;
-  gap: 5px;
+  width: 250px;
   margin-top: 20px;
+  gap: 5px;
 }
 
 .inputBoxChangePassword {
@@ -99,7 +100,9 @@
 
 .input {
   width: 100%;
+  height: 18px;
   padding: 10px;
+
   border: 1px solid var(--main-dark-color);
   background: var(--main-light-color);
   border-radius: 5px;
@@ -112,10 +115,11 @@
 .inputSpan {
   position: absolute;
   left: 0;
-  margin-top: -7px;
+  top: 4px;
   padding: 10px;
+  margin-top: -7px;
   pointer-events: none;
-  font-size: 0.65em;
+  font-size: 12px;
   color: lightgray;
   text-transform: uppercase;
   transition: 0.5s;
@@ -131,7 +135,7 @@
 .inputBoxChangePassword input:valid ~ span,
 .inputBoxChangePassword input:focus ~ span {
   color: var(--main-light-color);
-  transform: translateX(10px) translateY(-10px);
+  transform: translateX(7px) translateY(-11px);
   font-size: 12px;
   padding: 2px 10px;
   background-color: var(--secondary-dark-color);
@@ -157,13 +161,8 @@
     font-size: 2px;
   }
 
-  .inputBoxChangePassword input:valid ~ span,
-  .inputBoxChangePassword input:focus ~ span {
-    transform: translateX(10px) translateY(-10px);
-  }
-
   .inputSpan {
-    top: 4px;
+    top: 5px;
   }
 
   .email {

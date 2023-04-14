@@ -124,7 +124,6 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
             </div>
           );
         })}
-        {/* </div> */}
       </div>
     </div>
   );

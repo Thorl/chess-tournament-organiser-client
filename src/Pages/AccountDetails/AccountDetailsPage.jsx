@@ -167,7 +167,7 @@ export const AccountDetailsPage = () => {
         <button
           className={`${styles.accountDetails__form__btn} ${styles.font}`}
         >
-          Submit
+          Save
         </button>
       </form>
     </div>
