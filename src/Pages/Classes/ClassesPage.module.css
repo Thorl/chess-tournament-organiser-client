@@ -13,7 +13,9 @@
 }
 
 .classes__pageHeader {
-  padding: 20px 0 10px 0;
+  /* background-color: rgba(205, 170, 125, 0.6); */
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
   margin: 0;
 
   font-size: 28px;

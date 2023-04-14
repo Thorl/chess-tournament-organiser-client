@@ -23,8 +23,8 @@ function App() {
     <div className={styles.app}>
       <Routes>
         <Route element={<NavLayout />}>
-          <Route path="/" element={<HomePage />} />
           <Route element={<AnonRoutes />}>
+            <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
           </Route>

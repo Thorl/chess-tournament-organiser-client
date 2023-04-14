@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronRight,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { API_URL } from "../../constants/API_URL";
 import styles from "./Matches.module.css";
@@ -26,8 +31,6 @@ export const Matches = ({
   const storedAuthToken = localStorage.getItem("authToken");
   const numberOfMatches = pairings[round].length;
   const numberOfActiveRounds = Object.keys(pairings).length;
-
-  console.log("Is Loading?", isLoading);
 
   useEffect(() => {
     const updateMatchesCompleted = async () => {
@@ -69,6 +72,7 @@ export const Matches = ({
         const requestBody = {
           winningPlayerId,
           roundNumber: currentRoundNumber,
+          action: "win",
         };
 
         const response = await axios.post(
@@ -103,47 +107,109 @@ export const Matches = ({
   };
 
   const handleDraw = async (playerOneId, playerTwoId) => {
-    for (const pair of pairings[`round${currentRoundNumber}`]) {
-      const currentPlayerOneId = pair.player1.id;
-      const currentPlayerTwoId = pair.player2.id;
+    try {
+      for (const pair of pairings[`round${currentRoundNumber}`]) {
+        const currentPlayerOneId = pair.player1.id;
+        const currentPlayerTwoId = pair.player2.id;
 
-      if (
-        currentPlayerOneId === playerOneId &&
-        currentPlayerTwoId === playerTwoId
-      ) {
-        const requestBody = {
-          playerOneId,
-          playerTwoId,
-          roundNumber: currentRoundNumber,
-        };
+        if (
+          currentPlayerOneId === playerOneId &&
+          currentPlayerTwoId === playerTwoId
+        ) {
+          const requestBody = {
+            playerOneId,
+            playerTwoId,
+            roundNumber: currentRoundNumber,
+            action: "draw",
+          };
 
-        const response = await axios.post(
-          `${API_URL}/tournaments/${tournamentId}/score`,
-          requestBody,
-          {
-            headers: { Authorization: `Bearer ${storedAuthToken}` },
-          }
-        );
+          const response = await axios.post(
+            `${API_URL}/tournaments/${tournamentId}/score`,
+            requestBody,
+            {
+              headers: { Authorization: `Bearer ${storedAuthToken}` },
+            }
+          );
 
-        const updatedResults = response.data;
+          const updatedResults = response.data;
 
-        onUpdatePairingsData(updatedResults);
+          onUpdatePairingsData(updatedResults);
 
-        const tournamentDetailsResponse = await axios.get(
-          `${API_URL}/tournaments/${tournamentId}`,
-          {
-            headers: { Authorization: `Bearer ${storedAuthToken}` },
-          }
-        );
+          const tournamentDetailsResponse = await axios.get(
+            `${API_URL}/tournaments/${tournamentId}`,
+            {
+              headers: { Authorization: `Bearer ${storedAuthToken}` },
+            }
+          );
 
-        const updatedParticipantsData =
-          tournamentDetailsResponse.data.participantsData;
+          const updatedParticipantsData =
+            tournamentDetailsResponse.data.participantsData;
 
-        onUpdateParticipantsData(updatedParticipantsData);
+          onUpdateParticipantsData(updatedParticipantsData);
 
-        setMatchesCompleted(matchesCompleted + 1);
-        return;
+          setMatchesCompleted(matchesCompleted + 1);
+          return;
+        }
       }
+    } catch (error) {
+      console.error(
+        "An error occurred while updating a match result as a draw: ",
+        error
+      );
+    }
+  };
+
+  const handleResetMatch = async (playerOneId, playerTwoId) => {
+    try {
+      for (const pair of pairings[`round${currentRoundNumber}`]) {
+        const currentPlayerOneId = pair.player1.id;
+        const currentPlayerTwoId = pair.player2.id;
+
+        if (
+          currentPlayerOneId === playerOneId &&
+          currentPlayerTwoId === playerTwoId
+        ) {
+          const requestBody = {
+            playerOneId,
+            playerTwoId,
+            roundNumber: currentRoundNumber,
+            action: "reset",
+          };
+
+          const response = await axios.post(
+            `${API_URL}/tournaments/${tournamentId}/score`,
+            requestBody,
+            {
+              headers: { Authorization: `Bearer ${storedAuthToken}` },
+            }
+          );
+
+          const updatedResults = response.data;
+
+          onUpdatePairingsData(updatedResults);
+
+          const tournamentDetailsResponse = await axios.get(
+            `${API_URL}/tournaments/${tournamentId}`,
+            {
+              headers: { Authorization: `Bearer ${storedAuthToken}` },
+            }
+          );
+
+          const updatedParticipantsData =
+            tournamentDetailsResponse.data.participantsData;
+
+          onUpdateParticipantsData(updatedParticipantsData);
+
+          if (tournamentStatus === "finished") {
+            onUpdateTournamentStatus("active");
+          }
+
+          setMatchesCompleted(matchesCompleted - 1);
+          return;
+        }
+      }
+    } catch (error) {
+      console.error("An error occurred while reseting a match: ", error);
     }
   };
 
@@ -230,25 +296,24 @@ export const Matches = ({
     <div className={styles.matches}>
       <div className={styles.matches__roundSelector}>
         {currentRoundNumber > 1 && (
-          <button
-            className={styles.matches__roundSelector__btn}
+          <FontAwesomeIcon
             onClick={() => handleSwitchRound("previous")}
-          >
-            Previous
-          </button>
+            icon={faChevronLeft}
+            className={styles.matches__roundSelector__chevron}
+          />
         )}
         {currentRoundNumber === 1 && <div></div>}
         <h3 className={styles.matches__roundSelector__header}>
           Round {currentRoundNumber}
         </h3>
         {currentRoundNumber < numberOfTournamentRounds &&
-          currentRoundNumber < numberOfActiveRounds && (
-            <button
-              className={styles.matches__roundSelector__btn}
+          currentRoundNumber < numberOfActiveRounds &&
+          numberOfMatches === matchesCompleted && (
+            <FontAwesomeIcon
               onClick={() => handleSwitchRound("next")}
-            >
-              Next
-            </button>
+              icon={faChevronRight}
+              className={styles.matches__roundSelector__chevron}
+            />
           )}
         {currentRoundNumber === numberOfTournamentRounds && <div></div>}
       </div>
@@ -265,53 +330,80 @@ export const Matches = ({
           const wasMatchDecided = player1.points || player2.points;
 
           return (
-            <div key={index} className={styles.matches__grid__pair}>
-              <p
-                className={`${
-                  player1.points === 3 ? styles.matches__grid__pair__winner : ""
-                } ${
-                  player1.points === 0 ? styles.matches__grid__pair__loser : ""
-                } ${
-                  player1.points === 1 ? styles.matches__grid__pair__draw : ""
-                }`}
+            <>
+              <div
+                key={player1.id + player2.id}
+                className={styles.matches__grid__pair}
               >
-                {player1.name}
-              </p>
-              <p>vs</p>
-              <p
-                className={`${
-                  player2.points === 3 ? styles.matches__grid__pair__winner : ""
-                } ${
-                  player2.points === 0 ? styles.matches__grid__pair__loser : ""
-                } ${
-                  player1.points === 1 ? styles.matches__grid__pair__draw : ""
-                }`}
-              >
-                {player2.name}
-              </p>
-              <button
-                disabled={wasMatchDecided}
-                className={styles.matches__grid__pair__winBtn}
-                onClick={() => handleWin("player1", player1.id)}
-              >
-                Win
-              </button>
-              <button
-                disabled={wasMatchDecided}
-                className={styles.matches__grid__pair__drawBtn}
-                onClick={() => handleDraw(player1.id, player2.id)}
-              >
-                Draw
-              </button>
-              <button
-                disabled={wasMatchDecided}
-                className={styles.matches__grid__pair__winBtn}
-                onClick={() => handleWin("player2", player2.id)}
-              >
-                Win
-              </button>
-              <div></div>
-            </div>
+                <p
+                  className={`${
+                    player1.points === 3
+                      ? styles.matches__grid__pair__winner
+                      : ""
+                  } ${
+                    player1.points === 0
+                      ? styles.matches__grid__pair__loser
+                      : ""
+                  } ${
+                    player1.points === 1 ? styles.matches__grid__pair__draw : ""
+                  }`}
+                >
+                  {player1.name}
+                </p>
+                <p>vs</p>
+                <p
+                  className={`${
+                    player2.points === 3
+                      ? styles.matches__grid__pair__winner
+                      : ""
+                  } ${
+                    player2.points === 0
+                      ? styles.matches__grid__pair__loser
+                      : ""
+                  } ${
+                    player1.points === 1 ? styles.matches__grid__pair__draw : ""
+                  }`}
+                >
+                  {player2.name}
+                </p>
+
+                <div></div>
+              </div>
+              {!wasMatchDecided && (
+                <>
+                  <button
+                    className={styles.matches__grid__pair__winBtn}
+                    onClick={() => handleWin("player1", player1.id)}
+                  >
+                    Win
+                  </button>
+                  <button
+                    className={styles.matches__grid__pair__drawBtn}
+                    onClick={() => handleDraw(player1.id, player2.id)}
+                  >
+                    Draw
+                  </button>
+                  <button
+                    className={styles.matches__grid__pair__winBtn}
+                    onClick={() => handleWin("player2", player2.id)}
+                  >
+                    Win
+                  </button>
+                </>
+              )}
+              {wasMatchDecided && tournamentStatus === "active" && (
+                <>
+                  <div></div>
+                  <button
+                    onClick={() => handleResetMatch(player1.id, player2.id)}
+                    className={styles.matches__grid__pair__resetBtn}
+                  >
+                    Reset
+                  </button>
+                  <div></div>
+                </>
+              )}
+            </>
           );
         })}
       </div>
@@ -332,7 +424,7 @@ export const Matches = ({
             onClick={handleStartNextRound}
             className={styles.matches__nextRoundBtn}
           >
-            Start Next round
+            Start Next Round
           </button>
         )}
       {numberOfMatches === matchesCompleted &&

@@ -1,9 +1,11 @@
 import axios from "axios";
-
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useState } from "react";
+
 import styles from "./SignupPage.module.css";
+
+import spinner from "../../assets/chess-king-favicon.png";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -11,6 +13,7 @@ export const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -27,9 +30,12 @@ export const SignupPage = () => {
     const requestBody = { email, password };
 
     try {
+      setIsLoading(true);
+
       await axios.post(`${API_URL}/auth/signup`, requestBody);
 
       navigate("/login");
+      setIsLoading(false);
     } catch (error) {
       const errorDescription = error.response.data.message;
 
@@ -46,31 +52,38 @@ export const SignupPage = () => {
         <p className={styles.signup__form__errorMessage}>{errorMessage}</p>
       )}
       <form className={styles.signup__form} onSubmit={handleSignupSubmit}>
-        <label className={styles.signup__form__label} htmlFor="email">
-          Email
-        </label>
-        <input
-          className={styles.signup__form__input}
-          type="text"
-          id="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={handleEmailInput}
-          required
-        />
-        <label className={styles.signup__form__label} htmlFor="password">
-          Password
-        </label>
-        <input
-          className={styles.signup__form__input}
-          type="password"
-          id="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={handlePasswordInput}
-          required
-        />
-        <button className={styles.signup__form__btn}>Sign up</button>
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="text"
+            id="email"
+            value={email}
+            onChange={handleEmailInput}
+            required
+          />
+          <span className={styles.inputSpan}>Enter email</span>
+        </div>
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordInput}
+            required
+          />
+          <span className={styles.inputSpan}>Enter password</span>
+        </div>
+        {!isLoading && (
+          <button className={styles.signup__form__btn}>Sign up</button>
+        )}
+        {isLoading && (
+          <img
+            className={styles.signup__form__spinner}
+            src={spinner}
+            alt="Loading spinner in the form of the black king piece"
+          />
+        )}
 
         <p className={styles.signup__form__footer}>
           Already have an account? <Link to="/login">Log in</Link>

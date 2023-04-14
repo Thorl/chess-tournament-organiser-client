@@ -8,7 +8,12 @@ import { API_URL } from "../../constants/API_URL";
 import styles from "./NewClassPage.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faCircleMinus,
+  faChessKing,
+  faChessBoard,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const NewClassPage = () => {
   const [className, setClassName] = useState("");
@@ -188,10 +193,11 @@ export const NewClassPage = () => {
           </div>
         </div>
       )}
-      <button className={styles.save__class__btn} onClick={handleSaveClass}>
-        Save Class
-        {/* <FontAwesomeIcon icon={faFloppyDisk} /> */}
-      </button>
+      {classList.length > 0 && (
+        <button className={styles.save__class__btn} onClick={handleSaveClass}>
+          Save Class
+        </button>
+      )}
     </div>
   );
 };

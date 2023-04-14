@@ -8,6 +8,9 @@ import { API_URL } from "../../constants/API_URL";
 import styles from "./ClassDetailsPage.module.css";
 import { StudentDetails } from "./components/StudentDetails";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
 export const ClassDetailsPage = () => {
   const [classData, setClassData] = useState({});
   const [newStudentName, setNewStudentName] = useState("");
@@ -106,18 +109,20 @@ export const ClassDetailsPage = () => {
         >
           Add a New Student
         </label>
-        <input
-          className={styles.classDetails__addStudentForm__input}
-          value={newStudentName}
-          onChange={handleNewStudentNameInput}
-          type="text"
-          id="addStudent"
-          placeholder="Enter student name"
-          required
-        />
-        <button className={styles.classDetails__addStudentForm__addBtn}>
-          Add
-        </button>
+        <div className={styles.inputBox}>
+          <input
+            className={`${styles.input} ${styles.font}`}
+            value={newStudentName}
+            onChange={handleNewStudentNameInput}
+            type="text"
+            id="addStudent"
+            required
+          />
+          <span className={styles.inputSpan}>Student Name</span>
+          <button className={styles.newClass__form__addBtn}>
+            <FontAwesomeIcon className={styles.icon} icon={faPlus} />
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -5,13 +5,16 @@
   height: 100%;
   width: 100%;
   padding-top: 4%;
-  overflow-y: hidden;
+  overflow-y: scroll;
 
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../assets/chess-moving-white-piece.jpg") no-repeat 40% / cover;
 }
 
 .newTournament__header {
+  margin: 0;
+  padding-top: 4%;
+
   color: var(--main-light-color);
 }
 
@@ -22,8 +25,6 @@
   width: 80%;
   max-width: 450px;
   gap: 15px;
-
-  overflow-y: hidden;
 }
 
 .newTournament__form__input {
@@ -36,6 +37,7 @@
 
 .newTournament__form__addClassBtn {
   width: 40%;
+  margin-top: 10px;
 
   background-color: var(--secondary-dark-color);
   box-shadow: 1px 1px 2px var(--main-dark-color);
@@ -65,7 +67,6 @@
   width: 80%;
   padding: 10px;
   gap: 20px;
-  overflow-y: scroll;
 
   border-radius: 5px;
   background-color: rgba(205, 170, 125, 0.8);
@@ -134,17 +135,70 @@
   background-color: var(--secondary-light-color);
 }
 
+.inputBox {
+  position: relative;
+
+  display: flex;
+  margin-top: 20px;
+  width: 250px;
+  gap: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--main-dark-color);
+  background: var(--main-light-color);
+  border-radius: 5px;
+  outline: none;
+  color: var(--main-dark-color);
+  font-size: 0.75em;
+  border-width: 0px;
+}
+
+.inputSpan {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  padding: 10px;
+
+  pointer-events: none;
+  font-size: 12px;
+  color: lightgray;
+  text-transform: uppercase;
+  transition: 0.5s;
+  border-radius: 2px;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+  transform: translateX(3px) translateY(-10px);
+  font-size: 12px;
+  padding: 0 10px;
+  background-color: var(--main-light-color);
+  color: var(--main-dark-color);
+}
+
+.font {
+  font-family: var(--custom-font);
+  letter-spacing: 1px;
+}
+
 @media (min-width: 800px) {
   .newTournament {
     padding-top: 2%;
   }
 
   .newTournament__header {
+    padding-top: 2%;
+
     font-size: 30px;
   }
 
-  .newTournament__form__input {
-    height: 25px;
+  .newTournament__form input {
+    height: 15px;
+
+    font-size: 15px;
   }
 
   .newTournament__form__header {

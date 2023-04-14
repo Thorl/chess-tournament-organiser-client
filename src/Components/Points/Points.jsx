@@ -93,7 +93,7 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
       )}
       <div className={styles.points__grid}>
         <div className={styles.points__grid__rounds}>
-          <h3></h3>
+          <div></div>
           {rounds.map((_, i) => {
             return (
               <h3
@@ -102,30 +102,28 @@ export const Points = ({ pairings, participantsData, tournamentStatus }) => {
               >{`R${i + 1}`}</h3>
             );
           })}
-          <h3>Total</h3>
+          <h3 className={styles.points__grid__rounds__roundNumber}>Total</h3>
         </div>
-        <div className={styles.points__grid__points}>
-          {participantsData.map(({ student }) => {
-            const studentId = student._id;
-            let totalPoints;
-            if (studentPointsPerRound) {
-              totalPoints = studentPointsPerRound[studentId].reduce(
-                (total, curr) => total + curr
-              );
-            }
-            return (
-              <div key={studentId} className={styles.points__grid__points__row}>
-                <p>{student.name}</p>
-                {studentPointsPerRound &&
-                  studentPointsPerRound[studentId].map((points, i) => {
-                    return <p key={i}>{points}</p>;
-                  })}
-
-                <p>{totalPoints}</p>
-              </div>
+        {participantsData.map(({ student }) => {
+          const studentId = student._id;
+          let totalPoints;
+          if (studentPointsPerRound) {
+            totalPoints = studentPointsPerRound[studentId].reduce(
+              (total, curr) => total + curr
             );
-          })}
-        </div>
+          }
+          return (
+            <div key={studentId} className={styles.points__grid__row}>
+              <p>{student.name}</p>
+              {studentPointsPerRound &&
+                studentPointsPerRound[studentId].map((points, i) => {
+                  return <p key={i}>{points}</p>;
+                })}
+
+              <p>{totalPoints}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

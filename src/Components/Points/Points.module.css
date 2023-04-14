@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
 .points__winningMessage {
@@ -21,8 +22,8 @@
 .points__grid {
   display: grid;
   grid-template-columns: auto;
-  margin: 4% 0 25px 0;
-  padding: 20px 20px 0 20px;
+  max-width: auto;
+  padding: 4% 20px 20px 20px;
 
   border-radius: 5px;
   background-color: rgba(205, 170, 125, 0.8);
@@ -43,7 +44,7 @@
   text-align: center;
 }
 
-.points__grid__points__row {
+.points__grid__row {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(0, 1fr);
@@ -52,18 +53,33 @@
   border-bottom: 1px solid #000;
 }
 
-.points__grid__points__row:last-child {
+.points__grid__row:last-child {
   border: none;
 }
 
-.points__grid__points__row p {
+.points__grid__row p {
   color: var(--main-light-color);
 }
 
 .points__grid__rounds__roundNumber {
   color: var(--main-dark-color);
+  margin: 0;
 }
 
-.points__grid__rounds h3 {
-  margin: 0;
+@media (min-width: 800px) {
+  .points__grid {
+    padding: 30px 60px 10px 60px;
+  }
+
+  .points__grid__row {
+    padding: 15px 0;
+  }
+
+  .points__grid__rounds__roundNumber {
+    font-size: 25px;
+  }
+
+  .points__grid__row p {
+    font-size: 18px;
+  }
 }

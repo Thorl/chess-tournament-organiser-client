@@ -1,4 +1,18 @@
+.hamburgerMenu__overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
 .hamburgerMenu__hamburger {
+  z-index: 10;
+
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-around;
@@ -114,4 +128,10 @@
 .hamburgerMenu__dropdownMenu__font {
   font-family: var(--custom-font);
   letter-spacing: 1px;
+}
+
+@media (min-width: 600px) {
+  .hamburgerMenu__hamburger {
+    display: none;
+  }
 }

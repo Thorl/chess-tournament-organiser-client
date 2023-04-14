@@ -13,10 +13,18 @@ export const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <h1 className={styles.navbar__header}>Chesstament</h1>
       <div className={styles.navbar__topRow}>
+        <h1 className={styles.navbar__header}>Chesstament</h1>
         {isLoggedIn && currentPath !== "/profile" && (
-          <HamburgerMenu onLogout={logOutUser} />
+          <>
+            <button
+              onClick={logOutUser}
+              className={styles.navbar__topRow__logOutBtn}
+            >
+              Log out
+            </button>
+            <HamburgerMenu onLogout={logOutUser} />
+          </>
         )}
       </div>
       {isLoggedIn && currentPath !== "/profile" && (
@@ -28,12 +36,7 @@ export const Navbar = () => {
             >
               Profile
             </Link>
-            <Link
-              to="/account-details"
-              className={styles.navbar__bottomRow__navLinks__link}
-            >
-              Account Details
-            </Link>
+
             <Link
               to="/classes"
               className={styles.navbar__bottomRow__navLinks__link}
@@ -45,6 +48,12 @@ export const Navbar = () => {
               className={styles.navbar__bottomRow__navLinks__link}
             >
               Tournaments
+            </Link>
+            <Link
+              to="/account-details"
+              className={styles.navbar__bottomRow__navLinks__link}
+            >
+              Account Details
             </Link>
           </ul>
         </div>
