@@ -8,7 +8,7 @@
 }
 
 img {
-  height: 50px;
+  height: 30px;
   margin-top: 10px;
   border-radius: 5px;
 }
@@ -37,6 +37,10 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  img {
+    height: 40px;
   }
 
   .navbar__topRow {
@@ -76,6 +80,9 @@ img {
   @media (min-width: 1200px) {
     .navbar__header {
       font-size: 55px;
+    }
+    img {
+      height: 50px;
     }
   }
 }
