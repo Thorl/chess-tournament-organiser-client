@@ -14,9 +14,9 @@
 
 .newClass__mainHeader {
   font-size: 25px;
-  margin-top: -5px;
+  margin-top: 10px;
+  margin-bottom: 0;
   color: var(--main-light-color);
-  /* background-color: var(--secondary-dark-color); */
   padding: 5px 5px 5px 5px;
   border-radius: 5px;
 }
@@ -60,6 +60,7 @@
 .input {
   width: 100%;
   padding: 10px;
+
   border: 1px solid var(--main-dark-color);
   background: var(--main-light-color);
   border-radius: 5px;
@@ -69,13 +70,13 @@
   border-width: 0px;
 }
 
-
 .inputSpan {
   position: absolute;
   left: 0;
+  top: 2px;
   padding: 10px;
   pointer-events: none;
-  font-size: 0.65em;
+  font-size: 12px;
   color: lightgray;
   text-transform: uppercase;
   transition: 0.5s;
@@ -84,11 +85,10 @@
 .inputBox input:valid ~ span,
 .inputBox input:focus ~ span {
   color: var(--main-dark-color);
-  transform: translateX(10px) translateY(-7px);
-  font-size: 0.65em;
+  transform: translateX(10px) translateY(-9px);
+  font-size: 12px;
   padding: 0 10px;
   background-color: var(--main-light-color);
-  border-radius: 5px;
 }
 
 .font {
@@ -98,7 +98,6 @@
 
 .icon {
   font-size: 25px;
-
 }
 
 .newClass__form__studentNameInput {
@@ -113,8 +112,7 @@
   border-radius: 5px;
   position: absolute;
   right: 0;
-  margin-top: 8px;
-  margin-right: 10px;
+  top: 4px;
 }
 
 .save__class__btn {
@@ -122,8 +120,9 @@
   padding: 10px 20px;
   margin: 20px 0;
   max-width: 200px;
-  font-size: 20px;
+  font-size: 15px;
 
+  border-radius: 5px;
   cursor: pointer;
   color: var(--main-light-color);
   background-color: var(--secondary-dark-color);
@@ -182,7 +181,6 @@
 .remove__student__btn__icon {
   font-size: 20px;
   color: var(--deny-color);
-  /* box-shadow: -0.3px 0.3px 0.3px var(--main-dark-color); */
   transition: all ease-in-out 0.4s;
 }
 
@@ -198,8 +196,6 @@
   width: 100%;
 }
 
-
-
 @media (min-width: 800px) {
   .newClass {
     padding-top: 2%;
@@ -211,5 +207,21 @@
 
   .classListHeader {
     font-size: 25px;
+  }
+
+  .input {
+    height: 20px;
+
+    font-size: 15px;
+  }
+
+  .inputSpan {
+    top: 4px;
+  }
+
+  .inputBox input:valid ~ span,
+  .inputBox input:focus ~ span {
+    font-size: 13px;
+    transform: translateX(10px) translateY(-13px);
   }
 }

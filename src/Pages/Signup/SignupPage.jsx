@@ -1,9 +1,11 @@
 import axios from "axios";
-
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useState } from "react";
+
 import styles from "./SignupPage.module.css";
+
+import spinner from "../../assets/chess-king-favicon.png";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -11,6 +13,7 @@ export const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -27,9 +30,12 @@ export const SignupPage = () => {
     const requestBody = { email, password };
 
     try {
+      setIsLoading(true);
+
       await axios.post(`${API_URL}/auth/signup`, requestBody);
 
       navigate("/login");
+      setIsLoading(false);
     } catch (error) {
       const errorDescription = error.response.data.message;
 
@@ -68,7 +74,16 @@ export const SignupPage = () => {
           />
           <span className={styles.inputSpan}>Enter password</span>
         </div>
-        <button className={styles.signup__form__btn}>Sign up</button>
+        {!isLoading && (
+          <button className={styles.signup__form__btn}>Sign up</button>
+        )}
+        {isLoading && (
+          <img
+            className={styles.signup__form__spinner}
+            src={spinner}
+            alt="Loading spinner in the form of the black king piece"
+          />
+        )}
 
         <p className={styles.signup__form__footer}>
           Already have an account? <Link to="/login">Log in</Link>

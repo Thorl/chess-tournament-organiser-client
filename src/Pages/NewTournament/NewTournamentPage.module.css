@@ -37,6 +37,7 @@
 
 .newTournament__form__addClassBtn {
   width: 40%;
+  margin-top: 10px;
 
   background-color: var(--secondary-dark-color);
   box-shadow: 1px 1px 2px var(--main-dark-color);
@@ -160,8 +161,9 @@
   left: 0;
   top: 0px;
   padding: 10px;
+
   pointer-events: none;
-  font-size: 13px;
+  font-size: 12px;
   color: lightgray;
   text-transform: uppercase;
   transition: 0.5s;
@@ -170,11 +172,11 @@
 
 .inputBox input:valid ~ span,
 .inputBox input:focus ~ span {
-  transform: translateX(3px) translateY(-17px);
+  transform: translateX(3px) translateY(-10px);
   font-size: 12px;
   padding: 0 10px;
-  background-color: rgba(0, 0, 0, 0);
-  color: var(--main-light-color);
+  background-color: var(--main-light-color);
+  color: var(--main-dark-color);
 }
 
 .font {
@@ -197,10 +199,6 @@
     height: 15px;
 
     font-size: 15px;
-  }
-
-  .inputSpan {
-    font-size: 12px;
   }
 
   .newTournament__form__header {

@@ -202,14 +202,15 @@ export const NewTournamentPage = () => {
             })}
           </div>
         )}
-
-        <button
-          className={
-            styles.newTournament__form__studentList__createTournamentBtn
-          }
-        >
-          Create Tournament
-        </button>
+        {selectedClass && (
+          <button
+            className={
+              styles.newTournament__form__studentList__createTournamentBtn
+            }
+          >
+            Create Tournament
+          </button>
+        )}
       </form>
       <Modal
         title="Select a class"

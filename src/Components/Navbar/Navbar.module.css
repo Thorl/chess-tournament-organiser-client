@@ -28,6 +28,10 @@ img {
   align-items: center;
 }
 
+.navbar__topRow__logOutBtn {
+  display: none;
+}
+
 .navbar__bottomRow {
   display: none;
 }
@@ -43,8 +47,36 @@ img {
     height: 40px;
   }
 
-  .navbar__topRow {
+  /*  .navbar__topRow {
     display: none;
+  } */
+
+  .navbar__topRow {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .navbar__topRow__logOutBtn {
+    position: absolute;
+    /* top: 26%;
+    right: 20%; */
+    top: 16px;
+    right: 130px;
+
+    display: block;
+    padding: 5px;
+
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: var(--secondary-dark-color);
+    color: var(--main-light-color);
+    transition: all ease-in-out 0.4s;
+  }
+
+  .navbar__topRow__logOutBtn:hover {
+    background-color: var(--deny-color);
   }
 
   .navbar__bottomRow {
@@ -77,12 +109,20 @@ img {
     font-size: 50px;
   }
 
+  .navbar__topRow__logOutBtn {
+    top: 27px;
+    right: 55px;
+  }
+
   @media (min-width: 1200px) {
     .navbar__header {
       font-size: 55px;
     }
     img {
       height: 50px;
+    }
+    .navbar__topRow__logOutBtn {
+      top: 30px;
     }
   }
 }
