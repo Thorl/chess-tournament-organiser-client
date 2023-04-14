@@ -152,28 +152,29 @@
   outline: none;
   color: var(--main-dark-color);
   font-size: 0.75em;
-  border-width: 3px;
+  border-width: 0px;
 }
 
 .inputSpan {
   position: absolute;
   left: 0;
-  top: 5px;
+  top: 0px;
   padding: 10px;
   pointer-events: none;
-  font-size: 10px;
+  font-size: 13px;
   color: lightgray;
   text-transform: uppercase;
   transition: 0.5s;
+  border-radius: 2px;
 }
 
 .inputBox input:valid ~ span,
 .inputBox input:focus ~ span {
-  color: var(--main-dark-color);
-  transform: translateX(3px) translateY(-16px);
+  transform: translateX(3px) translateY(-17px);
   font-size: 12px;
   padding: 0 10px;
-  background-color: var(--main-light-color);
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--main-light-color);
 }
 
 .font {

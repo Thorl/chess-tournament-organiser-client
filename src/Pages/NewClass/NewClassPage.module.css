@@ -14,7 +14,11 @@
 
 .newClass__mainHeader {
   font-size: 25px;
+  margin-top: -5px;
   color: var(--main-light-color);
+  /* background-color: var(--secondary-dark-color); */
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
 }
 
 .newClass__errorMessage {
@@ -62,7 +66,7 @@
   outline: none;
   color: var(--main-dark-color);
   font-size: 0.75em;
-  border-width: 3px;
+  border-width: 0px;
 }
 
 
@@ -84,6 +88,7 @@
   font-size: 0.65em;
   padding: 0 10px;
   background-color: var(--main-light-color);
+  border-radius: 5px;
 }
 
 .font {
@@ -93,6 +98,7 @@
 
 .icon {
   font-size: 25px;
+
 }
 
 .newClass__form__studentNameInput {
