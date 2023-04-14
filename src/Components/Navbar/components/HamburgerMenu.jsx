@@ -70,7 +70,7 @@ export const HamburgerMenu = (props) => {
             className={`${styles.hamburgerMenu__dropdownMenu__btnContainer__logOutBtn} ${styles.hamburgerMenu__dropdownMenu__font}`}
             onClick={props.onLogout}
           >
-            Log Out
+            Log out
           </button>
         </div>
       </ul>
