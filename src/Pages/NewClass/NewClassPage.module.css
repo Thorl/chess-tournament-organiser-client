@@ -97,6 +97,10 @@
 }
 
 .icon {
+  position: absolute;
+  right: 5px;
+  top: 1px;
+
   font-size: 25px;
 }
 
@@ -180,7 +184,7 @@
 
 .remove__student__btn__icon {
   font-size: 20px;
-  color: var(--deny-color);
+  color: rgb(215, 5, 5);
   transition: all ease-in-out 0.4s;
 }
 
@@ -213,6 +217,10 @@
     height: 20px;
 
     font-size: 15px;
+  }
+
+  .icon {
+    top: 4px;
   }
 
   .inputSpan {

@@ -25,6 +25,7 @@ export const TournamentsPage = () => {
       setIsLoading(false);
       setTournaments(tournamentsFromDb);
     } catch (error) {
+      setIsLoading(false);
       console.error(
         "An error occurred while trying to load classes from the database: ",
         error

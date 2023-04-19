@@ -80,10 +80,6 @@
   background-color: rgba(205, 170, 125, 0.8);
 }
 
-
-
-
-
 .classDetails__addStudentForm__addBtn {
   width: 50%;
   max-width: 150px;
@@ -106,7 +102,6 @@
 
 .inputBox {
   position: relative;
-  
 
   display: flex;
   margin-top: 20px;
@@ -128,7 +123,8 @@
 
 .icon {
   font-size: 25px;
-  /* position: absolute; */
+  position: absolute;
+  top: -3px;
 }
 .inputSpan {
   position: absolute;
@@ -160,7 +156,6 @@
   margin-top: 8px;
   margin-right: 10px;
 }
-
 
 .font {
   font-family: var(--custom-font);
