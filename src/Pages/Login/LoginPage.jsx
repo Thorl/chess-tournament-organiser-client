@@ -46,6 +46,7 @@ export const LoginPage = () => {
       navigate("/profile");
       setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.error("An error occurred while trying to log in: ", error);
 
       const errorDescription = error.response.data.message;

@@ -243,6 +243,7 @@ export const Matches = ({
       setMatchesCompleted(0);
       setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.error("An error occurred while starting the next round: ", error);
     }
   };

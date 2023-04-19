@@ -37,6 +37,7 @@ export const SignupPage = () => {
       navigate("/login");
       setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       const errorDescription = error.response.data.message;
 
       console.error("An error occurred while signing up: ", error);

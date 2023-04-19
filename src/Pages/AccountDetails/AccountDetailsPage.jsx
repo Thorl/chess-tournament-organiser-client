@@ -135,7 +135,6 @@ export const AccountDetailsPage = () => {
                 id="currentPassword"
                 value={currentPassword}
                 onChange={handleCurrentPasswordInput}
-                required
               />
               <span className={styles.inputSpan}>Current Password</span>
             </div>
@@ -146,7 +145,6 @@ export const AccountDetailsPage = () => {
                 id="newPassword"
                 value={newPassword}
                 onChange={handleNewPasswordInput}
-                required
               />
               <span className={styles.inputSpan}>New Password</span>
             </div>
@@ -157,7 +155,6 @@ export const AccountDetailsPage = () => {
                 id="repeatPassword"
                 value={repeatPassword}
                 onChange={handleRepeatPasswordInput}
-                required
               />
               <span className={styles.inputSpan}>Repeat New Password</span>
             </div>

@@ -8,12 +8,7 @@ import { API_URL } from "../../constants/API_URL";
 import styles from "./NewClassPage.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlus,
-  faCircleMinus,
-  faChessKing,
-  faChessBoard,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 
 export const NewClassPage = () => {
   const [className, setClassName] = useState("");
