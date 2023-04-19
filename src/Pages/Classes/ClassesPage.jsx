@@ -25,6 +25,7 @@ export const ClassesPage = () => {
       setIsLoading(false);
       setClasses(classesFromDb);
     } catch (error) {
+      setIsLoading(false);
       console.error(
         "An error occurred while trying to load classes from the database: ",
         error
@@ -71,14 +72,15 @@ export const ClassesPage = () => {
           );
         })}
 
-        <div className={`${styles.classes__cardContainer__newClassCard}`}>
-          <Link to="/classes/new-class">
-            <FontAwesomeIcon
-              className={styles.classes__cardContainer__newClassCard__plusIcon}
-              icon={faPlus}
-            />
-          </Link>
-        </div>
+        <Link
+          to="/classes/new-class"
+          className={`${styles.classes__cardContainer__newClassCard}`}
+        >
+          <FontAwesomeIcon
+            className={styles.classes__cardContainer__newClassCard__plusIcon}
+            icon={faPlus}
+          />
+        </Link>
       </div>
     </div>
   );
